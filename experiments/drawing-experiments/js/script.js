@@ -1,17 +1,25 @@
 /**************************************************
-Template p5 project
-Pippin Barr
+Drawing Experiments
+Paola Petitti
 
-Here is a description of this template p5 project.
+Following along with the lecture videos for p5's drawing
+and color functions
+
+makes a cone as of now.
 **************************************************/
 
 // setup()
 //
-// Description of setup() goes here.
+// Creates a cone.
 function setup()
 {
+  // Changing canvas size
   createCanvas(500,500);
+
+  // Setting background color mint
   background(191,255,199);
+
+  // Removing the stroke
   noStroke();
 
 /*
@@ -22,8 +30,11 @@ Drawing Shapes Video:
   line(500,0,0,500);
   ellipse(250,250,100,100);
 */
+
+// Setting the ellipse to a corner and not center
 ellipseMode(CORNER);
 
+// Making a cone
 fill(127,0,200,100);
 ellipse(250,250,100,100);
 
@@ -43,7 +54,7 @@ ellipse(250,250,20,20);
 
 // draw()
 //
-// Description of draw() goes here.
+// Isn't doing anything right now.
 function draw() {
 
 }
