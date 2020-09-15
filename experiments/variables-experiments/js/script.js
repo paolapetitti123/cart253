@@ -7,13 +7,15 @@ Practicing variable related things
 
 // Variable Declaration
 let circleSize = 200,
-    circleX = 250,
-    circleY = 250;
+    circleX = 0,
+    circleY = 250,
+    circleSpeed = 2
+    circleAcceleration = 0.25;
 let backgroundShade = 0;
 
 // setup()
 //
-// Description of setup() goes here.
+// creating the canvas
 function setup()
 {
   createCanvas(500, 500);
@@ -21,9 +23,11 @@ function setup()
 
 // draw()
 //
-// Description of draw() goes here.
+// Creating a circle that moves across the canvas.
 function draw()
 {
   background(backgroundShade);
+  circleX += circleSpeed;
+  circleSpeed += circleAcceleration;
   ellipse(circleX, circleY, circleSize);
 }
