@@ -30,4 +30,7 @@ function draw()
   background(backgroundShade);
   circle.x += circle.speed;
   ellipse(circle.x, circle.y, circle.size);
+
+  console.log(`circleX: ${circle.x}`);
+  console.log("circleY:" + circle.y);
 }
