@@ -1,20 +1,24 @@
 /**************************************************
-Template p5 project
-Pippin Barr
+Introducing Variables
+Paola Petitti
 
-Here is a description of this template p5 project.
+Write description here!
 **************************************************/
 
 // setup()
 //
 // Description of setup() goes here.
-function setup() {
-  background(255,0,0);
+function setup()
+{
+  createCanvas(windowWidth, windowHeight);
 }
 
 // draw()
 //
 // Description of draw() goes here.
-function draw() {
-
+function draw()
+{
+  background(255, 0, 0);
+  rectMode(CENTER);
+  rect(width / 2, height / 2, 100, 100);
 }
