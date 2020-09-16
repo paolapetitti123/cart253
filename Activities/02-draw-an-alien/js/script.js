@@ -128,7 +128,7 @@ function setup()
   ellipse(195,400,115,45);
 
 }
-
+ 
 // draw()
 //
 // Does literally nothing

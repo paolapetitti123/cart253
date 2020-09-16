@@ -12,7 +12,7 @@ let circle = {
   y: 250,
   size: 100,
   speed: 1,
-  fill: 0
+  fill: 255
 };
 
 // setup()
@@ -30,11 +30,12 @@ function draw()
 {
   background(backgroundShade);
 
-  circle.speed = random(-5,5);
   circle.x += circle.speed;
-  circle.size = random(10, 100);
+  circle.x = constrain(circle.x,0,width);
 
-  circle.fill = random(0,255);
+  circle.size = map(mouseY, height, 0, 50, 500);
+
+  circle.fill = map(circle.x, 0, width, 0, 255);
   fill(circle.fill);
   ellipse(circle.x, circle.y, circle.size);
 }
