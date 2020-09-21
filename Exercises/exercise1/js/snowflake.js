@@ -1,10 +1,19 @@
 // link to video tutorial that I am following: https://youtu.be/cl-mHFCGzYk
 
+// creating snowflake object 
 class Snowflake {
   constructor() {
-    this.pos = createVector();
-    this.vel = createVector();
+    let x = random(width);
+    let y = random(-100,-10);
+    this.pos = createVector(x,y);
+    this.vel = createVector(0,0);
     this.acc = createVector();
+  }
+
+  update(){
+    this.acc = gravity;
+    this.vel.add(this.acc);
+    this.pos.add(this.vel);
   }
 
   render() {

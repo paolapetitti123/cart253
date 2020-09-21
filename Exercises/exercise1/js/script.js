@@ -62,8 +62,9 @@ let snow = [];
 // Setting up the canvas
 function setup() {
   createCanvas(400,400);
+  gravity = createVector(0,0.03);
   noStroke();
-  snow.push(new Snowflake());
+
 
 }
 
@@ -73,7 +74,10 @@ function setup() {
 function draw() {
   background(mouseX,bg.green, mouseY);
 
+  // creating snowflakes
+  snow.push(new Snowflake());
   for (flake of snow){
+    flake.update();
     flake.render();
   }
   // Snowman bottom circle
