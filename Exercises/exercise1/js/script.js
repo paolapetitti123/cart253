@@ -2,7 +2,7 @@
 Exercise 1: I like to move it move it
 Paola Petitti
 
-This project animates a Snowman onto the canvas! 
+This project animates a Snowman onto the canvas!
 **************************************************/
 // Variable declarations:
 let bg = {
@@ -55,6 +55,7 @@ let button2 = {
   alpha: 255
 };
 
+let snow = [];
 
 // setup()
 //
@@ -62,6 +63,7 @@ let button2 = {
 function setup() {
   createCanvas(400,400);
   noStroke();
+  snow.push(new Snowflake());
 
 }
 
@@ -71,6 +73,9 @@ function setup() {
 function draw() {
   background(mouseX,bg.green, mouseY);
 
+  for (flake of snow){
+    flake.render();
+  }
   // Snowman bottom circle
   snowmanBottom.x += 1;
   snowmanBottom.x = constrain(snowmanBottom.x,0,width/2);
@@ -95,6 +100,14 @@ function draw() {
   fill(snowmanTop.fill, snowmanTop.alpha);
   ellipse(snowmanTop.x,snowmanTop.y, snowmanTop.size);
 
+  // Snowman hat top piece
+  snowmanHat.x2 += 1;
+  snowmanHat.x2 = constrain(snowmanHat.x2,0,width/2);
+  snowmanHat.size += 1;
+  snowmanHat.size = constrain(snowmanHat.size,0, width/4);
+  fill(snowmanHat.fill, snowmanHat.alpha);
+  rectMode(CENTER);
+  rect(snowmanHat.x2,snowmanHat.y2,45,45);
 
   // Snowman hat bottom piece
   snowmanHat.x += 1;
@@ -105,14 +118,7 @@ function draw() {
   rectMode(CENTER);
   rect(snowmanHat.x,snowmanHat.y,65,15);
 
-  // Snowman hat top piece
-  snowmanHat.x2 += 1;
-  snowmanHat.x2 = constrain(snowmanHat.x2,0,width/2);
-  snowmanHat.size += 1;
-  snowmanHat.size = constrain(snowmanHat.size,0, width/4);
-  fill(snowmanHat.fill, snowmanHat.alpha);
-  rectMode(CENTER);
-  rect(snowmanHat.x2,snowmanHat.y2,45,45);
+
 
   // Snowman buttons
   button1.x += -1;
