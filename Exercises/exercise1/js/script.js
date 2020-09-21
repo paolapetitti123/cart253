@@ -2,7 +2,7 @@
 Exercise 1: I like to move it move it
 Paola Petitti
 
-Write description!!
+This project animates a Snowman onto the canvas! 
 **************************************************/
 // Variable declarations:
 let bg = {
@@ -10,35 +10,27 @@ let bg = {
   green: 0,
   blue: 0
 };
-
-// bottom snowman circle
 let snowmanBottom = {
   x: 0,
   y: 335,
   size: 100,
   fill: 255,
   alpha: 255
-}
-
-// middle snowman circle
+};
 let snowmanMid = {
   x: 400,
   y: 200,
   size: 100,
   fill: 255,
   alpha: 255
-}
-
-// top snowman circle
+};
 let snowmanTop = {
   x:0,
   y:100,
   size: 100,
   fill: 255,
   alpha: 255
-}
-
-// snowman top hat
+};
 let snowmanHat = {
   x:0,
   x2: 0,
@@ -47,25 +39,21 @@ let snowmanHat = {
   size: 100,
   fill: 0,
   alpha: 255
-}
-
-// snowman button1
+};
 let button1 = {
   x: 400,
   y: 200,
   size: 25,
   fill: 0,
   alpha: 255
-}
-
-// snowman button2
+};
 let button2 = {
   x: 400,
   y: 170,
   size: 25,
   fill: 0,
   alpha: 255
-}
+};
 
 
 // setup()
@@ -79,11 +67,11 @@ function setup() {
 
 // draw()
 //
-// Description of draw() goes here.
+// Created a Snowman that animates into the canvas
 function draw() {
   background(mouseX,bg.green, mouseY);
 
-// Snowman bottom circle
+  // Snowman bottom circle
   snowmanBottom.x += 1;
   snowmanBottom.x = constrain(snowmanBottom.x,0,width/2);
   snowmanBottom.size += 1;
@@ -91,7 +79,7 @@ function draw() {
   fill(snowmanBottom.fill, snowmanBottom.alpha);
   ellipse(snowmanBottom.x,snowmanBottom.y, snowmanBottom.size);
 
-// Snowman middle circle
+  // Snowman middle circle
   snowmanMid.x += -1;
   snowmanMid.x = constrain(snowmanMid.x, width/2, width);
   snowmanMid.size += 1;
@@ -135,6 +123,7 @@ function draw() {
   fill(button1.fill);
   ellipse(button1.x,button1.y, button1.size);
 
+  // Second Button
   button2.x += -1;
   button2.x = constrain(button2.x, width/2, width);
   button2.size += 1;
