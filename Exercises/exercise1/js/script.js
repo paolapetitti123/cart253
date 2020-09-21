@@ -55,6 +55,7 @@ let button2 = {
   alpha: 255
 };
 
+// creating an array for snow
 let snow = [];
 
 // setup()
@@ -74,12 +75,7 @@ function setup() {
 function draw() {
   background(mouseX,bg.green, mouseY);
 
-  // creating snowflakes
-  snow.push(new Snowflake());
-  for (flake of snow){
-    flake.update();
-    flake.render();
-  }
+
   // Snowman bottom circle
   snowmanBottom.x += 1;
   snowmanBottom.x = constrain(snowmanBottom.x,0,width/2);
@@ -122,8 +118,6 @@ function draw() {
   rectMode(CENTER);
   rect(snowmanHat.x,snowmanHat.y,65,15);
 
-
-
   // Snowman buttons
   button1.x += -1;
   button1.x = constrain(button1.x, width/2, width);
@@ -141,5 +135,12 @@ function draw() {
   button2.fill = map(button2.x, 255, width, 0, 255);
   fill(button2.fill);
   ellipse(button2.x,button2.y, button2.size);
+
+  // creating snowflakes
+  snow.push(new Snowflake());
+  for (flake of snow){
+    flake.update();
+    flake.render();
+  }
 
 }
