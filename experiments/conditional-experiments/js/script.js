@@ -10,7 +10,7 @@ let circle = {
   x: 0,
   y: 250,
   size: 100,
-  speed: 5
+  speed: 1
 }
 
 
@@ -29,19 +29,14 @@ function draw() {
 
   circle.x += circle.speed;
 
-  if (circle.x > width) {
-    circle.speed = -circle.speed;
-  }
-
-  if (circle.x < 0){
-    circle.speed = -circle.speed;
-  }
-
-  if (mouseY < height/2){
+  if (mouseX < width/3)
+  {
     fill(255,0,0);
   }
-
-  if (mouseY > height/2) {
+  else if(mouseX < 2 * width/3) {
+    fill(0,255,0);
+  }
+  else {
     fill(0,0,255);
   }
 
