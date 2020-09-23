@@ -4,15 +4,6 @@ Paola Petitti
 
 This project will be experimenting with conditional expressions
 **************************************************/
-// Variable declaration
-let bgShade = 0;
-let circle = {
-  x: 0,
-  y: 250,
-  size: 100,
-  speed: 1
-}
-
 
 // setup()
 //
@@ -25,16 +16,11 @@ function setup() {
 //
 // Description of draw() goes here.
 function draw() {
-  background(bgShade);
-
-  circle.x += circle.speed;
-  fill(255,255,255);
-
-  if (!(circle.x < width/3))
+  if(keyIsPressed)
   {
-      fill(255,0,0);
+    background(255);
   }
-
-
-  ellipse(circle.x,circle.y,circle.size);
+  else {
+    background(0);
+  }
 }
