@@ -5,10 +5,15 @@ Paola Petitti
 This project will be experimenting with conditional expressions
 **************************************************/
 // Variables
-let caterpillar = {
-  x: 100,
+let circle = {
+  x: 250,
   y: 250,
-  segmentSize: 50
+  size: 100
+}
+let bg = {
+  r: 0,
+  g: 0,
+  b: 0
 }
 
 // setup()
@@ -22,22 +27,13 @@ function setup() {
 //
 // Description of draw() goes here.
 function draw() {
-  background(0);
-  noStroke();
-  fill(100,200,100);
+  background(bg.r,bg.g,bg.b);
 
-  let x = caterpillar.x;
-  let numSegments = 5;
-  // let segmentsDrawn = 0;
+  ellipse(circle.x, circle.y, circle.size);
+}
 
-  // while (segmentsDrawn < numSegments){
-  //   ellipse(x, caterpillar.y, caterpillar.segmentSize);
-  //   x += 40;
-  //   segmentsDrawn++;
-  // }
-
-  for(let i = 0; i < numSegments; i++){
-    ellipse(x, caterpillar.y, caterpillar.segmentSize);
-    x += 40;
-  }
+function mousePressed() {
+  bg.r = random(0,255);
+  bg.g = random(0,255);
+  bg.b = random(0,255);
 }
