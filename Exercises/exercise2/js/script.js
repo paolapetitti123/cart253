@@ -60,6 +60,8 @@ function setup() {
   // setting up chocolate
   chocolate.y = random(0,height);
   chocolate.vx = chocolate.speed;
+
+  noCursor();
 }
 
 // draw()
@@ -78,7 +80,7 @@ function draw() {
   dog.x = mouseX;
   dog.y = mouseY;
 
-  // check if dog catches treat or chocolate
+  // check if dog catches treat
   let d = dist(dog.x,dog.y,treat.x,treat.y);
   if(d < treat.size/2 + dog.size/2) {
     treat.x = 0;
@@ -90,19 +92,31 @@ function draw() {
     noLoop();
   }
 
+  // check if dog touches chocolate
+  let dis = dist(dog.x, dog.y, chocolate.x, chocolate.y);
+  if(dis < chocolate.size/2 + dog.size/2){
+    noLoop();
+  }
+
+
 
   // treat movement
   treat.x += treat.vx;
   treat.y += treat.vy;
 
   // chocolate movement
-  
+  chocolate.x += chocolate.vx;
+  chocolate.y += chocolate.vy;
 
-  // checking if treat goes off screen
+  // checking if treat or choco goes off screen
   if (treat.x > width) {
     treat.x = 0;
     treat.y = random(0,height);
     treatCounter++;
+  }
+  else if (chocolate.x > width) {
+    chocolate.x = 0;
+    chocolate.y = random(0,height);
   }
 
   // Displaying the dog, treat and chocolate
