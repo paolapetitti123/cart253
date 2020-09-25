@@ -10,6 +10,7 @@ let treatImg;
 let chocolateImg;
 var pointCounter = 0;
 let treatCounter = 0;
+var bgImg;
 
 let treat = {
   x: 0,
@@ -45,13 +46,14 @@ function preload(){
   dogImg = loadImage('assets/images/dogEmoji.png');
   treatImg = loadImage('assets/images/dogTreat.png');
   chocolateImg = loadImage('assets/images/chocoEmoji.png');
+  bgImg = loadImage('assets/images/animalCrossingBg.png');
 }
 
 // setup()
 //
 // Description of setup() goes here.
 function setup() {
-  createCanvas(windowWidth,windowHeight);
+  createCanvas(1280,720);
 
   // Setting up treat
   treat.y = random(0,height);
@@ -68,7 +70,9 @@ function setup() {
 //
 // Description of draw() goes here.
 function draw() {
-  background(142,191,111);
+  imageMode(CENTER);
+  image(bgImg, width/2, height/2, width, height);
+//  background(bgImg);
 
   // Displaying the point counter
   noStroke();
