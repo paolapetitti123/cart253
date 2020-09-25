@@ -68,7 +68,8 @@ function setup() {
 //
 // Description of draw() goes here.
 function draw() {
-  background(0);
+  background(142,191,111);
+
   // Displaying the point counter
   noStroke();
   fill(255);
