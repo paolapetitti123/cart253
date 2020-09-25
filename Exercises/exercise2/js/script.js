@@ -12,6 +12,9 @@ var pointCounter = 0;
 let treatCounter = 0;
 var bgImg;
 
+// new variables for new idea
+let roaldImg;
+
 let treat = {
   x: 0,
   y: 250,
@@ -47,6 +50,7 @@ function preload(){
   treatImg = loadImage('assets/images/dogTreat.png');
   chocolateImg = loadImage('assets/images/chocoEmoji.png');
   bgImg = loadImage('assets/images/animalCrossingBg.png');
+  roaldImg = loadImage('assets/images/roald.png');
 }
 
 // setup()
@@ -54,7 +58,7 @@ function preload(){
 // Description of setup() goes here.
 function setup() {
   createCanvas(1280,720);
-
+  roald = new Roald();
   // Setting up treat
   treat.y = random(0,height);
   treat.vx = treat.speed;
@@ -66,14 +70,22 @@ function setup() {
   noCursor();
 }
 
+function keyPressed() {
+  if (key === ' '){
+    roald.jump();
+  }
+}
+
 // draw()
 //
 // Description of draw() goes here.
 function draw() {
-  imageMode(CENTER);
-  image(bgImg, width/2, height/2, width, height);
-//  background(bgImg);
+  // imageMode(CENTER);
+  // image(bgImg, width/2, height/2, width, height);
 
+  background(0);
+  roald.show();
+  roald.move();
   // Displaying the point counter
   noStroke();
   fill(255);
