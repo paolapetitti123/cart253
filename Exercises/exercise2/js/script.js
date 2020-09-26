@@ -5,52 +5,45 @@ Paola Petitti
 Dog collecting treats, game stops if it touches chocolate
 **************************************************/
 // Variable declarations
-let dogImg;
-let treatImg;
-let chocolateImg;
 var pointCounter = 0;
-let treatCounter = 0;
+let bellCounter = 0;
 var bgImg;
 
 // new variables for new idea
 let roaldImg;
-
-let treat = {
-  x: 0,
-  y: 250,
-  size: 100,
+let canImg;
+let can = {
+  x: 1280,
+  y: 600,
   vx: 0,
   vy: 0,
-  speed: 5,
-  image: treatImg
+  size: 50,
+  speed: 10,
+  image: canImg
 };
-
-let dog = {
-  x: 250,
-  y: 250,
-  size: 100,
-  image: dogImg
-};
-
-let chocolate = {
-  x: 0,
-  y: 250,
-  size: 100,
+let bellImg;
+let bells = {
+  x: 1520,
+  y: 600,
   vx: 0,
   vy: 0,
-  speed: 5,
-  image: chocolateImg
-};
+  size: 50,
+  speed: 10,
+  image: bellImg
+}
+let myMusic;
 
 // preload()
 //
 // Description of preload() goes here.
 function preload(){
-  dogImg = loadImage('assets/images/dogEmoji.png');
-  treatImg = loadImage('assets/images/dogTreat.png');
-  chocolateImg = loadImage('assets/images/chocoEmoji.png');
   bgImg = loadImage('assets/images/animalCrossingBg.png');
   roaldImg = loadImage('assets/images/roald.png');
+  canImg = loadImage('assets/images/can.png');
+  bellImg = loadImage('assets/images/bells.png');
+
+  soundFormats('mp3');
+  myMusic = loadSound('assets/sounds/buttercup.mp3');
 }
 
 // setup()
@@ -59,15 +52,14 @@ function preload(){
 function setup() {
   createCanvas(1280,720);
   roald = new Roald();
-  // Setting up treat
-  treat.y = random(0,height);
-  treat.vx = treat.speed;
 
-  // setting up chocolate
-  chocolate.y = random(0,height);
-  chocolate.vx = chocolate.speed;
+  // setting up can
+  can.vx = can.speed;
 
-  noCursor();
+  // setting up bells
+  bells.vx = bells.speed;
+
+
 }
 
 function keyPressed() {
@@ -80,12 +72,50 @@ function keyPressed() {
 //
 // Description of draw() goes here.
 function draw() {
-  // imageMode(CENTER);
-  // image(bgImg, width/2, height/2, width, height);
+  imageMode(CENTER);
+  image(bgImg, width/2, height/2, width, height);
 
-  background(0);
+  // can movement
+  can.x -= can.vx;
+
+  // bells movement
+  bells.x -= bells.vx;
+
+  // checking if can goes off screen
+  if(can.x < 0){
+    can.x = 1280;
+    pointCounter++;
+  }
+
+  if(bells.x < 0){
+    bells.x = 1520;
+  }
+
+  // checking if roald touches can
+  let d = dist(roald.x, roald.y, can.x,can.y);
+  if(d < can.size/2 + roald.size/2)
+  {
+    noLoop();
+  }
+
+  // checking if roald touches bells
+  let bellD = dist(roald.x, roald.y, bells.x,bells.y);
+  if(bellD < bells.size/2 + roald.size/2)
+  {
+    bells.x = 1520;
+    pointCounter += 100;
+  }
+
+
+
+  // displaying can & bells
+  image(canImg, can.x, can.y, can.size, can.size + 25);
+  image(bellImg, bells.x, bells.y, bells.size, bells.size +20);
+
+  // displaying roald
   roald.show();
   roald.move();
+
   // Displaying the point counter
   noStroke();
   fill(255);
@@ -93,52 +123,10 @@ function draw() {
   textAlign(LEFT);
   text(pointCounter, width/2, height/2);
 
-  // Dog movement
-  dog.x = mouseX;
-  dog.y = mouseY;
-
-  // check if dog catches treat
-  let d = dist(dog.x,dog.y,treat.x,treat.y);
-  if(d < treat.size/2 + dog.size/2) {
-    treat.x = 0;
-    treat.y = random(0,height);
-    pointCounter++;
-    // noLoop();
-  }
-  else if (treatCounter >= 3){
-    noLoop();
-  }
-
-  // check if dog touches chocolate
-  let dis = dist(dog.x, dog.y, chocolate.x, chocolate.y);
-  if(dis < chocolate.size/2 + dog.size/2){
-    noLoop();
-  }
 
 
 
-  // treat movement
-  treat.x += treat.vx;
-  treat.y += treat.vy;
 
-  // chocolate movement
-  chocolate.x += chocolate.vx;
-  chocolate.y += chocolate.vy;
 
-  // checking if treat or choco goes off screen
-  if (treat.x > width) {
-    treat.x = 0;
-    treat.y = random(0,height);
-    treatCounter++;
-  }
-  else if (chocolate.x > width) {
-    chocolate.x = 0;
-    chocolate.y = random(0,height);
-  }
 
-  // Displaying the dog, treat and chocolate
-  imageMode(CENTER);
-  image(dogImg, dog.x, dog.y,dog.size,dog.size);
-  image(treatImg,treat.x,treat.y,treat.size);
-  image(chocolateImg, chocolate.x, chocolate.y, chocolate.size, chocolate.size);
 }

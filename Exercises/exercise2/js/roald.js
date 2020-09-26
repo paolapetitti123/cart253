@@ -1,8 +1,9 @@
 class Roald {
   constructor(){
+    this.size = 150;
     this.r = 150;
     this.x = 150;
-    this.y = height - this.r;
+    this.y = height  - this.r;
     this.vy = 0;
     this.gravity = 3;
   }
@@ -12,6 +13,7 @@ class Roald {
       this.vy = -35;
     }
   }
+
 
   move(){
     this.y += this.vy;
