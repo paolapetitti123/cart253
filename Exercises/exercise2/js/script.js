@@ -2,7 +2,7 @@
 Exercise 2: Dodge-em
 Paola Petitti
 
-Dog collecting treats, game stops if it touches chocolate
+Roald has to collect bells and avoid getting hit by cans!
 **************************************************/
 // Variable declarations
 var pointCounter = 0;
