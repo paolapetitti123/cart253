@@ -50,6 +50,7 @@ function preload(){
 //
 // Description of setup() goes here.
 function setup() {
+  myMusic.play();
   createCanvas(1280,720);
   roald = new Roald();
 
@@ -96,13 +97,14 @@ function draw() {
   if(d < can.size/2 + roald.size/2)
   {
     noLoop();
+    myMusic.stop();
   }
 
   // checking if roald touches bells
   let bellD = dist(roald.x, roald.y, bells.x,bells.y);
   if(bellD < bells.size/2 + roald.size/2)
   {
-    bells.x = 1520;
+    bells.x = 1280 + random(300, 1000);
     pointCounter += 100;
   }
 
