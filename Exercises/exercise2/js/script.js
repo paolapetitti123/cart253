@@ -32,7 +32,7 @@ let bells = {
   image: bellImg
 }
 let myMusic;
-
+let gameOverMusic;
 // preload()
 //
 // Description of preload() goes here.
@@ -44,6 +44,7 @@ function preload(){
 
   soundFormats('mp3');
   myMusic = loadSound('assets/sounds/buttercup.mp3');
+  gameOverMusic = loadSound('assets/sounds/game over.mp3');
 }
 
 // setup()
@@ -96,8 +97,10 @@ function draw() {
   let d = dist(roald.x, roald.y, can.x,can.y);
   if(d < can.size/2 + roald.size/2)
   {
+    gameOverMusic.play();
     noLoop();
     myMusic.stop();
+
   }
 
   // checking if roald touches bells
