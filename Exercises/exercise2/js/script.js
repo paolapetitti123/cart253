@@ -5,9 +5,13 @@ Paola Petitti
 Roald has to collect bells and avoid getting hit by cans!
 **************************************************/
 // Variable declarations
+var x1 = 0;
+var x2;
+var scrollSpeed = 10;
 var pointCounter = 0;
 let bellCounter = 0;
 var bgImg;
+
 
 // new variables for new idea
 let roaldImg;
@@ -21,7 +25,7 @@ let can = {
   speed: 10,
   image: canImg
 };
-let bellImg;
+var bellImg;
 let bells = {
   x: 1520,
   y: 600,
@@ -33,18 +37,20 @@ let bells = {
 }
 let myMusic;
 let gameOverMusic;
+
 // preload()
 //
 // Description of preload() goes here.
 function preload(){
+  // setting up music
+  myMusic = loadSound('assets/sounds/buttercup.mp3');
+  gameOverMusic = loadSound('assets/sounds/game over.mp3');
+
+  // setting up images
   bgImg = loadImage('assets/images/animalCrossingBg.png');
   roaldImg = loadImage('assets/images/roald.png');
   canImg = loadImage('assets/images/can.png');
   bellImg = loadImage('assets/images/bells.png');
-
-  soundFormats('mp3');
-  myMusic = loadSound('assets/sounds/buttercup.mp3');
-  gameOverMusic = loadSound('assets/sounds/game over.mp3');
 }
 
 // setup()
@@ -61,7 +67,8 @@ function setup() {
   // setting up bells
   bells.vx = bells.speed;
 
-
+  // setting up background
+  x2 = width;
 }
 
 function keyPressed() {
@@ -74,9 +81,24 @@ function keyPressed() {
 //
 // Description of draw() goes here.
 function draw() {
-  imageMode(CENTER);
-  image(bgImg, width/2, height/2, width, height);
+  push();
+  imageMode(CORNER);
+  image(bgImg, x1, 0, width, height);
+  image(bgImg, x2, 0, width, height);
 
+  // trying to loop the background
+  x1 -= scrollSpeed;
+  x2 -= scrollSpeed;
+
+  if(x1 < -width){
+    x1 = width;
+  }
+  if(x2 < -width){
+    x2 = width;
+  }
+  pop();
+
+  imageMode(CENTER);
   // can movement
   can.x -= can.vx;
 
@@ -86,7 +108,6 @@ function draw() {
   // checking if can goes off screen
   if(can.x < 0){
     can.x = 1280;
-    pointCounter++;
   }
 
   if(bells.x < 0){
@@ -100,7 +121,6 @@ function draw() {
     gameOverMusic.play();
     noLoop();
     myMusic.stop();
-
   }
 
   // checking if roald touches bells
@@ -111,8 +131,6 @@ function draw() {
     pointCounter += 100;
   }
 
-
-
   // displaying can & bells
   image(canImg, can.x, can.y, can.size, can.size + 25);
   image(bellImg, bells.x, bells.y, bells.size, bells.size +20);
@@ -122,16 +140,12 @@ function draw() {
   roald.move();
 
   // Displaying the point counter
+  image(bellImg, 30, 35, bells.size, bells.size + 20);
   noStroke();
-  fill(255);
+  fill(0);
   textSize(50);
   textAlign(LEFT);
-  text(pointCounter, width/2, height/2);
-
-
-
-
-
+  text(pointCounter, 70, 55);
 
 
 }

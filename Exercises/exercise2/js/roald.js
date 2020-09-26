@@ -9,7 +9,7 @@ class Roald {
   }
 
   jump(){
-    if(this.y == height - this.r){
+    if(this.y === height - this.r){
       this.vy = -35;
     }
   }
