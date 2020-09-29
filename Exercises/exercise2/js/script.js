@@ -11,9 +11,6 @@ var scrollSpeed = 10;
 var pointCounter = 0;
 let bellCounter = 0;
 var bgImg;
-
-
-// new variables for new idea
 let roaldImg;
 let canImg;
 let can = {
@@ -37,6 +34,9 @@ let bells = {
 }
 let myMusic;
 let gameOverMusic;
+let bellMusic;
+var fade;
+var fadeAmonut = 1;
 
 // preload()
 //
@@ -45,6 +45,7 @@ function preload(){
   // setting up music
   myMusic = loadSound('assets/sounds/buttercup.mp3');
   gameOverMusic = loadSound('assets/sounds/game over.mp3');
+  bellMusic = loadSound('assets/sounds/glee.mp3');
 
   // setting up images
   bgImg = loadImage('assets/images/animalCrossingBg.png');
@@ -57,7 +58,7 @@ function preload(){
 //
 // Description of setup() goes here.
 function setup() {
-  myMusic.play();
+  fade = 255;
   createCanvas(1280,720);
   roald = new Roald();
 
@@ -71,31 +72,26 @@ function setup() {
   x2 = width;
 }
 
-function keyPressed() {
-  if (key === ' '){
-    roald.jump();
-  }
-}
 
 // draw()
 //
 // Description of draw() goes here.
 function draw() {
   push();
-  imageMode(CORNER);
-  image(bgImg, x1, 0, width, height);
-  image(bgImg, x2, 0, width, height);
+    imageMode(CORNER);
+    image(bgImg, x1, 0, width, height);
+    image(bgImg, x2, 0, width, height);
 
-  // trying to loop the background
-  x1 -= scrollSpeed;
-  x2 -= scrollSpeed;
+    // trying to loop the background
+    x1 -= scrollSpeed;
+    x2 -= scrollSpeed;
 
-  if(x1 < -width){
-    x1 = width;
-  }
-  if(x2 < -width){
-    x2 = width;
-  }
+    if(x1 < -width){
+      x1 = x2 + width;
+    }
+    if(x2 < -width){
+      x2 = x1 + width;
+    }
   pop();
 
   imageMode(CENTER);
@@ -118,9 +114,9 @@ function draw() {
   let d = dist(roald.x, roald.y, can.x,can.y);
   if(d < can.size/2 + roald.size/2)
   {
+    myMusic.stop();
     gameOverMusic.play();
     noLoop();
-    myMusic.stop();
   }
 
   // checking if roald touches bells
@@ -129,6 +125,7 @@ function draw() {
   {
     bells.x = 1280 + random(300, 1000);
     pointCounter += 100;
+    bellMusic.play();
   }
 
   // displaying can & bells
@@ -140,12 +137,34 @@ function draw() {
   roald.move();
 
   // Displaying the point counter
+  push();
   image(bellImg, 30, 35, bells.size, bells.size + 20);
   noStroke();
   fill(0);
   textSize(50);
   textAlign(LEFT);
   text(pointCounter, 70, 55);
+  pop();
 
+  textSize(25);
+  textAlign(LEFT);
+  fill(0,0,0, fade);
+  text("press spacebar to jump over cans", width/2, 55);
+  if(fade > 255)
+  {
+    fadeAmonut = -1;
+  }
+  fade += fadeAmonut;
 
 }
+
+
+function keyPressed() {
+  if (key === ' '){
+    roald.jump();
+    if(!myMusic.isPlaying() && !gameOverMusic.isPlaying())
+      {
+        myMusic.play();
+      }
+    }
+  }
