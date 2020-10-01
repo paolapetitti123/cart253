@@ -7,10 +7,10 @@ These are experiments with functions
 let circle = {
   x: 250,
   y: 250,
+  size: 100,
   vx: 0,
   vy: 0,
-  speed: 5,
-  size: 100
+  speed: 2
 }
 
 function setup() {
@@ -20,36 +20,25 @@ function setup() {
 function draw() {
   background(0);
 
-  // First check for horizontal movement
-  // Is the left arrow pressed?
-  if (keyIsDown(LEFT_ARROW)) {
-    // If it is, set the x velocity to be negative
+  let dx = circle.x - mouseX;
+  let dy = circle.y - mouseY;
+
+  if(dx < 0){
     circle.vx = -circle.speed;
   }
-  // Otherwise is the right arrow pressed?
-  else if (keyIsDown(RIGHT_ARROW)) {
-    // If it is, set the x velocity to be positive
+  else if(dx > 0){
     circle.vx = circle.speed;
   }
-  // If neither of those keys are pressed...
-  else {
-    // Then set the x velocity to 0 to stop moving horizontally
-    circle.vx = 0;
-  }
 
-  // Do the same thing with vertical movement and the UP and DOWN keys
-  if (keyIsDown(UP_ARROW)) {
+  if(dy < 0){
     circle.vy = -circle.speed;
   }
-  else if (keyIsDown(DOWN_ARROW)) {
+  else if (dy > 0){
     circle.vy = circle.speed;
   }
-  else {
-    circle.vy = 0;
-  }
 
-  circle.x = circle.x + circle.vx;
-  circle.y = circle.y + circle.vy;
+  circle.x += circle.vx;
+  circle.y += circle.vy;
 
   ellipse(circle.x, circle.y, circle.size);
 }
