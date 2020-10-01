@@ -4,35 +4,65 @@ Paola Petitti
 
 These are experiments with functions
 **************************************************/
-let hello = {
-  string: `Hello, world!`,
+let circle = {
   x: 0,
-  y: 0,
-  vx: 5,
-  vy: 1,
-  size: 64
+  y: 250,
+  size: 100,
+  vx: 0,
+  vy: 0,
+  speed: 2,
 };
 
+let state = `title`; // Possible states are: title, animation, ending
+
 function setup() {
-  createCanvas(500, 500)
+  createCanvas(500, 500);
+  circle.vx = circle.speed;
+  textSize(32);
+  textAlign(CENTER,CENTER);
 }
 
 function draw() {
   background(0);
 
+  if(state === `title`){
+    // Title
+    title();
+  }
+  else if(state === `animation`){
+    // Animation code
+    animation();
+  }
+  else if(state === `ending`) {
+    // End
+    ending();
+  }
+}
 
-  hello.x += hello.vx;
-  hello.y += hello.vy;
+function title(){
+  fill(255);
+  text(`Life.`,width/2,height/2);
+}
 
-  hello.size += 1;
+function animation(){
+  circle.x = circle.x + circle.vx;
+  circle.y = circle.y + circle.vy;
 
+  if(circle.x > width){
+    state = `ending`;
+  }
 
-  textAlign(CENTER,CENTER);
-  textSize(hello.size);
-  textStyle(BOLD);
+  ellipse(circle.x, circle.y, circle.size);
+}
 
-  fill(200,50,200);
-  stroke(255,255,255);
-  strokeWeight(3);
-  text(hello.string,hello.x, hello.y);
+function ending(){
+  fill(127);
+  text(`The End`, width/2, height/2);
+}
+
+function keyPressed(){
+  if(state === `title`){
+    state = `animation`;
+  }
+
 }
