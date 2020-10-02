@@ -78,9 +78,9 @@ function setup() {
 // Setting up the velocities of the fans to random values between 0
 // and the speed I specified in the fan objects
 function setupFans(){
-  fan1.vx = random(0, fan1.speed);
-  fan2.vx = random(0, fan2.speed);
-  fan3.vx = random(0, fan3.speed);
+  fan1.vx = random(2, fan1.speed);
+  fan2.vx = random(1, fan2.speed);
+  fan3.vx = random(3, fan3.speed);
 }
 
 // Description of draw() goes here.
