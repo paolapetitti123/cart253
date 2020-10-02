@@ -57,6 +57,7 @@ let scrollSpeed = 5;
 let state = `title`;
 var fade;
 var fadeAmonut = 1;
+let gameMusic;
 
 // Loading all the images into their variables
 function preload(){
@@ -65,6 +66,8 @@ function preload(){
   fan1Img = loadImage('assets/images/fan1.png');
   fan2Img = loadImage('assets/images/fan2.png');
   fan3Img = loadImage('assets/images/fan3.png');
+
+  gameMusic = loadSound('assets/sounds/gamemusic.mp3');
 }
 
 // Description of setup() goes here.
@@ -194,6 +197,9 @@ function keyPressed(){
   }
   else if(state === `title`){
     state = `simulation`;
+    if(!gameMusic.isPlaying()){
+      gameMusic.play();
+    }
   }
 }
 
