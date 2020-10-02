@@ -13,7 +13,7 @@ http://www.avatarsinpixels.com/ to save me some time
 let bgImg;
 let celebImg;
 let celeb = {
-  x: 500,
+  x: 1000,
   y: 600,
   size: 100,
   vx: 0,
@@ -24,7 +24,7 @@ let celeb = {
 
 let fan1Img;
 let fan1 = {
-  x: 100,
+  x: 0,
   y: 600,
   size: 100,
   vx: 0,
@@ -35,7 +35,7 @@ let fan1 = {
 
 let fan2Img;
 let fan2 = {
-  x: 150,
+  x: 50,
   y: 600,
   size: 100,
   vx: 0,
@@ -46,7 +46,7 @@ let fan2 = {
 
 let fan3Img;
 let fan3 = {
-  x: 200,
+  x: 100,
   y: 600,
   size: 100,
   vx: 0,
@@ -81,17 +81,17 @@ function setupFans(){
   fan3.vx = random(0, fan3.speed);
 }
 
-function fanMove(){
-  fan1.x += fan1.vx;
-  fan2.x += fan2.vx;
-  fan3.x += fan3.vx;
-}
-
 
 // Description of draw() goes here.
 function draw() {
   backdrop();
+  simulation();
+}
+
+function simulation(){
   fanMove();
+  checkOffscreen();
+  checkTouch();
   display();
 }
 
@@ -112,8 +112,43 @@ function backdrop(){
   }
 }
 
+function fanMove(){
+  fan1.x += fan1.vx;
+  fan2.x += fan2.vx;
+  fan3.x += fan3.vx;
+}
+
+function checkOffscreen(){
+  if(celeb.x > width){
+    state = `win`;
+  }
+}
+
+function checkTouch(){
+  if(isTouching(fan1) || isTouching(fan2) || isTouch(fan3)){
+    state = `lose`;
+  }
+}
+
+function isTouching(fan){
+  let d = dist(celeb.x, celeb.y,fan.x,fan.y);
+  if(d < celeb.size/2 + fan.size/2){
+    return true;
+  }
+}
+
+function keyPressed(){
+  if(keyCode === LEFT_ARROW){
+    celeb.x -= 8;
+  }
+  else if(keyCode === RIGHT_ARROW){
+    celeb.x += 8;
+  }
+}
+
 function display(){
   image(fan1Img, fan1.x,fan1.y,fan1.size,fan1.size);
   image(fan2Img, fan2.x,fan2.y,fan2.size,fan2.size);
   image(fan3Img, fan3.x,fan3.y,fan3.size,fan3.size);
+  image(celebImg, celeb.x,celeb.y,celeb.size,celeb.size);
 }
