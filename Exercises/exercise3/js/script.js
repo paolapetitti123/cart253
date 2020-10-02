@@ -83,7 +83,6 @@ function setupFans(){
   fan3.vx = random(0, fan3.speed);
 }
 
-
 // Description of draw() goes here.
 function draw() {
   backdrop();
@@ -190,10 +189,7 @@ function isTouching(fan){
 
 // Tells the program what to do depending on which key is pressed in which state
 function keyPressed(){
-  if(keyCode === LEFT_ARROW){
-    celeb.x -= 8;
-  }
-  else if(keyCode === RIGHT_ARROW){
+  if(keyCode === RIGHT_ARROW){
     celeb.x += 8;
   }
   else if(state === `title`){
