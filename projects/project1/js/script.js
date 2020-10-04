@@ -7,12 +7,17 @@ Here is a description of this template p5 project.
 // Variable declarations
 let bgImg;
 let bgLeft = 0;
+let hrtLeft = 500;
 let moveSpeed = 15;
-let stealer;
+
+let heartImg;
+var dHeart;
+
 
 
 function preload(){
   bgImg = loadImage('assets/images/stealerBackground.png');
+  heartImg = loadImage('assets/images/diamondHeart.png');
 }
 
 // setup()
@@ -20,9 +25,7 @@ function preload(){
 // Description of setup() goes here.
 function setup() {
 createCanvas(1280,720);
-rectMode(CENTER);
-
-stealer = new Stealer(width/2, height - 50);
+stealer = new Stealer(50, height - 50);
 }
 
 // draw()
@@ -30,21 +33,31 @@ stealer = new Stealer(width/2, height - 50);
 // Description of draw() goes here.
 function draw() {
   background(0);
+
+  push();
   imageMode(CORNER);
   bgImg.resize(7250,720);
   image(bgImg, bgLeft, 0);
-
   handleKey();
+  pop();
 
+  push();
+  imageMode(CENTER);
+  heartImg.resize(350,350);
+  image(heartImg, 500, 500);
+  pop();
   stealer.show();
 }
 
+
 function moveBgLeft(){
-  let minBgLeft = - bgImg.width + width;
+  let minBgLeft = -bgImg.width + width;
+  let minHrLeft = -heartImg.width + bgImg.width;
 
   if (bgLeft - moveSpeed > minBgLeft){
     bgLeft -= moveSpeed;
   }
+
 }
 
 function moveBgRight(){
