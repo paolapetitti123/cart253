@@ -15,7 +15,7 @@ let heartD = {
   y: 500,
   size: 350
 }
-var dHeart;
+
 
 
 // loading images
@@ -34,15 +34,18 @@ stealer = new Stealer(50, height - 200);
 
 // draw()
 //
-// shows background, & diamond heart (diamond heart needs to stay in place)
+// shows background, diamond heart, now allows square to jump
 function draw() {
   background(0);
   backgroundMove();
   heartDiamond();
-  //hrtTouch();
 
-  handleKey();
+
+
   stealer.display();
+  stealer.move();
+  handleKey();
+
 }
 
 function backgroundMove(){
@@ -54,7 +57,6 @@ function backgroundMove(){
 function heartDiamond(){
   let hrtX = bgLeft + 7000;
   imageMode(CENTER);
-  //heartImg.resize(350,350);
   image(heartImg, hrtX, heartD.y,heartD.size, heartD.size);
   hrtTouch(hrtX);
 }
@@ -76,7 +78,7 @@ function moveBgRight(){
   }
 }
 
-// Function to see which keys are being held down.
+// Function to see which keys are being held down to move the bg
 function handleKey(){
   if(keyIsDown(LEFT_ARROW)){
     if(stealer.canMoveLeft()){
@@ -84,20 +86,25 @@ function handleKey(){
     } else {
       moveBgRight();
     }
-  } else if (keyIsDown(RIGHT_ARROW)){
+  }
+  else if (keyIsDown(RIGHT_ARROW)){
     if(stealer.canMoveRight()){
       stealer.moveRight();
-    } else {
-      moveBgLeft();
     }
+    else {
+      moveBgLeft();
+      }
+    }
+}
+
+// Function to see if the UP arrow gets pressed once to jump
+function keyPressed(){
+  if (keyCode === UP_ARROW){
+    console.log(stealer.pos.y);
+    stealer.jump();
   }
 }
 
-function keyPressed(){
-  if(key === ' '){
-    var jump = createVector(0, -1);
-  }
-}
 
 function hrtTouch(heartX){
   let d = dist(stealer.pos.x, stealer.pos.y, heartX, heartD.y);

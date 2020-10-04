@@ -1,14 +1,13 @@
 function Stealer(x, y) {
   this.pos = createVector(x, y);
-  this.vel = createVector(1, 0);
+  this.vel = createVector(0, 0);
   this.acc = createVector(0, 0);
-  // this.x = 50;
   this.r = 200;
-  // this.y = height - this.r;
   this.vy = 0;
   this.gravity = 3;
   this.speed = moveSpeed;
   this.size = 150;
+  this.gravity = 3;
 
   this.applyForce = function(force) {
     this.acc.add(force);
@@ -20,15 +19,27 @@ function Stealer(x, y) {
     this.acc.set(0, 0);
   }
 
+  this.move = function() {
+    this.pos.y += this.vy;
+    this.vy += this.gravity;
+    this.pos.y = constrain(this.pos.y, 0, height - this.r);
+  }
+
+  this.jump = function() {
+    if(this.pos.y === height - this.r){
+      this.vy = -35;
+    }
+  }
+
   this.display = function() {
     fill(255);
     rect(this.pos.x, this.pos.y, this.size, this.size);
   }
 
   this.edges = function() {
-    if (this.pos.y >= height) {
+    if (this.pos.y > height - 200) {
       this.vel.y *= 0;
-      this.pos.y = height;
+      this.pos.y = height - 200;
     }
   }
 
