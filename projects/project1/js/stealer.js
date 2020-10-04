@@ -1,6 +1,6 @@
 class Stealer {
   constructor(x, y){
-    this.x = x;
+    this.x = x + 500;
     this.y = y;
     this.speed = moveSpeed;
   }
@@ -23,11 +23,11 @@ class Stealer {
 
 
   moveLeft(){
-    this.x -= this.speed;
+    this.x  -= this.speed;
   }
 
   moveRight(){
-    this.x += this.speed;
+    this.x  += this.speed;
   }
 
 

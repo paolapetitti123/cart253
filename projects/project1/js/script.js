@@ -8,7 +8,7 @@ Here is a description of this template p5 project.
 let bgImg;
 let bgLeft = 0;
 let moveSpeed = 15;
-
+let heartLeft = 0;
 let heartImg;
 var dHeart;
 
@@ -32,22 +32,24 @@ stealer = new Stealer(50, height - 50);
 // shows background, & diamond heart (diamond heart needs to stay in place)
 function draw() {
   background(0);
-
-  push();
-  imageMode(CORNER);
-  bgImg.resize(7250,720);
-  image(bgImg, bgLeft, 0);
-  pop();
-
-  push();
-  imageMode(CENTER);
-  heartImg.resize(350,350);
-  image(heartImg, 500, 500);
-  pop();
-
+  backgroundMove();
+  heartDiamond();
 
   handleKey();
   stealer.show();
+}
+
+function backgroundMove(){
+  imageMode(CORNER);
+  bgImg.resize(7250,720);
+  image(bgImg, bgLeft, 0);
+}
+
+function heartDiamond(){
+  let hrtX = bgLeft + 7000;
+  imageMode(CENTER);
+  heartImg.resize(350,350);
+  image(heartImg, hrtX, 500);
 }
 
 // Functions to move the background
@@ -57,6 +59,7 @@ function moveBgLeft(){
   if (bgLeft - moveSpeed > minBgLeft){
     bgLeft -= moveSpeed;
   }
+
 
 }
 
