@@ -10,6 +10,11 @@ let bgLeft = 0;
 let moveSpeed = 15;
 let heartLeft = 0;
 let heartImg;
+let heartD = {
+  x: 7000,
+  y: 500,
+  size: 350
+}
 var dHeart;
 
 
@@ -24,7 +29,7 @@ function preload(){
 // Initializing stealer object and creating canvas.
 function setup() {
 createCanvas(1280,720);
-stealer = new Stealer(50, height - 50);
+stealer = new Stealer(50, height - 200);
 }
 
 // draw()
@@ -34,9 +39,10 @@ function draw() {
   background(0);
   backgroundMove();
   heartDiamond();
+  //hrtTouch();
 
   handleKey();
-  stealer.show();
+  stealer.display();
 }
 
 function backgroundMove(){
@@ -48,8 +54,9 @@ function backgroundMove(){
 function heartDiamond(){
   let hrtX = bgLeft + 7000;
   imageMode(CENTER);
-  heartImg.resize(350,350);
-  image(heartImg, hrtX, 500);
+  //heartImg.resize(350,350);
+  image(heartImg, hrtX, heartD.y,heartD.size, heartD.size);
+  hrtTouch(hrtX);
 }
 
 // Functions to move the background
@@ -83,5 +90,18 @@ function handleKey(){
     } else {
       moveBgLeft();
     }
+  }
+}
+
+function keyPressed(){
+  if(key === ' '){
+    var jump = createVector(0, -1);
+  }
+}
+
+function hrtTouch(heartX){
+  let d = dist(stealer.pos.x, stealer.pos.y, heartX, heartD.y);
+  if(d < stealer.size/2 + heartD.size/2){
+    console.log("TOUCHING");
   }
 }
