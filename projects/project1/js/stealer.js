@@ -4,9 +4,10 @@ function Stealer(x, y) {
   this.acc = createVector(0, 0);
   this.r = 200;
   this.vy = 0;
+  this.vx = 0;
   this.gravity = 3;
   this.speed = moveSpeed;
-  this.size = 150;
+  this.size = 200;
   this.gravity = 3;
 
   this.applyForce = function(force) {
@@ -17,6 +18,8 @@ function Stealer(x, y) {
     this.vel.add(this.acc);
     this.pos.add(this.vel);
     this.acc.set(0, 0);
+    // this.pos.x += this.vx;
+
   }
 
   this.move = function() {
@@ -31,11 +34,9 @@ function Stealer(x, y) {
     }
   }
 
-  this.display = function() {
-    fill(255);
-    rectMode(CENTER);
-    rect(this.pos.x, this.pos.y + 75, this.size, this.size);
-  }
+  // this.display = function(image) {
+  //   image(robberStandImg,this.pos.x, this.pos.y + 75, this.size, this.size);
+  // }
 
   this.edges = function() {
     if (this.pos.y > height ) {
@@ -61,10 +62,14 @@ function Stealer(x, y) {
   }
 
   this.moveLeft = function(){
-    this.pos.x  -= this.speed;
+    // this.pos.x  -= this.vx;
+    this.pos.x -= moveSpeed;
+    // this.vel.x = -moveSpeed;
   }
 
   this.moveRight = function(){
-    this.pos.x  += this.speed;
+    // this.pos.x  += this.vx;
+   this.pos.x += moveSpeed;
+    // this.vel.x = moveSpeed;
   }
 }

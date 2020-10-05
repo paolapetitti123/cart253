@@ -20,9 +20,11 @@ let crate = {
   x: 0,
   y: 595,
   sizeX: 150,
-  sizeY: 150
+  sizeY: 150,
+  size: 150
 };
-
+let robberStandImg;
+let robberWalkImg;
 
 
 // loading images
@@ -30,6 +32,8 @@ function preload(){
   bgImg = loadImage('assets/images/stealerBackground.png');
   heartImg = loadImage('assets/images/diamondHeart.png');
   crateImg = loadImage('assets/images/crate.png');
+  robberStandImg = loadImage('assets/images/stealer/robber-stand.gif');
+  robberWalkImg = loadImage('assets/images/stealer/robber-right-walk.gif');
 }
 
 // setup()
@@ -48,8 +52,7 @@ function draw() {
   backgroundMove();
   heartDiamond();
   crateShow();
-//  crateTouch();
-  stealer.display();
+  //stealer.display();
   stealer.move();
   handleKey();
 }
@@ -96,8 +99,6 @@ function moveBgLeft(){
   if (bgLeft - moveSpeed > minBgLeft){
     bgLeft -= moveSpeed;
   }
-
-
 }
 
 function moveBgRight(){
@@ -111,17 +112,24 @@ function handleKey(){
   if(keyIsDown(LEFT_ARROW)){
     if(stealer.canMoveLeft()){
       stealer.moveLeft();
+      display(robberWalkImg);
     } else {
       moveBgRight();
+      display(robberWalkImg);
     }
   }
   else if (keyIsDown(RIGHT_ARROW)){
     if(stealer.canMoveRight()){
       stealer.moveRight();
+      display(robberWalkImg);
     }
     else {
       moveBgLeft();
+      display(robberWalkImg);
       }
+    }
+    else {
+      display(robberStandImg);
     }
 }
 
@@ -133,6 +141,10 @@ function keyPressed(){
   }
 }
 
+function display(picture){
+  image(picture,stealer.pos.x, stealer.pos.y + 75, stealer.size, stealer.size);
+}
+
 
 function hrtTouch(heartX){
   let d = dist(stealer.pos.x, stealer.pos.y, heartX, heartD.y);
@@ -142,13 +154,16 @@ function hrtTouch(heartX){
 }
 
 function crateTouch(crateX){
-  // let d = dist(stealer.pos.x, stealer.pos.y, crateX, crate.y);
-  // if(d < stealer.size/2 + crate.size/2){
-  //   console.log("CRATE");
-  // }
-
-  if(stealer.pos.x >= crateX - crate.sizeX && stealer.pos.x <= crateX + crate.sizeX && stealer.pos.y + stealer.r >= crate.y - crate.sizeY/2  && stealer.pos.y + stealer.r <= crate.y - crate.sizeY/2){
-    //stealer.pos.y = stealer.pos.y;
+  let d = dist(stealer.pos.x, stealer.pos.y, crateX, crate.y);
+  if(d < stealer.r/2 + crate.size/2){
     stealer.vy = 0;
+    if(stealer.pos.y >= 520){
+      stealer.pos.x -= 15;
+    }
+    else if(stealer.pos.y < 520){
+      stealer.pos.x -= 0.01;
+    }
   }
+
+
 }
