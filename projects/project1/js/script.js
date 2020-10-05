@@ -15,6 +15,13 @@ let heartD = {
   y: 500,
   size: 350
 }
+let crateImg;
+let crate = {
+  x: 0,
+  y: 595,
+  sizeX: 150,
+  sizeY: 150
+};
 
 
 
@@ -22,14 +29,15 @@ let heartD = {
 function preload(){
   bgImg = loadImage('assets/images/stealerBackground.png');
   heartImg = loadImage('assets/images/diamondHeart.png');
+  crateImg = loadImage('assets/images/crate.png');
 }
 
 // setup()
 //
 // Initializing stealer object and creating canvas.
 function setup() {
-createCanvas(1280,720);
-stealer = new Stealer(50, height - 200);
+  createCanvas(1280,720);
+  stealer = new Stealer(100, height + 50);
 }
 
 // draw()
@@ -39,13 +47,11 @@ function draw() {
   background(0);
   backgroundMove();
   heartDiamond();
-
-
-
+  crateShow();
+//  crateTouch();
   stealer.display();
   stealer.move();
   handleKey();
-
 }
 
 function backgroundMove(){
@@ -54,11 +60,33 @@ function backgroundMove(){
   image(bgImg, bgLeft, 0);
 }
 
+// Displaying the diamond at the end of the level
 function heartDiamond(){
   let hrtX = bgLeft + 7000;
   imageMode(CENTER);
   image(heartImg, hrtX, heartD.y,heartD.size, heartD.size);
   hrtTouch(hrtX);
+}
+
+function crateShow(){
+  let crateX = bgLeft + 500;
+  imageMode(CENTER);
+  image(crateImg, crateX, crate.y,crate.sizeX, crate.sizeY);
+    crateTouch(crateX);
+  for(let j = 0; j < 5; j++){
+    crateX += 1000;
+    for(let i = 0; i < 5; i++){
+      imageMode(CENTER);
+      image(crateImg, crateX, crate.y,crate.sizeX, crate.sizeY);
+  crateTouch(crateX);
+    }
+  }
+
+
+
+  // imageMode(CENTER);
+  // image(crateImg, crateX, crate.y,crate.sizeX, crate.sizeY);
+
 }
 
 // Functions to move the background
@@ -110,5 +138,17 @@ function hrtTouch(heartX){
   let d = dist(stealer.pos.x, stealer.pos.y, heartX, heartD.y);
   if(d < stealer.size/2 + heartD.size/2){
     console.log("TOUCHING");
+  }
+}
+
+function crateTouch(crateX){
+  // let d = dist(stealer.pos.x, stealer.pos.y, crateX, crate.y);
+  // if(d < stealer.size/2 + crate.size/2){
+  //   console.log("CRATE");
+  // }
+
+  if(stealer.pos.x >= crateX - crate.sizeX && stealer.pos.x <= crateX + crate.sizeX && stealer.pos.y + stealer.r >= crate.y - crate.sizeY/2  && stealer.pos.y + stealer.r <= crate.y - crate.sizeY/2){
+    //stealer.pos.y = stealer.pos.y;
+    stealer.vy = 0;
   }
 }

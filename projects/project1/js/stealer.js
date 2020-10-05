@@ -33,13 +33,14 @@ function Stealer(x, y) {
 
   this.display = function() {
     fill(255);
-    rect(this.pos.x, this.pos.y, this.size, this.size);
+    rectMode(CENTER);
+    rect(this.pos.x, this.pos.y + 75, this.size, this.size);
   }
 
   this.edges = function() {
-    if (this.pos.y > height - 200) {
+    if (this.pos.y > height ) {
       this.vel.y *= 0;
-      this.pos.y = height - 200;
+      this.pos.y = height ;
     }
   }
 
