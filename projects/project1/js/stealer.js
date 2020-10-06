@@ -18,7 +18,6 @@ function Stealer(x, y) {
     this.vel.add(this.acc);
     this.pos.add(this.vel);
     this.acc.set(0, 0);
-    // this.pos.x += this.vx;
 
   }
 
@@ -34,9 +33,6 @@ function Stealer(x, y) {
     }
   }
 
-  // this.display = function(image) {
-  //   image(robberStandImg,this.pos.x, this.pos.y + 75, this.size, this.size);
-  // }
 
   this.edges = function() {
     if (this.pos.y > height ) {
@@ -62,14 +58,10 @@ function Stealer(x, y) {
   }
 
   this.moveLeft = function(){
-    // this.pos.x  -= this.vx;
     this.pos.x -= moveSpeed;
-    // this.vel.x = -moveSpeed;
   }
 
   this.moveRight = function(){
-    // this.pos.x  += this.vx;
    this.pos.x += moveSpeed;
-    // this.vel.x = moveSpeed;
   }
 }

@@ -12,19 +12,25 @@ let heartLeft = 0;
 let heartImg;
 let heartD = {
   x: 7000,
-  y: 500,
+  y: 448,
   size: 350
 }
 let crateImg;
 let crate = {
   x: 0,
-  y: 595,
+  y: 547,
   sizeX: 150,
   sizeY: 150,
   size: 150
 };
 let robberStandImg;
 let robberWalkImg;
+let laser = {
+  x: 0,
+  y: 622,
+  sizeX: 15,
+  sizeY: 8
+}
 
 
 // loading images
@@ -52,9 +58,10 @@ function draw() {
   backgroundMove();
   heartDiamond();
   crateShow();
-  //stealer.display();
   stealer.move();
   handleKey();
+  laserShow();
+
 }
 
 function backgroundMove(){
@@ -71,6 +78,29 @@ function heartDiamond(){
   hrtTouch(hrtX);
 }
 
+function laserShow(){
+  let laserX = bgLeft + 600;
+  fill(123,223,105);
+  noStroke();
+  rectMode(CORNER);
+  rect(laserX,laser.y, laser.sizeX, laser.sizeY);
+  for(let i = 0; i < 9; i++){
+    laserX += 600;
+    for(let j = 0; j < 9; j++){
+      rect(laserX, laser.y, laser.sizeX, laser.sizeY);
+    }
+  }
+  // Speed of laser
+  laser.sizeY -= 8;
+
+  // Checks if laser hits top and restarts if it does.
+  if(laser.sizeY < -500){
+    laser.sizeY = 0;
+  }
+
+  laserTouch(laserX,laser.sizeY);
+}
+
 function crateShow(){
   let crateX = bgLeft + 500;
   imageMode(CENTER);
@@ -84,12 +114,6 @@ function crateShow(){
   crateTouch(crateX);
     }
   }
-
-
-
-  // imageMode(CENTER);
-  // image(crateImg, crateX, crate.y,crate.sizeX, crate.sizeY);
-
 }
 
 // Functions to move the background
@@ -118,6 +142,7 @@ function handleKey(){
       display(robberWalkImg);
     }
   }
+
   else if (keyIsDown(RIGHT_ARROW)){
     if(stealer.canMoveRight()){
       stealer.moveRight();
@@ -142,7 +167,8 @@ function keyPressed(){
 }
 
 function display(picture){
-  image(picture,stealer.pos.x, stealer.pos.y + 75, stealer.size, stealer.size);
+  imageMode(CENTER);
+  image(picture,stealer.pos.x, stealer.pos.y, stealer.size, stealer.size);
 }
 
 
@@ -155,15 +181,26 @@ function hrtTouch(heartX){
 
 function crateTouch(crateX){
   let d = dist(stealer.pos.x, stealer.pos.y, crateX, crate.y);
+
   if(d < stealer.r/2 + crate.size/2){
     stealer.vy = 0;
     if(stealer.pos.y >= 520){
+
       stealer.pos.x -= 15;
     }
     else if(stealer.pos.y < 520){
       stealer.pos.x -= 0.01;
     }
   }
+}
 
+function laserTouch(laserX, laserSizeY){
+  let d = dist(stealer.pos.x, stealer.pos.y, laserX, laser.y);
 
+  if(d <= stealer.r/2 + laserSizeY/2){
+    console.log("RECTANGLE");
+    fill(255,0,0,25);
+    rectMode(CENTER);
+    rect(0,0,1280,720);
+  }
 }
