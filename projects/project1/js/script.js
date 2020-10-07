@@ -32,9 +32,7 @@ let laser = {
   sizeY: 8
 }
 let livesCounter = 3;
-let timer = 1;
-let robberHurtImg;
-
+let heartLivesImg;
 
 // loading images
 function preload(){
@@ -43,7 +41,8 @@ function preload(){
   crateImg = loadImage('assets/images/crate.png');
   robberStandImg = loadImage('assets/images/stealer/robber-standing.gif');
   robberWalkImg = loadImage('assets/images/stealer/robber-walking.gif');
-  robberHurtImg = loadImage('assets/images/stealer/robber-angry.gif');
+  heartLivesImg = loadImage('assets/images/stealer/heart.png');
+  transparentImg = loadImage('assets/images/stealer/transparent.png');
 }
 
 // setup()
@@ -68,18 +67,15 @@ function draw() {
   showLives();
 }
 
+
+
+
+// Functions to move the background
 function backgroundMove(){
   imageMode(CORNER);
   bgImg.resize(7250,720);
   image(bgImg, bgLeft, 0);
 }
-
-
-
-
-
-
-// Functions to move the background
 function moveBgLeft(){
   let minBgLeft = -bgImg.width + width;
 
@@ -87,7 +83,6 @@ function moveBgLeft(){
     bgLeft -= moveSpeed;
   }
 }
-
 function moveBgRight(){
   if(bgLeft + moveSpeed < 0){
     bgLeft += moveSpeed;
@@ -128,6 +123,7 @@ function keyPressed(){
   }
 }
 
+// Function that changes the gif being displayed
 function display(picture){
   imageMode(CENTER);
   image(picture,stealer.pos.x, stealer.pos.y, stealer.size2, stealer.size);
@@ -169,8 +165,8 @@ function crateShow(){
   }
 }
 function crateTouch(crateX){
-
   if(isCrateTouching(crateX)){
+    console.log("TOUCH");
     stealer.vy = 0;
     if(stealer.pos.y >= 520){
       if(stealer.pos.x < crateX){
@@ -183,13 +179,13 @@ function crateTouch(crateX){
     else if(stealer.pos.y < 520){
       stealer.pos.x -= 0.01;
     }
-
    }
 }
 function isCrateTouching(crateX) {
-  let d = dist(stealer.pos.x, stealer.pos.y, crateX, crate.y);
-  if(d < stealer.r/2 + crate.size/2)
-  {
+if(stealer.pos.x + stealer.r/2 > crateX - crate.sizeX/4 &&
+  stealer.pos.x - stealer.r/2 < crateX + crate.sizeX/4 &&
+  stealer.pos.y + stealer.r/2 >= crate.y - crate.sizeY/2  &&
+  stealer.pos.y - stealer.r/2 <= crate.y - crate.sizeY/2){
     return true;
   }
 }
@@ -220,7 +216,7 @@ function laserShow(){
     laserX += 600;
   }
   // Speed of laser
-  laser.sizeY -= 5;
+  laser.sizeY -= 7;
 
   // Checks if laser hits top and restarts if it does.
   if(laser.sizeY < -500){
@@ -232,13 +228,12 @@ function laserShow(){
 function laserTouch(laserX, laserSizeY, laserY){
   if (laserIsTouching(laserX, laserSizeY, laserY) && !isOnCrate() && livesCounter >= 0)
   {
-      console.log("Ouch!");
+      stealer.pos.x -= 100;
+      stealer.jump();
+      livesCounter -= 1;
       fill(255,0,0,25);
       rectMode(CORNER);
       rect(0,0,1280,720);
-      stealer.pos.x -= 100;
-      livesCounter -= 1;
-      console.log(livesCounter);
   }
   else if (livesCounter < 0) {
     console.log("GAME OVER");
@@ -264,6 +259,22 @@ This function is to display how many lives the player has left.
 */
 function showLives(){
   fill(0);
-  textSize(25);
-  text(`Lives: ${livesCounter}`, 50, 65);
+  // textSize(25);
+  // text(`Lives: ${livesCounter}`, 50, 65);
+  if(livesCounter == 3){
+    image(heartLivesImg, 50, 65, 25,25);
+    image(heartLivesImg, 80, 65, 25,25);
+    image(heartLivesImg, 110, 65, 25,25);
+  }
+  else if (livesCounter == 2){
+    image(heartLivesImg, 50, 65, 25,25);
+    image(heartLivesImg, 80, 65, 25,25);
+  }
+  else if(livesCounter == 1){
+    image(heartLivesImg, 50, 65, 25,25);
+  }
+  else if(livesCounter == 0) {
+    image(transparentImg, 50, 65, 25,25);
+  }
+  // image(heartImg,stealer.pos.x, stealer.pos.y, stealer.size2, stealer.size);
 }
