@@ -181,16 +181,17 @@ function crateTouch(crateX){
     }
    }
 }
-function isCrateTouching(crateX) {
-if(stealer.pos.x + stealer.r/2 > crateX - crate.sizeX/4 &&
-  stealer.pos.x - stealer.r/2 < crateX + crate.sizeX/4 &&
-  stealer.pos.y + stealer.r/2 >= crate.y - crate.sizeY/2  &&
-  stealer.pos.y - stealer.r/2 <= crate.y - crate.sizeY/2){
-    return true;
-  }
-}
+function isCrateTouching(crateX){
+  if(stealer.pos.x + stealer.r/2 > crateX - crate.sizeX/4 &&
+    stealer.pos.x - stealer.r/2 < crateX + crate.sizeX/4 &&
+    stealer.pos.y + stealer.r/2 >= crate.y - crate.sizeY/2  &&
+    stealer.pos.y - stealer.r/2 <= crate.y - crate.sizeY/2){
+      return true;
+    }
+ }
 function isOnCrate(){
-  if(stealer.pos.y < 520){
+  if(stealer.pos.y + stealer.r/2 >= crate.y - crate.sizeY/2  &&
+  stealer.pos.y - stealer.r/2 <= crate.y - crate.sizeY/2){
     return true;
   }
 }
@@ -202,7 +203,9 @@ so long as you haven't lost all your lives.
 */
 function laserShow(){
   let laserX = bgLeft + 400;
-  fill(123,223,105,50);
+  let bottom = 622;
+  let top = -500;
+  fill(127);
   noStroke();
   rectMode(CORNER);
   for(let i = 0; i < 9; i++){
@@ -212,16 +215,15 @@ function laserShow(){
       livesCounter -= 1;
       console.log(livesCounter);
     }
-    // laserTouch(laserX,laser.sizeY,laser.y);
     laserX += 600;
   }
-  // Speed of laser
-  laser.sizeY -= 7;
+   laser.sizeY -= 7;
 
   // Checks if laser hits top and restarts if it does.
-  if(laser.sizeY < -500){
-    laser.sizeY = 0;
+  if(laser.sizeY < top){
+    laser.sizeY += 500;
   }
+
 
 
 }
