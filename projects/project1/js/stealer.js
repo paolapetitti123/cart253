@@ -8,6 +8,7 @@ function Stealer(x, y) {
   this.gravity = 3;
   this.speed = moveSpeed;
   this.size = 200;
+  this.size2 = 115;
   this.gravity = 3;
 
   this.applyForce = function(force) {

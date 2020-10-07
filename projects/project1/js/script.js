@@ -31,6 +31,9 @@ let laser = {
   sizeX: 15,
   sizeY: 8
 }
+let livesCounter = 3;
+let timer = 1;
+let robberHurtImg;
 
 
 // loading images
@@ -38,8 +41,9 @@ function preload(){
   bgImg = loadImage('assets/images/stealerBackground.png');
   heartImg = loadImage('assets/images/diamondHeart.png');
   crateImg = loadImage('assets/images/crate.png');
-  robberStandImg = loadImage('assets/images/stealer/robber-stand.gif');
-  robberWalkImg = loadImage('assets/images/stealer/robber-right-walk.gif');
+  robberStandImg = loadImage('assets/images/stealer/robber-standing.gif');
+  robberWalkImg = loadImage('assets/images/stealer/robber-walking.gif');
+  robberHurtImg = loadImage('assets/images/stealer/robber-angry.gif');
 }
 
 // setup()
@@ -61,7 +65,7 @@ function draw() {
   stealer.move();
   handleKey();
   laserShow();
-
+  showLives();
 }
 
 function backgroundMove(){
@@ -70,51 +74,10 @@ function backgroundMove(){
   image(bgImg, bgLeft, 0);
 }
 
-// Displaying the diamond at the end of the level
-function heartDiamond(){
-  let hrtX = bgLeft + 7000;
-  imageMode(CENTER);
-  image(heartImg, hrtX, heartD.y,heartD.size, heartD.size);
-  hrtTouch(hrtX);
-}
 
-function laserShow(){
-  let laserX = bgLeft + 600;
-  fill(123,223,105);
-  noStroke();
-  rectMode(CORNER);
-  rect(laserX,laser.y, laser.sizeX, laser.sizeY);
-  for(let i = 0; i < 9; i++){
-    laserX += 600;
-    for(let j = 0; j < 9; j++){
-      rect(laserX, laser.y, laser.sizeX, laser.sizeY);
-    }
-  }
-  // Speed of laser
-  laser.sizeY -= 8;
 
-  // Checks if laser hits top and restarts if it does.
-  if(laser.sizeY < -500){
-    laser.sizeY = 0;
-  }
 
-  laserTouch(laserX,laser.sizeY);
-}
 
-function crateShow(){
-  let crateX = bgLeft + 500;
-  imageMode(CENTER);
-  image(crateImg, crateX, crate.y,crate.sizeX, crate.sizeY);
-    crateTouch(crateX);
-  for(let j = 0; j < 5; j++){
-    crateX += 1000;
-    for(let i = 0; i < 5; i++){
-      imageMode(CENTER);
-      image(crateImg, crateX, crate.y,crate.sizeX, crate.sizeY);
-  crateTouch(crateX);
-    }
-  }
-}
 
 // Functions to move the background
 function moveBgLeft(){
@@ -161,17 +124,25 @@ function handleKey(){
 // Function to see if the UP arrow gets pressed once to jump
 function keyPressed(){
   if (keyCode === UP_ARROW){
-    console.log(stealer.pos.y);
     stealer.jump();
   }
 }
 
 function display(picture){
   imageMode(CENTER);
-  image(picture,stealer.pos.x, stealer.pos.y, stealer.size, stealer.size);
+  image(picture,stealer.pos.x, stealer.pos.y, stealer.size2, stealer.size);
 }
 
-
+/*
+Displaying the diamond at the end of the level that you need to reach in order
+to win the level.
+*/
+function heartDiamond(){
+  let hrtX = bgLeft + 7000;
+  imageMode(CENTER);
+  image(heartImg, hrtX, heartD.y,heartD.size, heartD.size);
+  hrtTouch(hrtX);
+}
 function hrtTouch(heartX){
   let d = dist(stealer.pos.x, stealer.pos.y, heartX, heartD.y);
   if(d < stealer.size/2 + heartD.size/2){
@@ -179,28 +150,120 @@ function hrtTouch(heartX){
   }
 }
 
-function crateTouch(crateX){
-  let d = dist(stealer.pos.x, stealer.pos.y, crateX, crate.y);
+/*
+The following 4 crate functions show the crates, detect if you touch one & if
+you are currently on a crate, if you are on a crate the lasers can't hurt you.
+*/
+function crateShow(){
+  let crateX = bgLeft + 500;
+  imageMode(CENTER);
+    image(crateImg, crateX, crate.y,crate.sizeX, crate.sizeY);
+    crateTouch(crateX);
+  for(let j = 0; j < 5; j++){
+    crateX += 1000;
 
-  if(d < stealer.r/2 + crate.size/2){
+      imageMode(CENTER);
+      image(crateImg, crateX, crate.y,crate.sizeX, crate.sizeY);
+      crateTouch(crateX);
+
+  }
+}
+function crateTouch(crateX){
+
+  if(isCrateTouching(crateX)){
     stealer.vy = 0;
     if(stealer.pos.y >= 520){
-
-      stealer.pos.x -= 15;
+      if(stealer.pos.x < crateX){
+        stealer.pos.x -= 15;
+      }
+      else{
+        stealer.pos.x += 15;
+      }
     }
     else if(stealer.pos.y < 520){
       stealer.pos.x -= 0.01;
     }
+
+   }
+}
+function isCrateTouching(crateX) {
+  let d = dist(stealer.pos.x, stealer.pos.y, crateX, crate.y);
+  if(d < stealer.r/2 + crate.size/2)
+  {
+    return true;
+  }
+}
+function isOnCrate(){
+  if(stealer.pos.y < 520){
+    return true;
   }
 }
 
-function laserTouch(laserX, laserSizeY){
-  let d = dist(stealer.pos.x, stealer.pos.y, laserX, laser.y);
-
-  if(d <= stealer.r/2 + laserSizeY/2){
-    console.log("RECTANGLE");
-    fill(255,0,0,25);
-    rectMode(CENTER);
-    rect(0,0,1280,720);
+/*
+The 3 following functions show the green lasers, detect if you hit one and
+what happens when you do hit one lose a life and get pushed back to try again
+so long as you haven't lost all your lives.
+*/
+function laserShow(){
+  let laserX = bgLeft + 400;
+  fill(123,223,105,50);
+  noStroke();
+  rectMode(CORNER);
+  for(let i = 0; i < 9; i++){
+    rect(laserX, laser.y, laser.sizeX, laser.sizeY);
+    if(laserTouch(laserX,laser.sizeY,laser.y))
+    {
+      livesCounter -= 1;
+      console.log(livesCounter);
+    }
+    // laserTouch(laserX,laser.sizeY,laser.y);
+    laserX += 600;
   }
+  // Speed of laser
+  laser.sizeY -= 5;
+
+  // Checks if laser hits top and restarts if it does.
+  if(laser.sizeY < -500){
+    laser.sizeY = 0;
+  }
+
+
+}
+function laserTouch(laserX, laserSizeY, laserY){
+  if (laserIsTouching(laserX, laserSizeY, laserY) && !isOnCrate() && livesCounter >= 0)
+  {
+      console.log("Ouch!");
+      fill(255,0,0,25);
+      rectMode(CORNER);
+      rect(0,0,1280,720);
+      stealer.pos.x -= 100;
+      livesCounter -= 1;
+      console.log(livesCounter);
+  }
+  else if (livesCounter < 0) {
+    console.log("GAME OVER");
+  }
+
+
+}
+function laserIsTouching(laserX, laserSizeY, laserY){
+  if (stealer.pos.x + stealer.size/2 > laserX - laser.sizeX/2 &&
+      stealer.pos.x - stealer.size/2 < laserX + laser.sizeX/2 &&
+      stealer.pos.y + stealer.size/2 > laserY + laserSizeY &&
+      stealer.pos.y - stealer.size/2 < laserY) {
+      return true;
+    }
+    else {
+      return false;
+    }
+}
+
+
+/*
+This function is to display how many lives the player has left.
+*/
+function showLives(){
+  fill(0);
+  textSize(25);
+  text(`Lives: ${livesCounter}`, 50, 65);
 }
