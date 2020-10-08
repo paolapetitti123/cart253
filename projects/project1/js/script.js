@@ -2,9 +2,19 @@
 Project 1: The Stealer
 Paola Petitti
 
-Here is a description of this template p5 project.
+You must jump over the metal bars that are coming out of the floor
+to make it to the end of the level and steal the diamond heart. The player
+can jump onto the boxes however you can't jump when your on a box (I might try
+changing that if time permits).
+
+The idea/concept for this is heavily inspired by
+The Boyz - The Stealer music video
+This is the link if you are interested in watching it
+https://www.youtube.com/watch?v=c_e-IC0VwZM&ab_channel=THEBOYZ
 **************************************************/
-// Variable declarations
+/*
+  Variable declarations
+*/
 let bgImg;
 let bgLeft = 0;
 let moveSpeed = 15;
@@ -81,8 +91,10 @@ function draw() {
   }
 }
 
-
-function simulation(){
+/*
+  This function makes the game run!
+*/
+function simulation() {
   heartDiamond();
   stealer.move();
   handleKey();
@@ -92,7 +104,9 @@ function simulation(){
 
 
 
-// Functions to move the background
+/*
+  Functions to move the background
+*/
 function backgroundMove(){
   imageMode(CORNER);
   bgImg.resize(7250,720);
@@ -111,7 +125,9 @@ function moveBgRight(){
   }
 }
 
-// Function to see which keys are being held down to move the bg
+/*
+  Function to see which keys are being held down to move the bg
+*/
 function handleKey(){
   if(keyIsDown(LEFT_ARROW)){
     if(stealer.canMoveLeft()){
@@ -138,7 +154,9 @@ function handleKey(){
     }
 }
 
-// Function to see if the UP arrow gets pressed once to jump
+/*
+  Function to see if the UP arrow gets pressed once to jump
+*/
 function keyPressed(){
   if (keyCode === UP_ARROW){
     stealer.jump();
@@ -149,15 +167,17 @@ function keyPressed(){
   }
 }
 
-// Function that changes the gif being displayed
+/*
+  Function that changes the gif being displayed
+*/
 function display(picture){
   imageMode(CENTER);
   image(picture,stealer.pos.x, stealer.pos.y, stealer.size2, stealer.size);
 }
 
 /*
-Displaying the diamond at the end of the level that you need to reach in order
-to win the level.
+  Displaying the diamond at the end of the level that you need to reach in order
+  to win the level.
 */
 function heartDiamond(){
   let hrtX = bgLeft + 7000;
@@ -173,8 +193,8 @@ function hrtTouch(heartX){
 }
 
 /*
-The following 4 crate functions show the crates, detect if you touch one & if
-you are currently on a crate, if you are on a crate the lasers can't hurt you.
+  The following 4 crate functions show the crates, detect if you touch one & if
+  you are currently on a crate, if you are on a crate the lasers can't hurt you.
 */
 function crateShow(){
   crate.x = bgLeft + 500;
@@ -224,9 +244,9 @@ function isOnCrate(){
 }
 
 /*
-The 3 following functions show the green lasers, detect if you hit one and
-what happens when you do hit one lose a life and get pushed back to try again
-so long as you haven't lost all your lives.
+  The 3 following functions show the green lasers, detect if you hit one and
+  what happens when you do hit one lose a life and get pushed back to try again
+  so long as you haven't lost all your lives.
 */
 function laserShow(){
   let laserX = bgLeft + 800;
@@ -280,7 +300,7 @@ function laserIsTouching(laserX, laserSizeY, laserY){
 }
 
 /*
-This function is to display how many lives the player has left.
+  This function is to display how many lives the player has left.
 */
 function showLives(){
   fill(0);
@@ -304,20 +324,25 @@ function showLives(){
   // image(heartImg,stealer.pos.x, stealer.pos.y, stealer.size2, stealer.size);
 }
 
+/*
+  The following 3 functions tell the program what to do for the start state,
+  the win state and the lose state.
 
+  Note to self:
+  Change the win ending to still have the stand of the diamond just without
+  the diamond in it and maybe change the music depending on the ending!
+*/
 function intro(){
   backgroundMove();
   crateShow();
   image(introImg, width/2, height/2);
 }
-
 function winEnding(){
   textSize(50);
   textAlign(CENTER);
   fill(253, 139, 255);
   text(`You stole the diamond!`, width/2, height/2);
 }
-
 function loseEnding(){
   textSize(50);
   textAlign(CENTER);
