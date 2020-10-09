@@ -246,7 +246,7 @@ function isOnCrate(){
 }
 
 /*
-  The 3 following functions show the bars, detect if you hit one and
+  The 5 following functions show the bars, detect if you hit one and
   what happens when you do hit one lose a life and get pushed back to try again
   so long as you haven't lost all your lives.
 */
@@ -274,22 +274,12 @@ function barShow(){
   }
 }
 function shouldShrink(){
-  console.log("SHRINKING");
-    cieling += 7;
-     bar.sizeY += 7;
-  console.log(cieling);
+  cieling += 7;
+  bar.sizeY += 7;
 }
 function shouldGrow(){
-  console.log("GROWING");
-  console.log(bar.sizeY);
-
-
   bar.sizeY -= 7;
 }
-/*
-bottom = 0; cieling = -500;
-*/
-
 function barTouch(barX, barSizeY, barY){
   if (barIsTouching(barX, barSizeY, barY) && livesCounter >= 0)
   {
