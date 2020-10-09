@@ -266,18 +266,24 @@ function barShow(){
     shouldGrow();
   }
 
-  if(bar.sizeY <= cieling && bar.sizeY <= bottom){
+  else if(bar.sizeY <= cieling && bar.sizeY < bottom){
     shouldShrink();
+  }
+  else if(bar.sizeY == 0){
+    cieling = -496;
   }
 }
 function shouldShrink(){
   console.log("SHRINKING");
-  bar.sizeY += 20;
-
+    cieling += 7;
+     bar.sizeY += 7;
+  console.log(cieling);
 }
 function shouldGrow(){
   console.log("GROWING");
   console.log(bar.sizeY);
+
+
   bar.sizeY -= 7;
 }
 /*
