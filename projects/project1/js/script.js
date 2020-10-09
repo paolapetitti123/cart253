@@ -11,6 +11,13 @@ The idea/concept for this is heavily inspired by
 The Boyz - The Stealer music video
 This is the link if you are interested in watching it
 https://www.youtube.com/watch?v=c_e-IC0VwZM&ab_channel=THEBOYZ
+
+Hit sound effect: https://freesound.org/people/CastIronCarousel/sounds/216783/
+Gameplay music: https://freemusicarchive.org/search?adv=1&quicksearch=Monplaisir%20Garage&&
+Game win music: https://freemusicarchive.org/search?adv=1&quicksearch=Monplaisir%20Victory&&
+Game over sound: https://freesound.org/people/Euphrosyyn/sounds/442127/
+
+All the art (background, sprites, crates/boxes) was done by me 
 **************************************************/
 /*
   Variable declarations
@@ -70,9 +77,10 @@ function preload(){
 
 }
 
-// setup()
-//
-// Initializing stealer object and creating canvas.
+/*
+  Initializing stealer object, creating canvas and setting the
+  volume for the sounds.
+*/
 function setup() {
   createCanvas(1280,720);
   stealer = new Stealer(100, height + 50);
@@ -81,9 +89,9 @@ function setup() {
   gameWin.setVolume(0.3);
 }
 
-// draw()
-//
-// shows background, diamond heart, now allows square to jump
+/*
+  Shows background, tells game which state to enter
+*/
 function draw() {
   background(0);
   backgroundMove();
