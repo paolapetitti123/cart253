@@ -35,12 +35,14 @@ let crate = {
 };
 let robberStandImg;
 let robberWalkImg;
-let laser = {
+let bar = {
   x: 0,
   y: 622,
   sizeX: 15,
-  sizeY: 8
+  sizeY: 0
 }
+let bottom = 0;
+let cieling = -496;
 let livesCounter = 3;
 let heartLivesImg;
 let introImg;
@@ -98,7 +100,7 @@ function simulation() {
   heartDiamond();
   stealer.move();
   handleKey();
-  laserShow();
+  barShow();
   showLives();
 }
 
@@ -194,7 +196,7 @@ function hrtTouch(heartX){
 
 /*
   The following 4 crate functions show the crates, detect if you touch one & if
-  you are currently on a crate, if you are on a crate the lasers can't hurt you.
+  you are currently on a crate, if you are on a crate the bars can't hurt you.
 */
 function crateShow(){
   crate.x = bgLeft + 500;
@@ -244,34 +246,46 @@ function isOnCrate(){
 }
 
 /*
-  The 3 following functions show the green lasers, detect if you hit one and
+  The 3 following functions show the bars, detect if you hit one and
   what happens when you do hit one lose a life and get pushed back to try again
   so long as you haven't lost all your lives.
 */
-function laserShow(){
-  let laserX = bgLeft + 800;
-  let bottom = 622;
-  let top = -500;
+function barShow(){
+  let barX = bgLeft + 800;
   fill(127);
   noStroke();
   rectMode(CORNER);
+
   for(let i = 0; i < 9; i++){
-    rect(laserX, laser.y, laser.sizeX, laser.sizeY);
-    laserTouch(laserX,laser.sizeY,laser.y);
-    laserX += 600;
-  }
-   laser.sizeY -= 4;
+    rect(barX, bar.y, bar.sizeX, bar.sizeY);
+    barTouch(barX,bar.sizeY,bar.y);
+    barX += 600;
 
-  // Checks if laser hits top and restarts if it does.
-  if(laser.sizeY <= top){
-    laser.sizeY = 0;
+  }
+  if(bar.sizeY <= bottom && bar.sizeY > cieling){
+    shouldGrow();
   }
 
-
+  if(bar.sizeY <= cieling && bar.sizeY <= bottom){
+    shouldShrink();
+  }
+}
+function shouldShrink(){
+  console.log("SHRINKING");
+  bar.sizeY += 20;
 
 }
-function laserTouch(laserX, laserSizeY, laserY){
-  if (laserIsTouching(laserX, laserSizeY, laserY) && livesCounter >= 0)
+function shouldGrow(){
+  console.log("GROWING");
+  console.log(bar.sizeY);
+  bar.sizeY -= 7;
+}
+/*
+bottom = 0; cieling = -500;
+*/
+
+function barTouch(barX, barSizeY, barY){
+  if (barIsTouching(barX, barSizeY, barY) && livesCounter >= 0)
   {
       stealer.pos.x -= 100;
       stealer.jump();
@@ -287,11 +301,11 @@ function laserTouch(laserX, laserSizeY, laserY){
 
 
 }
-function laserIsTouching(laserX, laserSizeY, laserY){
-  if (stealer.pos.x + stealer.size/2 > laserX - laser.sizeX/2 &&
-      stealer.pos.x - stealer.size/2 < laserX + laser.sizeX/2 &&
-      stealer.pos.y + stealer.size/2 > laserY + laserSizeY &&
-      stealer.pos.y - stealer.size/2 < laserY) {
+function barIsTouching(barX, barSizeY, barY){
+  if (stealer.pos.x + stealer.size/2 > barX - bar.sizeX/2 &&
+      stealer.pos.x - stealer.size/2 < barX + bar.sizeX/2 &&
+      stealer.pos.y + stealer.size/2 > barY + barSizeY &&
+      stealer.pos.y - stealer.size/2 < barY) {
       return true;
     }
     else {
