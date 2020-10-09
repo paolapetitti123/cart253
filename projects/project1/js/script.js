@@ -48,6 +48,9 @@ let heartLivesImg;
 let introImg;
 let state = 'start';
 let gameMusic;
+let gameWin;
+let gameOver;
+let punchSound;
 
 // loading images
 function preload(){
@@ -60,7 +63,10 @@ function preload(){
   transparentImg = loadImage('assets/images/stealer/transparent.png');
   introImg = loadImage('assets/images/introScreen.png');
 
-  gameMusic = loadSound('assets/sounds/gameMusic.mp3');
+  gameMusic = loadSound('assets/sounds/Monplaisir_-_02_-_Garage.mp3');
+  gameWin = loadSound('assets/sounds/Monplaisir_-_08_-_Victory.mp3');
+  gameOver = loadSound('assets/sounds/gameOver.wav');
+  punchSound = loadSound('assets/sounds/punch.mp3');
 
 }
 
@@ -70,6 +76,9 @@ function preload(){
 function setup() {
   createCanvas(1280,720);
   stealer = new Stealer(100, height + 50);
+  gameMusic.setVolume(0.5);
+  gameOver.setVolume(0.2);
+  gameWin.setVolume(0.3);
 }
 
 // draw()
@@ -191,6 +200,8 @@ function hrtTouch(heartX){
   let d = dist(stealer.pos.x, stealer.pos.y, heartX, heartD.y);
   if(d < stealer.size/2 + heartD.size/2){
     state = `winEnding`;
+    gameMusic.stop();
+    gameWin.play();
   }
 }
 
@@ -289,10 +300,12 @@ function barTouch(barX, barSizeY, barY){
       fill(255,0,0,25);
       rectMode(CORNER);
       rect(0,0,1280,720);
-
+      punchSound.play();
   }
   else if (livesCounter < 0) {
     state = `loseEnding`;
+    gameMusic.stop();
+    gameOver.play();
   }
 
 
