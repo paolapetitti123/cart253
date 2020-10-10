@@ -60,6 +60,7 @@ let gameWin;
 let gameOver;
 let punchSound;
 
+
 // loading images
 function preload(){
   bgImg = loadImage('assets/images/stealerBackground.png');
@@ -182,7 +183,7 @@ function keyPressed(){
   if (keyCode === UP_ARROW){
     stealer.jump();
   }
-  else if(keyCode === ENTER){
+  else if(keyCode === ENTER && state == `start`){
     state = `simulation`;
     gameMusic.play();
   }
@@ -249,6 +250,8 @@ function crateTouch(crateX){
       stealer.pos.x -= 0.01;
     }
    }
+
+
 }
 function isCrateTouching(crateX){
   if(stealer.pos.x + stealer.r/2 > crateX - crate.sizeX/4 &&
@@ -261,7 +264,6 @@ function isCrateTouching(crateX){
 function isOnCrate(){
   if(stealer.pos.y + stealer.r/2 >= crate.y - crate.sizeY/2  &&
   stealer.pos.y - stealer.r/2 <= crate.y - crate.sizeY/2){
-   console.log('TOUCH');
     return true;
   }
 }
@@ -373,15 +375,17 @@ function intro(){
 function winEnding(){
   textSize(50);
   textAlign(CENTER);
+  textFont("monospace");
   fill(253, 139, 255);
   let hrtX = bgLeft + 7000;
   imageMode(CENTER);
   image(heartStolenImg, hrtX, heartD.y,heartD.size, heartD.size);
-  text(`Mission: SUCCESSFUL`, width/2, height/2);
+  text(`MISSION : SUCCESSFUL`, width/2, height/2);
 }
 function loseEnding(){
   textSize(50);
   textAlign(CENTER);
-  fill(0,8,255);
-  text(`Oh no, better luck next time!`, width/2, height/2);
+  fill(0,0,0);
+  textFont("monospace");
+  text(`MISSION : FAILED`, width/2, height/2);
 }
