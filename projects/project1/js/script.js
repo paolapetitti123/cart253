@@ -17,7 +17,7 @@ Gameplay music: https://freemusicarchive.org/search?adv=1&quicksearch=Monplaisir
 Game win music: https://freemusicarchive.org/search?adv=1&quicksearch=Monplaisir%20Victory&&
 Game over sound: https://freesound.org/people/Euphrosyyn/sounds/442127/
 
-All the art (background, sprites, crates/boxes) was done by me 
+All the art (background, sprites, crates/boxes) was done by me
 **************************************************/
 /*
   Variable declarations
@@ -27,6 +27,7 @@ let bgLeft = 0;
 let moveSpeed = 15;
 let heartLeft = 0;
 let heartImg;
+let heartStolenImg;
 let heartD = {
   x: 7000,
   y: 448,
@@ -63,6 +64,7 @@ let punchSound;
 function preload(){
   bgImg = loadImage('assets/images/stealerBackground.png');
   heartImg = loadImage('assets/images/diamondHeart.png');
+  heartStolenImg = loadImage('assets/images/diamondHeartStolen.png');
   crateImg = loadImage('assets/images/crate.png');
   robberStandImg = loadImage('assets/images/stealer/robber-standing.gif');
   robberWalkImg = loadImage('assets/images/stealer/robber-walking.gif');
@@ -372,7 +374,10 @@ function winEnding(){
   textSize(50);
   textAlign(CENTER);
   fill(253, 139, 255);
-  text(`You stole the diamond!`, width/2, height/2);
+  let hrtX = bgLeft + 7000;
+  imageMode(CENTER);
+  image(heartStolenImg, hrtX, heartD.y,heartD.size, heartD.size);
+  text(`Mission: SUCCESSFUL`, width/2, height/2);
 }
 function loseEnding(){
   textSize(50);
