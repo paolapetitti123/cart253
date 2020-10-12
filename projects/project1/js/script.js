@@ -237,7 +237,6 @@ function crateShow(){
 }
 function crateTouch(crateX){
   if(isCrateTouching(crateX)){
-    console.log("TOUCH");
     stealer.vy = 0;
     if(stealer.pos.y >= 520){
       if(stealer.pos.x < crateX){
@@ -262,12 +261,6 @@ function isCrateTouching(crateX){
       return true;
     }
  }
-function isOnCrate(){
-  if(stealer.pos.y + stealer.r/2 >= crate.y - crate.sizeY/2  &&
-  stealer.pos.y - stealer.r/2 <= crate.y - crate.sizeY/2){
-    return true;
-  }
-}
 
 /*
   The 5 following functions show the bars, detect if you hit one and
@@ -307,11 +300,6 @@ function shouldGrow(){
 function barTouch(barX, barSizeY, barY){
   if (barIsTouching(barX, barSizeY, barY) && livesCounter >= 0)
   {
-      // stealer.jump();
-      // stealer.pos.x -= 100;
-      // stealer.jump();
-      // livesCounter -= 1;
-
       if(stealer.pos.x >= barX){
         stealer.jump();
         stealer.pos.x += 100;
