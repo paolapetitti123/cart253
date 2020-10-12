@@ -59,6 +59,7 @@ let gameMusic;
 let gameWin;
 let gameOver;
 let punchSound;
+let buttonEasy;
 
 
 // loading images
@@ -306,9 +307,23 @@ function shouldGrow(){
 function barTouch(barX, barSizeY, barY){
   if (barIsTouching(barX, barSizeY, barY) && livesCounter >= 0)
   {
-      stealer.pos.x -= 100;
-      stealer.jump();
-      livesCounter -= 1;
+      // stealer.jump();
+      // stealer.pos.x -= 100;
+      // stealer.jump();
+      // livesCounter -= 1;
+
+      if(stealer.pos.x >= barX){
+        stealer.jump();
+        stealer.pos.x += 100;
+        stealer.jump();
+        livesCounter -= 1;
+      }
+      else{
+        stealer.jump();
+        stealer.pos.x -= 100;
+        stealer.jump();
+        livesCounter -= 1;
+      }
       fill(255,0,0,25);
       rectMode(CORNER);
       rect(0,0,1280,720);
@@ -362,10 +377,6 @@ function showLives(){
 /*
   The following 3 functions tell the program what to do for the start state,
   the win state and the lose state.
-
-  Note to self:
-  Change the win ending to still have the stand of the diamond just without
-  the diamond in it and maybe change the music depending on the ending!
 */
 function intro(){
   backgroundMove();
