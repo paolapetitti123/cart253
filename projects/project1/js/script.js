@@ -60,7 +60,8 @@ let gameWin;
 let gameOver;
 let punchSound;
 let buttonEasy;
-
+let difficulty = 0;
+let diffImg;
 
 // loading images
 function preload(){
@@ -73,6 +74,7 @@ function preload(){
   heartLivesImg = loadImage('assets/images/stealer/heart.png');
   transparentImg = loadImage('assets/images/stealer/transparent.png');
   introImg = loadImage('assets/images/introScreen.png');
+  diffImg = loadImage('assets/images/selectDifficulty.png');
 
   gameMusic = loadSound('assets/sounds/Monplaisir_-_02_-_Garage.mp3');
   gameWin = loadSound('assets/sounds/Monplaisir_-_08_-_Victory.mp3');
@@ -103,6 +105,9 @@ function draw() {
   if(state === `start`){
     intro();
   }
+  else if(state === `diffSelect`){
+    diffSelect();
+  }
   else if(state === `simulation`){
     simulation();
   }
@@ -125,7 +130,14 @@ function simulation() {
   showLives();
 }
 
-
+/*
+  This function changes the difficulty level
+*/
+function diffSelect(){
+  backgroundMove();
+  crateShow();
+  image(diffImg, width/2, height/2);
+}
 
 /*
   Functions to move the background
@@ -185,10 +197,24 @@ function keyPressed(){
     stealer.jump();
   }
   else if(keyCode === ENTER && state == `start`){
-    state = `simulation`;
+    state = `diffSelect`;
     gameMusic.play();
   }
-}
+  else if(state == `diffSelect` && key == '1'){
+      difficulty = 1;
+      state = `simulation`;
+    }
+  else if(state == `diffSelect` && key == '2'){
+      difficulty = 2;
+      state = `simulation`;
+    }
+  else if(state == `diffSelect` && key == '3'){
+      difficulty = 3;
+      state = `simulation`;
+    }
+  }
+
+
 
 /*
   Function that changes the gif being displayed
@@ -291,11 +317,32 @@ function barShow(){
   }
 }
 function shouldShrink(){
-  cieling += 7;
-  bar.sizeY += 7;
+  if(difficulty === 1){
+    cieling += 3;
+    bar.sizeY += 3;
+  }
+  else if(difficulty === 2){
+    cieling += 7;
+    bar.sizeY += 7;
+  }
+  else if(difficulty === 3){
+    cieling += 10;
+    bar.sizeY += 10;
+  }
+  // cieling += 7;
+  // bar.sizeY += 7;
 }
 function shouldGrow(){
-  bar.sizeY -= 7;
+  if(difficulty === 1){
+    bar.sizeY -= 3;
+  }
+  else if(difficulty === 2){
+    bar.sizeY -= 7;
+  }
+  else if(difficulty === 3){
+    bar.sizeY -= 10;
+  }
+  // bar.sizeY -= 7;
 }
 function barTouch(barX, barSizeY, barY){
   if (barIsTouching(barX, barSizeY, barY) && livesCounter >= 0)
