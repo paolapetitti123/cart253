@@ -131,7 +131,7 @@ function simulation() {
 }
 
 /*
-  This function changes the difficulty level
+  This function shows how to change the difficulty level at the beginning
 */
 function diffSelect(){
   backgroundMove();
@@ -167,25 +167,25 @@ function handleKey(){
   if(keyIsDown(LEFT_ARROW)){
     if(stealer.canMoveLeft()){
       stealer.moveLeft();
-      display(robberWalkImg);
+      display(robberWalkImg, stealer.size2 + 10, stealer.size);
     } else {
       moveBgRight();
-      display(robberWalkImg);
+      display(robberWalkImg, stealer.size2 + 10, stealer.size);
     }
   }
 
   else if (keyIsDown(RIGHT_ARROW)){
     if(stealer.canMoveRight()){
       stealer.moveRight();
-      display(robberWalkImg);
+      display(robberWalkImg, stealer.size2 + 10, stealer.size);
     }
     else {
       moveBgLeft();
-      display(robberWalkImg);
+      display(robberWalkImg, stealer.size2 + 10, stealer.size);
       }
     }
     else {
-      display(robberStandImg);
+      display(robberStandImg, stealer.size2 , stealer.size);
     }
 }
 
@@ -219,9 +219,9 @@ function keyPressed(){
 /*
   Function that changes the gif being displayed
 */
-function display(picture){
+function display(picture, sizeX, sizeY){
   imageMode(CENTER);
-  image(picture,stealer.pos.x, stealer.pos.y, stealer.size2, stealer.size);
+  image(picture,stealer.pos.x, stealer.pos.y, sizeX, sizeY);
 }
 
 /*
