@@ -63,7 +63,9 @@ let buttonEasy;
 let difficulty = 0;
 let diffImg;
 
-// loading images
+/*
+  Loading all the images and music!
+*/
 function preload(){
   bgImg = loadImage('assets/images/stealerBackground.png');
   heartImg = loadImage('assets/images/diamondHeart.png');
@@ -120,7 +122,7 @@ function draw() {
 }
 
 /*
-  This function makes the game run!
+  This function calls all the functions needed to make the game run!
 */
 function simulation() {
   heartDiamond();
@@ -128,15 +130,6 @@ function simulation() {
   handleKey();
   barShow();
   showLives();
-}
-
-/*
-  This function shows how to change the difficulty level at the beginning
-*/
-function diffSelect(){
-  backgroundMove();
-  crateShow();
-  image(diffImg, width/2, height/2);
 }
 
 /*
@@ -161,7 +154,8 @@ function moveBgRight(){
 }
 
 /*
-  Function to see which keys are being held down to move the bg
+  Function to see which arrow keys are being held down to move
+  the background & character
 */
 function handleKey(){
   if(keyIsDown(LEFT_ARROW)){
@@ -185,7 +179,7 @@ function handleKey(){
       }
     }
     else {
-      display(robberStandImg, stealer.size2 , stealer.size);
+      display(robberStandImg, stealer.size2, stealer.size);
     }
 }
 
@@ -198,23 +192,23 @@ function keyPressed(){
   }
   else if(keyCode === ENTER && state == `start`){
     state = `diffSelect`;
-    gameMusic.play();
   }
   else if(state == `diffSelect` && key == '1'){
       difficulty = 1;
       state = `simulation`;
+      gameMusic.play();
     }
   else if(state == `diffSelect` && key == '2'){
       difficulty = 2;
       state = `simulation`;
+      gameMusic.play();
     }
   else if(state == `diffSelect` && key == '3'){
       difficulty = 3;
       state = `simulation`;
+      gameMusic.play();
     }
   }
-
-
 
 /*
   Function that changes the gif being displayed
@@ -329,8 +323,6 @@ function shouldShrink(){
     cieling += 10;
     bar.sizeY += 10;
   }
-  // cieling += 7;
-  // bar.sizeY += 7;
 }
 function shouldGrow(){
   if(difficulty === 1){
@@ -342,7 +334,6 @@ function shouldGrow(){
   else if(difficulty === 3){
     bar.sizeY -= 10;
   }
-  // bar.sizeY -= 7;
 }
 function barTouch(barX, barSizeY, barY){
   if (barIsTouching(barX, barSizeY, barY) && livesCounter >= 0)
@@ -388,9 +379,6 @@ function barIsTouching(barX, barSizeY, barY){
   This function is to display how many lives the player has left.
 */
 function showLives(){
-  fill(0);
-  // textSize(25);
-  // text(`Lives: ${livesCounter}`, 50, 65);
   if(livesCounter == 3){
     image(heartLivesImg, 50, 65, 25,25);
     image(heartLivesImg, 80, 65, 25,25);
@@ -406,17 +394,21 @@ function showLives(){
   else if(livesCounter == 0) {
     image(transparentImg, 50, 65, 25,25);
   }
-  // image(heartImg,stealer.pos.x, stealer.pos.y, stealer.size2, stealer.size);
 }
 
 /*
-  The following 3 functions tell the program what to do for the start state,
-  the win state and the lose state.
+  The following 4 functions tell the program what to do for the start state,
+  the difficulty select state, the win state and the lose state.
 */
 function intro(){
   backgroundMove();
   crateShow();
   image(introImg, width/2, height/2);
+}
+function diffSelect(){
+  backgroundMove();
+  crateShow();
+  image(diffImg, width/2, height/2);
 }
 function winEnding(){
   textSize(50);
