@@ -15,10 +15,10 @@ function setup() {
   createCanvas(600, 600);
 
   for (let i = 0;i < schoolSize; i++){
-    school[i] = createFish(random(0, width), random(0, height));
+    let fish = createFish(random(0, width), random(0, height));
+    school.push(fish);
   }
 
-  // Create four fish, positioned randomly
 
 }
 
@@ -74,4 +74,9 @@ function displayFish(fish) {
   noStroke();
   ellipse(fish.x, fish.y, fish.size);
   pop();
+}
+
+function mousePressed(){
+  let fish = createFish(mouseX,mouseY);
+  school.push(fish);
 }
