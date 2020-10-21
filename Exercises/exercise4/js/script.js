@@ -25,20 +25,19 @@ and only 10 pieces of food to drop!
 
 Press Space to start`;
 let lost = `GAME OVER!`;
-let win = `YOU WIN!`
+let win = `YOU WIN!`;
 let state = `start`;
 let gameTimer = 30;
 
-
-function preload(){
+function preload() {
   fishImage = loadImage(`assets/images/FISH.png`);
 }
 
 function setup() {
   createCanvas(600, 600);
 
-  for (let i = 0;i < schoolSize; i++){
-    let fish = createFish(random(0, width), random(0, height), random(50,75));
+  for (let i = 0; i < schoolSize; i++) {
+    let fish = createFish(random(0, width), random(0, height), random(50, 75));
     school.push(fish);
   }
 }
@@ -46,64 +45,41 @@ function setup() {
 // draw()
 // Moves and displays our fish, also allows food to be seen
 function draw() {
-  background(0,0,255);
+  background(0, 0, 255);
 
-  if(state === `start`){
+  if (state === `start`) {
     intro();
-  }
-  else if(state === `simulation`){
+  } else if (state === `simulation`) {
     simulation();
-  }
-  else if(state === `instructions`){
+  } else if (state === `instructions`) {
     gameInstructions();
+  } else if (state === `winEnding`) {
+    gameWin();
+  } else if (state === `loseEnding`) {
+    gameOver();
   }
-   else if(state === `winEnding`){
-     gameWin();
-   }
-   else if(state === `loseEnding`){
-     gameOver();
-   }
 }
 
-function simulation(){
+// simulation()
+// Runs all the needed functions for the simulation
+function simulation() {
   fishLoop();
   foodLoop();
   showTimer();
   showEaten();
   console.log("Timer: " + gameTimer);
-  if(frameCount % 60 == 0 && gameTimer > 0) {
+  if (frameCount % 60 == 0 && gameTimer > 0) {
     gameTimer--;
   }
-  if(gameTimer == 0){
+  if (gameTimer == 0) {
     state = `loseEnding`;
   }
 }
 
-// showEaten()
-// Displays the amount of food the fish have eaten
-function showEaten() {
-  textSize(25);
-  textAlign(CENTER, CENTER);
-  textFont("monospace");
-  fill(253, 139, 255);
-  text(`Eaten: ${eatenCounter}`,500,50);
-}
-
-// showTimer()
-// Displays a timer in the top right corner
-function showTimer(){
-  textSize(25);
-  textAlign(CENTER, CENTER);
-  textFont("monospace");
-  fill(253, 139, 255);
-  text(`Time: ${gameTimer}`,500,10);
-}
-
 // fishLoop()
 // Loops through array of fish
-function fishLoop(){
-  for (let i = 0;i < school.length; i++)
-  {
+function fishLoop() {
+  for (let i = 0; i < school.length; i++) {
     moveFish(school[i]);
     displayFish(school[i]);
   }
@@ -111,18 +87,14 @@ function fishLoop(){
 
 // foodLoop()
 // Loops through array of food
-function foodLoop(){
-  for(let i=0; i < fishFood.length; i++)
-  {
+function foodLoop() {
+  for (let i = 0; i < fishFood.length; i++) {
     displayFood(fishFood[i]);
     moveFood(fishFood[i]);
 
-    for(let j = 0; j < school.length; j++){
-      fishEating(school[j],fishFood[i]);
-
+    for (let j = 0; j < school.length; j++) {
+      fishEating(school[j], fishFood[i]);
     }
-
-
   }
 }
 
@@ -135,22 +107,22 @@ function createFish(x, y, size) {
     size: size,
     vx: 0,
     vy: 0,
-    speed: 2
+    speed: 2,
   };
   return fish;
 }
 
 // createFood(x)
 //This function creates the fish food at mouseX (y position above the canvas)
-function createFood(x){
+function createFood(x) {
   let food = {
     x: x,
-    y: random(-500,-10),
+    y: random(-500, -10),
     size: 15,
     vx: 0,
     vy: 0,
     speed: 5,
-    eaten: false
+    eaten: false,
   };
   return food;
 }
@@ -176,16 +148,15 @@ function moveFish(fish) {
 
 // moveFood(food)
 // Getting the food to drop down
-function moveFood(food){
+function moveFood(food) {
   // change direction
   food.vy = -food.speed;
 
   // have the food drop
   food.y = food.y - food.vy;
 
-
   // constrain food to the tank
-  food.y = constrain(food.y,-500,height);
+  food.y = constrain(food.y, -500, height);
 }
 
 // displayFish(fish)
@@ -199,88 +170,103 @@ function displayFish(fish) {
 
 // displayFood(food)
 // Displays fish food on the canvas
-function displayFood(food){
-  if(!food.eaten){
+function displayFood(food) {
+  if (!food.eaten) {
     push();
-    fill(97,56,26);
+    fill(97, 56, 26);
     noStroke();
-    ellipse(food.x,food.y,food.size);
+    ellipse(food.x, food.y, food.size);
     pop();
   }
 }
 
 // fishEating(fish,food)
 // Checks to see if any of the fish have eaten food
-function fishEating(fish,food){
+function fishEating(fish, food) {
   let d = dist(fish.x, fish.y, food.x, food.y);
-  if(d < fish.size/2 + food.size/2){
+  if (d < fish.size / 2 + food.size / 2) {
     food.eaten = true;
     food.x = 700;
     eatenCounter += 1;
-    console.log("FOOD EATEN");
-    console.log(eatenCounter);
 
-    if(eatenCounter >= foodLimit){
+    if (eatenCounter >= foodLimit) {
       state = `winEnding`;
     }
   }
 }
 
+// showEaten()
+// Displays the amount of food the fish have eaten
+function showEaten() {
+  textSize(25);
+  textAlign(CENTER, CENTER);
+  textFont("monospace");
+  fill(253, 139, 255);
+  text(`Eaten: ${eatenCounter}`, 500, 50);
+}
+
+// showTimer()
+// Displays a timer in the top right corner
+function showTimer() {
+  textSize(25);
+  textAlign(CENTER, CENTER);
+  textFont("monospace");
+  fill(253, 139, 255);
+  text(`Time: ${gameTimer}`, 500, 10);
+}
+
+// The following 4 functions tell the program what to do in different states
+function intro() {
+  textSize(35);
+  textAlign(CENTER, CENTER);
+  textFont("monospace");
+  fill(253, 139, 255);
+  text(title, width / 2, height / 2);
+}
+function gameInstructions() {
+  textSize(25);
+  textAlign(CENTER, CENTER);
+  textFont("monospace");
+  fill(253, 139, 255);
+  text(instructions, width / 2, height / 2);
+}
+function gameOver() {
+  textSize(25);
+  textAlign(CENTER, CENTER);
+  textFont("monospace");
+  fill(253, 139, 255);
+  text(lost, width / 2, height / 2);
+  noLoop();
+}
+function gameWin() {
+  textSize(25);
+  textAlign(CENTER, CENTER);
+  textFont("monospace");
+  fill(253, 139, 255);
+  text(win, width / 2, height / 2);
+  noLoop();
+}
+
 // mousePressed()
 // When the mouse is pressed, the fish food will drop from the top of the tank
-function mousePressed(){
+function mousePressed() {
   if (foodCounter < foodLimit) {
     let food = createFood(mouseX);
     fishFood.push(food);
     foodCounter++;
-   }
-   else {
-     console.log('maxed out');
-   }
+  } else {
+    console.log("maxed out");
+  }
 }
 
-function keyPressed(){
-  if(state === `start` && key == ' '){
+// keyPressed()
+// Tells the program what to do when the space or enter is pressed in different states
+function keyPressed() {
+  if (state === `start` && key == " ") {
     state = `simulation`;
-  }
-  else if(keyCode == ENTER && state === `start`){
+  } else if (keyCode == ENTER && state === `start`) {
     state = `instructions`;
-  }
-  else if(state === `instructions` && key == ' '){
+  } else if (state === `instructions` && key == " ") {
     state = `simulation`;
   }
-}
-
-function intro(){
-    textSize(35);
-    textAlign(CENTER, CENTER);
-    textFont("monospace");
-    fill(253, 139, 255);
-    text(title, width/2,height/2);
-}
-
-function gameInstructions(){
-  textSize(25);
-  textAlign(CENTER, CENTER);
-  textFont("monospace");
-  fill(253, 139, 255);
-  text(instructions, width/2,height/2);
-}
-
-function gameOver(){
-  textSize(25);
-  textAlign(CENTER, CENTER);
-  textFont("monospace");
-  fill(253, 139, 255);
-  text(lost, width/2,height/2);
-  noLoop();
-}
-
-function gameWin(){
-  textSize(25);
-  textAlign(CENTER, CENTER);
-  textFont("monospace");
-  fill(253, 139, 255);
-  text(win, width/2,height/2);
-  noLoop();
 }
