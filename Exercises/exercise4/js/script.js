@@ -20,8 +20,11 @@ PRESS SPACE TO START,
 ENTER FOR INSTRUCTIONS`;
 let instructions = `Click to drop food at the position
 your mouse is located.
-You have 1 minute to feed the fish,
+You have 30 seconds to feed the fish,
 and only 10 pieces of food to drop!
+
+You win if the fish eat all the food
+before time runs out!
 
 Press Space to start`;
 let lost = `GAME OVER!`;
