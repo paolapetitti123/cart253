@@ -1,9 +1,11 @@
 /**************************************************
-Template p5 project
-Pippin Barr
+OOP Activity
+Paola Petitti
 
 Here is a description of this template p5 project.
 **************************************************/
+
+"use strict";
 
 // setup()
 //
