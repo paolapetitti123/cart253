@@ -20,6 +20,17 @@ class Flower {
       g: 0,
       b: 0
     };
+    this.alive = true;
+  }
+
+  shrink() {
+    let shrinkage = random(0,0.1);
+    this.size -= shrinkage;
+    this.petalThickness -= shrinkage/10;
+
+    if(this.size <= 0 || this.petalThickness <= 0){
+      this.alive = false;
+    }
   }
 
   display() {
@@ -37,11 +48,5 @@ class Flower {
     pop();
   }
 
-  mousePressed() {
-    let d = dist(this.x, this.y, mouseX, mouseY);
-    if(d < this.size/2 + this.petalThickness) {
-      this.stemLength += 5;
-      this.y -= 5;
-    }
-  }
+
 }
