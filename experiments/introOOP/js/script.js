@@ -74,6 +74,14 @@ function draw() {
       bee.shrink();
       bee.move();
       bee.display();
+
+      for (let j = 0; j < garden.flowers.length; j++){
+        let flower = garden.flowers[j];
+        if(flower.alive){
+          bee.tryToPollinate(flower);
+        }
+
+      }
     }
   }
 }
