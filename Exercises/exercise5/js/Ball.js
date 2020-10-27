@@ -38,6 +38,7 @@ class Ball {
     }
   }
 
+  // Allows for the ball to bounce off of the paddle 
   bounce(paddle) {
     if(this.x > paddle.x - paddle.width/2 &&
        this.x < paddle.x + paddle.width/2 &&
@@ -53,6 +54,9 @@ class Ball {
 
   }
 
+  // Checks to see if the ball hits one of the bricks and if it does the brick
+  // disappears and 1 gets added to the brick counter so that once the counter
+  // reaches the number of bricks, the game is over.
   hit(brick) {
     if(this.x > brick.x - brick.width/2 &&
        this.x < brick.x + brick.width/2 &&
@@ -65,7 +69,6 @@ class Ball {
          this.vy = -this.vy;
          this.ay = 0;
          brickCounter++;
-         console.log(brickCounter);
        }
   }
 

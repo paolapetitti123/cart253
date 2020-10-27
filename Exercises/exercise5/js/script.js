@@ -56,7 +56,7 @@ function setup() {
 
 // draw()
 //
-// Calling all the functions needed to make the game run.
+// Tells the game what to do in the different states.
 function draw() {
   background(0);
   if(state === `start`){
@@ -74,6 +74,7 @@ function draw() {
 
 }
 
+// Has all the required functions to make the game run
 function playGame(){
   handleKey();
   paddle.display();
@@ -93,6 +94,8 @@ function handleKey(){
   }
 }
 
+// Checks to see if the enter key was pressed at the beginning to allow the
+// game to run.
 function keyPressed(){
   if(state === `start` && keyCode == ENTER){
     state = `play`;
@@ -132,12 +135,16 @@ function ballControl(){
   }
 }
 
+// Checks what the counter variable is at to know when to change the state to
+// win if the user gets there.
 function counter(){
   if(brickCounter >= numBrick){
     state = "win";
   }
 }
 
+// Displays text in the start state with instructions on how to play and to
+// press enter to start the game
 function startScreen(){
   textSize(35);
   textAlign(CENTER, CENTER);
@@ -146,6 +153,7 @@ function startScreen(){
   text(title, width / 2, height / 2);
 }
 
+// Displays a win message if the user wins the game
 function winScreen(){
   textSize(35);
   textAlign(CENTER, CENTER);
@@ -155,6 +163,7 @@ function winScreen(){
   noLoop();
 }
 
+// Displays a lose message if the user loses the game
 function loseScreen(){
   textSize(35);
   textAlign(CENTER, CENTER);
