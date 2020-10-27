@@ -30,6 +30,8 @@ class Ball {
       this.active = false;
     }
 
+    // This gets the ball to stay within the canvas along the X-axis while
+    // also 'bouncing' off the sides so it doesn't get stuck there.
     this.x = constrain(this.x, 0, width);
     if(this.x >= width || this.x <= 0) {
       this.vx *= -1;

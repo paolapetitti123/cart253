@@ -9,12 +9,16 @@ class Paddle {
 
   moveLeft(){
     this.x -= this.speed;
-    this.x = constrain(this.x, 0, width);
+    // starting at this.width/2 makes the paddle edge on the left not exceed
+    // past the canvas screen
+    this.x = constrain(this.x, this.width/2, width);
   }
 
   moveRight(){
     this.x += this.speed;
-    this.x = constrain(this.x, 0, width);
+    // ending at width - this.width/2 makes the paddle edge on the right
+    // not exceed past the canvas screen
+    this.x = constrain(this.x, 0, width - this.width/2);
   }
 
   // This method allows the paddle to be seen
