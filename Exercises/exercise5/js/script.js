@@ -55,6 +55,7 @@ function draw() {
   paddle.display();
   brickDisplay();
   ballControl();
+  counter();
 }
 
 // allows the user to use the L & R arrow keys to move the paddle
@@ -94,5 +95,11 @@ function ballControl(){
         }
       }
     }
+  }
+}
+
+function counter(){
+  if(brickCounter === numBrick){
+    console.log("win");
   }
 }
