@@ -13,12 +13,16 @@ let paddle;
 let balls = [];
 let numBalls = 1;
 
+let brick;
+let bricks = [];
+let numBrick = 6;
+let brickSpacing = 130;
 
 // setup()
 //
 // Description of setup() goes here.
 function setup() {
-  createCanvas(windowWidth,windowHeight);
+  createCanvas(1280,720);
   paddle = new Paddle(150,30);
 
   for (let i = 0; i < numBalls; i++){
@@ -27,6 +31,15 @@ function setup() {
     let ball = new Ball(x,y);
     balls.push(ball);
   }
+
+  for (let i = 0; i < numBrick; i++){
+    let y = 100;
+    let brick = new Brick(brickSpacing, y);
+    brickSpacing += 200;
+    bricks.push(brick);
+  }
+
+
 }
 
 // draw()
@@ -41,8 +54,16 @@ function draw() {
   else if(keyIsPressed === true && keyCode === RIGHT_ARROW){
     paddle.moveRight();
   }
-//  paddle.move();
+
   paddle.display();
+
+
+  for(let i = 0; i < bricks.length; i++){
+    let brick = bricks[i];
+    if(brick.active){
+      brick.display();
+    }
+  }
 
   for(let i = 0; i < balls.length; i++){
     let ball = balls[i];
@@ -51,6 +72,12 @@ function draw() {
       ball.move();
       ball.bounce(paddle);
       ball.display();
+      for (let j = 0; j < bricks.length; j++){
+        let brick = bricks[j];
+        if(brick.active){
+          ball.hit(brick);
+        }
+      }
     }
   }
 }

@@ -29,6 +29,8 @@ class Ball {
     if(this.y - this.size/2 > height) {
       this.active = false;
     }
+
+    this.x = constrain(this.x, 0, width);
   }
 
   bounce(paddle) {
@@ -43,6 +45,20 @@ class Ball {
          this.vy = -this.vy;
          this.ay = 0;
     }
+  }
+
+  hit(brick) {
+    if(this.x > brick.x - brick.width/2 &&
+       this.x < brick.x + brick.width/2 &&
+       this.y + this.size/2 > brick.y - brick.height/2 &&
+       this.y - this.size/2 < brick.y + brick.height/2) {
+         brick.active = false;
+         let dx = this.x - brick.x;
+         this.vx += map(dx,-brick.width/2, brick.width/2, -2,2);
+
+         this.vy = -this.vy;
+         this.ay = 0;
+       }
   }
 
   display(){
