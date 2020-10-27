@@ -2,7 +2,7 @@
 OOP Activity
 Paola Petitti
 
-Juggling simulator
+turning the juggling simulator into a brick breaker game
 **************************************************/
 
 "use strict";
@@ -11,7 +11,8 @@ let gravityForce = 0.0025;
 let paddle;
 
 let balls = [];
-let numBalls = 3;
+let numBalls = 1;
+
 
 // setup()
 //
@@ -21,8 +22,8 @@ function setup() {
   paddle = new Paddle(150,30);
 
   for (let i = 0; i < numBalls; i++){
-    let x = random(0, width);
-    let y = random(-400,-100);
+    let x = width/2;
+    let y = height/2;
     let ball = new Ball(x,y);
     balls.push(ball);
   }
@@ -34,7 +35,13 @@ function setup() {
 function draw() {
   background(0);
 
-  paddle.move();
+  if(keyIsPressed === true && keyCode === LEFT_ARROW){
+    paddle.moveLeft();
+  }
+  else if(keyIsPressed === true && keyCode === RIGHT_ARROW){
+    paddle.moveRight();
+  }
+//  paddle.move();
   paddle.display();
 
   for(let i = 0; i < balls.length; i++){
