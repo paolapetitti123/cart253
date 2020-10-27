@@ -18,6 +18,8 @@ let bricks = [];
 let numBrick = 6;
 let brickSpacing = 130;
 
+let brickCounter = 0;
+
 // setup()
 //
 // Description of setup() goes here.
@@ -47,24 +49,32 @@ function setup() {
 // Description of draw() goes here.
 function draw() {
   background(0);
+  handleKey();
+  paddle.display();
+  brickDisplay();
+  ballControl();
+}
 
+
+function handleKey(){
   if(keyIsPressed === true && keyCode === LEFT_ARROW){
     paddle.moveLeft();
   }
   else if(keyIsPressed === true && keyCode === RIGHT_ARROW){
     paddle.moveRight();
   }
+}
 
-  paddle.display();
-
-
+function brickDisplay(){
   for(let i = 0; i < bricks.length; i++){
     let brick = bricks[i];
     if(brick.active){
       brick.display();
     }
   }
+}
 
+function ballControl(){
   for(let i = 0; i < balls.length; i++){
     let ball = balls[i];
     if(ball.active) {
