@@ -1,5 +1,5 @@
 /**************************************************
-OOP Activity
+Brick Breaker Game/Exercise 
 Paola Petitti
 
 turning the juggling simulator into a brick breaker game
