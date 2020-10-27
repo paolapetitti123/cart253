@@ -22,6 +22,14 @@ let numBrick = 6;
 let brickSpacing = 130;
 let brickCounter = 0;
 
+// declaring the start state of the game & text that goes with the states
+let state = `start`;
+let title = `Brick breaker
+Use L & R arrow keys to move
+Press Enter to start`;
+let lose = `GAME OVER!`;
+let win = `YOU WIN!`;
+
 // setup()
 //
 // loading the balls & bricks arrays with new objects, and creating a new paddle
@@ -51,6 +59,22 @@ function setup() {
 // Calling all the functions needed to make the game run.
 function draw() {
   background(0);
+  if(state === `start`){
+    startScreen();
+  }
+  else if(state === `play`){
+    playGame();
+  }
+  else if(state === `win`){
+    winScreen();
+  }
+  else if(state === `lose`){
+    loseScreen();
+  }
+
+}
+
+function playGame(){
   handleKey();
   paddle.display();
   brickDisplay();
@@ -60,11 +84,18 @@ function draw() {
 
 // allows the user to use the L & R arrow keys to move the paddle
 function handleKey(){
+  // To Play the game
   if(keyIsPressed === true && keyCode === LEFT_ARROW){
     paddle.moveLeft();
   }
   else if(keyIsPressed === true && keyCode === RIGHT_ARROW){
     paddle.moveRight();
+  }
+}
+
+function keyPressed(){
+  if(state === `start` && keyCode == ENTER){
+    state = `play`;
   }
 }
 
@@ -95,11 +126,40 @@ function ballControl(){
         }
       }
     }
+    else if(!ball.active){
+      state = "lose";
+    }
   }
 }
 
 function counter(){
-  if(brickCounter === numBrick){
-    console.log("win");
+  if(brickCounter >= numBrick){
+    state = "win";
   }
+}
+
+function startScreen(){
+  textSize(35);
+  textAlign(CENTER, CENTER);
+  textFont("monospace");
+  fill(253, 139, 255);
+  text(title, width / 2, height / 2);
+}
+
+function winScreen(){
+  textSize(35);
+  textAlign(CENTER, CENTER);
+  textFont("monospace");
+  fill(253, 139, 255);
+  text(win, width / 2, height / 2);
+  noLoop();
+}
+
+function loseScreen(){
+  textSize(35);
+  textAlign(CENTER, CENTER);
+  textFont("monospace");
+  fill(253, 139, 255);
+  text(lose, width / 2, height / 2);
+  noLoop();
 }

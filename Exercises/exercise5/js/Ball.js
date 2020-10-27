@@ -31,6 +31,9 @@ class Ball {
     }
 
     this.x = constrain(this.x, 0, width);
+    if(this.x >= width || this.x <= 0) {
+      this.vx *= -1;
+    }
   }
 
   bounce(paddle) {
@@ -45,6 +48,7 @@ class Ball {
          this.vy = -this.vy;
          this.ay = 0;
     }
+
   }
 
   hit(brick) {
