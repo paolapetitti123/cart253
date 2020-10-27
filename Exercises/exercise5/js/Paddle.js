@@ -9,12 +9,12 @@ class Paddle {
 
   moveLeft(){
     this.x -= this.speed;
-    this.x = constrain(this.x, 0  + this.width/2, width);
+    this.x = constrain(this.x, 0, width);
   }
 
   moveRight(){
     this.x += this.speed;
-    this.x = constrain(this.x, 0, width - this.width/2);
+    this.x = constrain(this.x, 0, width);
   }
 
   // This method allows the paddle to be seen
