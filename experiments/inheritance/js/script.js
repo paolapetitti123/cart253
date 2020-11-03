@@ -9,6 +9,7 @@ Here is a description of this template p5 project.
 let vehicles = [];
 let numCars = 10;
 let numMotor = 10;
+let numSportCars = 3;
 
 // setup()
 //
@@ -20,6 +21,13 @@ function setup() {
     let y = random(0, height);
     let car = new Car(x,y);
     vehicles.push(car);
+  }
+
+  for(let i = 0; i < numSportCars; i++){
+    let x = random(0,width);
+    let y = random(0, height);
+    let sportsCar = new SportsCar(x,y);
+    vehicles.push(sportsCar);
   }
 
   for(let i = 0; i < numMotor; i++){
