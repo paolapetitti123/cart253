@@ -2,10 +2,16 @@
 Inheritance Activity
 Paola Petitti
 **************************************************/
-let state = `title`;
+let state = `simulation`;
+
+let pedestrian;
 
 function setup() {
 createCanvas(windowWidth, windowHeight);
+
+let x = width/2;
+let y = height;
+pedestrian = new Pedestrian(x,y);
 }
 
 
@@ -31,7 +37,9 @@ function title(){
 }
 
 function simulation(){
-
+  pedestrian.handleInput();
+  pedestrian.move();
+  pedestrian.display();
 }
 
 function success(){
