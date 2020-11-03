@@ -19,12 +19,19 @@ Game over sound: https://freesound.org/people/Euphrosyyn/sounds/442127/
 
 All the art (background, sprites, crates/boxes) was done by me
 **************************************************/
-/*
-  Variable declarations
-*/
+// Background variables
 let bgImg;
 let bgLeft = 0;
+let bottom = 0;
+let cieling = -496;
+
+// User variables
 let moveSpeed = 15;
+let robberStandImg;
+let robberWalkImg;
+let padding = 10;
+
+// diamond variable declarations
 let heartLeft = 0;
 let heartImg;
 let heartStolenImg;
@@ -33,6 +40,8 @@ let heartD = {
   y: 448,
   size: 350
 }
+
+// Crate objects
 let crateImg;
 let crate = {
   x: undefined,
@@ -40,26 +49,29 @@ let crate = {
   sizeX: 150,
   sizeY: 150,
   size: 150
-};
-let robberStandImg;
-let robberWalkImg;
+}
+
+// Metal Bar object
 let bar = {
   x: 0,
   y: 622,
   sizeX: 15,
   sizeY: 0
 }
-let bottom = 0;
-let cieling = -496;
+
+// Game Lives variables
 let livesCounter = 3;
 let heartLivesImg;
-let introImg;
-let state = 'start';
+
+// Audio related variables
 let gameMusic;
 let gameWin;
 let gameOver;
 let punchSound;
-let buttonEasy;
+
+// Intro related variables (imgs, states, difficulty)
+let introImg;
+let state = 'start';
 let difficulty = 0;
 let diffImg;
 
@@ -77,6 +89,7 @@ function preload(){
   transparentImg = loadImage('assets/images/stealer/transparent.png');
   introImg = loadImage('assets/images/introScreen.png');
   diffImg = loadImage('assets/images/selectDifficulty.png');
+
 
   gameMusic = loadSound('assets/sounds/Monplaisir_-_02_-_Garage.mp3');
   gameWin = loadSound('assets/sounds/Monplaisir_-_08_-_Victory.mp3');
@@ -160,21 +173,21 @@ function handleKey(){
   if(keyIsDown(LEFT_ARROW)){
     if(stealer.canMoveLeft()){
       stealer.moveLeft();
-      display(robberWalkImg, stealer.size2 + 10, stealer.size);
+      display(robberWalkImg, stealer.size2 + padding, stealer.size);
     } else {
       moveBgRight();
-      display(robberWalkImg, stealer.size2 + 10, stealer.size);
+      display(robberWalkImg, stealer.size2 + padding, stealer.size);
     }
   }
 
   else if (keyIsDown(RIGHT_ARROW)){
     if(stealer.canMoveRight()){
       stealer.moveRight();
-      display(robberWalkImg, stealer.size2 + 10, stealer.size);
+      display(robberWalkImg, stealer.size2 + padding, stealer.size);
     }
     else {
       moveBgLeft();
-      display(robberWalkImg, stealer.size2 + 10, stealer.size);
+      display(robberWalkImg, stealer.size2 + padding, stealer.size);
       }
     }
     else {
@@ -212,9 +225,9 @@ function keyPressed(){
 /*
   Function that changes the gif being displayed
 */
-function display(picture, sizeX, sizeY){
+function display(picture, width, height){
   imageMode(CENTER);
-  image(picture,stealer.pos.x, stealer.pos.y, sizeX, sizeY);
+  image(picture,stealer.pos.x, stealer.pos.y, width, height);
 }
 
 /*
