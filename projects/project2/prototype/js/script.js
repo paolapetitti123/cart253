@@ -35,8 +35,17 @@ let robberStandImg;
 let robberWalkImg;
 let padding = 10;
 
+
+// door variables
+let doorImg;
+let door = {
+  x: 7000,
+  y: 448,
+  sizeW: 350,
+  sizeH: 172,
+};
+
 // diamond variable declarations
-let heartLeft = 0;
 let heartImg;
 let heartStolenImg;
 let heartD = {
@@ -79,12 +88,16 @@ let state = "start";
 let difficulty = 0;
 let diffImg;
 
+
+
+
 /*
   Loading all the images and music!
 */
 function preload() {
   bgImg = loadImage("assets/images/stealerBackground.png");
   heartImg = loadImage("assets/images/diamondHeart.png");
+  doorImg = loadImage("assets/images/door.png");
   heartStolenImg = loadImage("assets/images/diamondHeartStolen.png");
   crateImg = loadImage("assets/images/crate.png");
   robberStandImg = loadImage("assets/images/stealer/robber-standing.gif");
@@ -136,7 +149,7 @@ function draw() {
   This function calls all the functions needed to make the game run!
 */
 function simulation() {
-  heartDiamond();
+  displayDoor();
   stealer.move();
   handleKey();
   barShow();
@@ -225,15 +238,17 @@ function display(picture, width, height) {
   Displaying the diamond at the end of the level that you need to reach in order
   to win the level.
 */
-function heartDiamond() {
-  let hrtX = bgLeft + 7000;
+function displayDoor() {
+  let doorX = bgLeft + 6800;
   imageMode(CENTER);
-  image(heartImg, hrtX, heartD.y, heartD.size, heartD.size);
-  hrtTouch(hrtX);
+  image(doorImg, doorX, door.y, door.sizeH, door.sizeW);
+  doorTouch(doorX);
 }
-function hrtTouch(heartX) {
-  let d = dist(stealer.pos.x, stealer.pos.y, heartX, heartD.y);
-  if (d < stealer.size / 2 + heartD.size / 2) {
+function doorTouch(doorX) {
+  if(
+    stealer.pos.x + stealer.r / 6 > doorX - door.sizeW / 2 &&
+    stealer.pos.x - stealer.r / 6 < doorX + door.sizeW / 2
+  ){
     state = `winEnding`;
     gameMusic.stop();
     gameWin.play();
@@ -400,10 +415,10 @@ function winEnding() {
   textAlign(CENTER);
   textFont("monospace");
   fill(253, 139, 255);
-  let hrtX = bgLeft + 7000;
+  let doorX = bgLeft + 6800;
   imageMode(CENTER);
-  image(heartStolenImg, hrtX, heartD.y, heartD.size, heartD.size);
-  text(`MISSION : SUCCESSFUL`, width / 2, height / 2);
+  image(doorImg, doorX, door.y, door.sizeH, door.sizeW);
+  text(`Level 2 in development`, width / 2, height / 2);
 }
 function loseEnding() {
   textSize(50);
