@@ -82,7 +82,6 @@ function preload(){
   gameWin = loadSound('assets/sounds/Monplaisir_-_08_-_Victory.mp3');
   gameOver = loadSound('assets/sounds/gameOver.wav');
   punchSound = loadSound('assets/sounds/punch.mp3');
-
 }
 
 /*
