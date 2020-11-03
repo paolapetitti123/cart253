@@ -274,10 +274,10 @@ function crateTouch(crateX){
 
 }
 function isCrateTouching(crateX){
-  if(stealer.pos.x + stealer.r/2 > crateX - crate.sizeX/4 &&
-    stealer.pos.x - stealer.r/2 < crateX + crate.sizeX/4 &&
-    stealer.pos.y + stealer.r/2 >= crate.y - crate.sizeY/2  &&
-    stealer.pos.y - stealer.r/2 <= crate.y - crate.sizeY/2){
+  if(stealer.pos.x + stealer.r/6 > crateX - crate.sizeX/2 &&
+    stealer.pos.x - stealer.r/6  < crateX + crate.sizeX/2 &&
+    stealer.pos.y + stealer.r/2 > crate.y - crate.sizeY/2  &&
+    stealer.pos.y - stealer.r/2 < crate.y - crate.sizeY/2){
       return true;
     }
  }
@@ -364,8 +364,8 @@ function barTouch(barX, barSizeY, barY){
 
 }
 function barIsTouching(barX, barSizeY, barY){
-  if (stealer.pos.x + stealer.size/2 > barX - bar.sizeX/2 &&
-      stealer.pos.x - stealer.size/2 < barX + bar.sizeX/2 &&
+  if (stealer.pos.x + stealer.size/6 > barX - bar.sizeX/2 &&
+      stealer.pos.x - stealer.size/6 < barX + bar.sizeX/2 &&
       stealer.pos.y + stealer.size/2 > barY + barSizeY &&
       stealer.pos.y - stealer.size/2 < barY) {
       return true;
