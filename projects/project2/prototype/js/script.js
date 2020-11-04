@@ -168,7 +168,6 @@ function simulation() {
     crateShow();
     stealer.move();
     handleKey();
-    barShow();
     showLives();
   }
 
@@ -206,6 +205,11 @@ function moveBgRight() {
     bgLeft += moveSpeed;
   }
 }
+function moveBgRight2() {
+  if (bgLeft + moveSpeed < 0) {
+    bgLeft += moveSpeed;
+  }
+}
 
 
 
@@ -214,20 +218,31 @@ function moveBgRight() {
   the background & character
 */
 function handleKey() {
-  if (keyIsDown(LEFT_ARROW) && level == 1) {
+  if (keyIsDown(LEFT_ARROW)) {
     if (stealer.canMoveLeft()) {
       stealer.moveLeft();
       display(robberWalkImg, stealer.size2 + padding, stealer.size);
     } else {
-      moveBgRight();
+      if(level == 1){
+        moveBgRight();
+      }
+      else if(level == 2){
+        moveBgRight2();
+      }
       display(robberWalkImg, stealer.size2 + padding, stealer.size);
     }
-  } else if (keyIsDown(RIGHT_ARROW) && level == 1) {
+  } else if (keyIsDown(RIGHT_ARROW)) {
     if (stealer.canMoveRight()) {
       stealer.moveRight();
       display(robberWalkImg, stealer.size2 + padding, stealer.size);
     } else {
-      moveBgLeft();
+      if(level == 1){
+        moveBgLeft();
+      }
+      else if(level == 2){
+        moveBgLeft2();
+      }
+
       display(robberWalkImg, stealer.size2 + padding, stealer.size);
     }
   }
@@ -347,8 +362,6 @@ for (let i = 0; i < metalBars.length; i++) {
     bar.display(x,y,bar.width, bar.height);
     bar.barTouch(stealer);
     x += 600;
-    console.log(bar.x);
-
     if(bar.height <= bottom && bar.height > cieling){
       bar.grow();
     }
@@ -428,7 +441,8 @@ function loseEnding() {
 
 function reset(){
   stealer.pos.x = 100;
-  livesCounter == 3;
-  bgImg.width = bgImg.width;
-  width = width;
+  livesCounter = 3;
+  width = 0;
+  bgLeft = 0;
+  bgImg = 0;
 }
