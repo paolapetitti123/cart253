@@ -24,7 +24,8 @@ Game over sound: https://freesound.org/people/Euphrosyyn/sounds/442127/
 All the art (background, sprites, crates/boxes) was done by me
 **************************************************/
 // Background variables
-let bgImg;
+let bgImg1;
+let bgImg2;
 let bgLeft = 0;
 let bottom = 0;
 let cieling = -496;
@@ -85,14 +86,14 @@ let state = "start";
 let difficulty = 0;
 let diffImg;
 
-let x = bgLeft + 800;
-
+let level = 1;
 
 /*
   Loading all the images and music!
 */
 function preload() {
   bgImg = loadImage("assets/images/stealerBackground.png");
+  bgImg2 = loadImage("assets/images/stealerBackground2.png");
   heartImg = loadImage("assets/images/diamondHeart.png");
   doorImg = loadImage("assets/images/door.png");
   heartStolenImg = loadImage("assets/images/diamondHeartStolen.png");
@@ -135,9 +136,6 @@ function setup() {
   Shows background, tells game which state to enter
 */
 function draw() {
-  background(0);
-  backgroundMove();
-  crateShow();
   if (state === `start`) {
     intro();
   } else if (state === `diffSelect`) {
@@ -155,11 +153,25 @@ function draw() {
   This function calls all the functions needed to make the game run!
 */
 function simulation() {
-  displayDoor();
-  stealer.move();
-  handleKey();
-  barShow();
-  showLives();
+  if(level == 1){
+    backgroundMove();
+    crateShow();
+    displayDoor();
+    stealer.move();
+    handleKey();
+    barShow();
+    showLives();
+  }
+  else if(level == 2){
+    backgroundMoveLevel2();
+    bgLeft = 0;
+    crateShow();
+    stealer.move();
+    handleKey();
+    barShow();
+    showLives();
+  }
+
 }
 
 /*
@@ -170,8 +182,20 @@ function backgroundMove() {
   bgImg.resize(7250, 720);
   image(bgImg, bgLeft, 0);
 }
+function backgroundMoveLevel2() {
+  imageMode(CORNER);
+  bgImg2.resize(7250, 720);
+  image(bgImg2, bgLeft, 0);
+}
 function moveBgLeft() {
   let minBgLeft = -bgImg.width + width;
+
+  if (bgLeft - moveSpeed > minBgLeft) {
+    bgLeft -= moveSpeed;
+  }
+}
+function moveBgLeft2() {
+  let minBgLeft = -bgImg2.width + width;
 
   if (bgLeft - moveSpeed > minBgLeft) {
     bgLeft -= moveSpeed;
@@ -183,12 +207,14 @@ function moveBgRight() {
   }
 }
 
+
+
 /*
   Function to see which arrow keys are being held down to move
   the background & character
 */
 function handleKey() {
-  if (keyIsDown(LEFT_ARROW)) {
+  if (keyIsDown(LEFT_ARROW) && level == 1) {
     if (stealer.canMoveLeft()) {
       stealer.moveLeft();
       display(robberWalkImg, stealer.size2 + padding, stealer.size);
@@ -196,7 +222,7 @@ function handleKey() {
       moveBgRight();
       display(robberWalkImg, stealer.size2 + padding, stealer.size);
     }
-  } else if (keyIsDown(RIGHT_ARROW)) {
+  } else if (keyIsDown(RIGHT_ARROW) && level == 1) {
     if (stealer.canMoveRight()) {
       stealer.moveRight();
       display(robberWalkImg, stealer.size2 + padding, stealer.size);
@@ -204,7 +230,8 @@ function handleKey() {
       moveBgLeft();
       display(robberWalkImg, stealer.size2 + padding, stealer.size);
     }
-  } else {
+  }
+    else {
     display(robberStandImg, stealer.size2, stealer.size);
   }
 }
@@ -257,9 +284,10 @@ function doorTouch(doorX) {
     stealer.pos.x + stealer.r / 6 > doorX - door.sizeW / 2 &&
     stealer.pos.x - stealer.r / 6 < doorX + door.sizeW / 2
   ){
-    state = `winEnding`;
+    level = 2;
+    endOfLevel1();
     gameMusic.stop();
-    gameWin.play();
+
   }
 }
 
@@ -368,6 +396,17 @@ function diffSelect() {
   crateShow();
   image(diffImg, width / 2, height / 2);
 }
+function endOfLevel1() {
+  textSize(50);
+  textAlign(CENTER);
+  textFont("monospace");
+  fill(253, 139, 255);
+  let doorX = bgLeft + 6800;
+  imageMode(CENTER);
+  image(doorImg, doorX, door.y, door.sizeH, door.sizeW);
+  reset();
+  // text(`Level 2 loading...`, width / 2, height / 2);
+}
 function winEnding() {
   textSize(50);
   textAlign(CENTER);
@@ -376,7 +415,7 @@ function winEnding() {
   let doorX = bgLeft + 6800;
   imageMode(CENTER);
   image(doorImg, doorX, door.y, door.sizeH, door.sizeW);
-  text(`Level 2 in development`, width / 2, height / 2);
+  text(`MISSON : SUCCESS`, width / 2, height / 2);
 }
 function loseEnding() {
   textSize(50);
@@ -384,4 +423,12 @@ function loseEnding() {
   fill(0, 0, 0);
   textFont("monospace");
   text(`MISSION : FAILED`, width / 2, height / 2);
+}
+
+
+function reset(){
+  stealer.pos.x = 100;
+  livesCounter == 3;
+  bgImg.width = bgImg.width;
+  width = width;
 }
