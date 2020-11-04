@@ -302,8 +302,6 @@ function doorTouch(doorX) {
   ){
     level = 2;
     endOfLevel1();
-    gameMusic.stop();
-
   }
 }
 
@@ -419,7 +417,6 @@ function endOfLevel1() {
   imageMode(CENTER);
   image(doorImg, doorX, door.y, door.sizeH, door.sizeW);
   reset();
-  // text(`Level 2 loading...`, width / 2, height / 2);
 }
 function winEnding() {
   textSize(50);
@@ -444,5 +441,4 @@ function reset(){
   stealer.pos.x = 100;
   livesCounter = 3;
   bgLeft = 0;
-
 }
