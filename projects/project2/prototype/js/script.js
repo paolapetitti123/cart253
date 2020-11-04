@@ -65,12 +65,9 @@ let crate = {
 };
 
 // Metal Bar object
-let bar = {
-  x: 0,
-  y: 622,
-  sizeX: 15,
-  sizeY: 0,
-};
+let metalBars = [];
+let numOfBars = 9;
+let minBars = 0;
 
 // Game Lives variables
 let livesCounter = 3;
@@ -88,7 +85,7 @@ let state = "start";
 let difficulty = 0;
 let diffImg;
 
-
+let x = bgLeft + 800;
 
 
 /*
@@ -120,6 +117,15 @@ function preload() {
 function setup() {
   createCanvas(1280, 720);
   stealer = new Stealer(100, height + 50);
+
+  for(let i = 0; i < numOfBars; i++){
+    let x = undefined;
+    let y = undefined;
+    let bar = new Bar(x,y);
+    metalBars.push(bar);
+  }
+
+
   gameMusic.setVolume(0.5);
   gameOver.setVolume(0.2);
   gameWin.setVolume(0.3);
@@ -207,6 +213,8 @@ function handleKey() {
   Function to see if the UP arrow gets pressed once to jump
 */
 function keyPressed() {
+  let x = bgLeft + 800;
+  let y = 622;
   if (keyCode === UP_ARROW) {
     stealer.jump();
   } else if (keyCode === ENTER && state == `start`) {
@@ -303,80 +311,30 @@ function isCrateTouching(crateX) {
   so long as you haven't lost all your lives.
 */
 function barShow() {
-  let barX = bgLeft + 800;
-  fill(127);
-  noStroke();
-  rectMode(CORNER);
+  let x = bgLeft + 800;
+  let y = 622;
 
-  for (let i = 0; i < 9; i++) {
-    rect(barX, bar.y, bar.sizeX, bar.sizeY);
-    barTouch(barX, bar.sizeY, bar.y);
-    barX += 600;
-  }
-  if (bar.sizeY <= bottom && bar.sizeY > cieling) {
-    shouldGrow();
-  } else if (bar.sizeY <= cieling && bar.sizeY < bottom) {
-    shouldShrink();
-  } else if (bar.sizeY == 0) {
-    cieling = -496;
-  }
-}
-function shouldShrink() {
-  if (difficulty === 1) {
-    cieling += 3;
-    bar.sizeY += 3;
-  } else if (difficulty === 2) {
-    cieling += 7;
-    bar.sizeY += 7;
-  } else if (difficulty === 3) {
-    cieling += 10;
-    bar.sizeY += 10;
-  }
-}
-function shouldGrow() {
-  if (difficulty === 1) {
-    bar.sizeY -= 3;
-  } else if (difficulty === 2) {
-    bar.sizeY -= 7;
-  } else if (difficulty === 3) {
-    bar.sizeY -= 10;
-  }
-}
-function barTouch(barX, barSizeY, barY) {
-  if (barIsTouching(barX, barSizeY, barY) && livesCounter >= 0) {
-    if (stealer.pos.x >= barX) {
-      stealer.jump();
-      stealer.pos.x += 100;
-      stealer.jump();
-      livesCounter -= 1;
-    } else {
-      stealer.jump();
-      stealer.pos.x -= 100;
-      stealer.jump();
-      livesCounter -= 1;
+for (let i = 0; i < metalBars.length; i++) {
+    let bar = metalBars[i];
+    bar.display(x,y,bar.width, bar.height);
+    stealer.barTouch(bar);
+    x += 600;
+    console.log(bar.x);
+
+    if(bar.height <= bottom && bar.height > cieling){
+      bar.grow();
     }
-    fill(255, 0, 0, 25);
-    rectMode(CORNER);
-    rect(0, 0, 1280, 720);
-    punchSound.play();
-  } else if (livesCounter < 0) {
-    state = `loseEnding`;
-    gameMusic.stop();
-    gameOver.play();
+    else if(bar.height <= cieling && bar.height < bottom){
+      bar.shrink();
+    }
+    else if(bar.height == 0){
+      cieling = -496;
+    }
   }
+
 }
-function barIsTouching(barX, barSizeY, barY) {
-  if (
-    stealer.pos.x + stealer.size / 6 > barX - bar.sizeX / 2 &&
-    stealer.pos.x - stealer.size / 6 < barX + bar.sizeX / 2 &&
-    stealer.pos.y + stealer.size / 2 > barY + barSizeY &&
-    stealer.pos.y - stealer.size / 2 < barY
-  ) {
-    return true;
-  } else {
-    return false;
-  }
-}
+
+
 
 /*
   This function is to display how many lives the player has left.
