@@ -36,7 +36,6 @@ let robberStandImg;
 let robberWalkImg;
 let padding = 10;
 
-
 // door variables
 let doorImg;
 let door = {
@@ -119,13 +118,12 @@ function setup() {
   createCanvas(1280, 720);
   stealer = new Stealer(100, height + 50);
 
-  for(let i = 0; i < numOfBars; i++){
+  for (let i = 0; i < numOfBars; i++) {
     let x = undefined;
     let y = undefined;
-    let bar = new Bar(x,y);
+    let bar = new Bar(x, y);
     metalBars.push(bar);
   }
-
 
   gameMusic.setVolume(0.5);
   gameOver.setVolume(0.2);
@@ -147,14 +145,13 @@ function draw() {
   } else if (state === `loseEnding`) {
     loseEnding();
   }
-
 }
 
 /*
   This function calls all the functions needed to make the game run!
 */
 function simulation() {
-  if(level == 1){
+  if (level == 1) {
     backgroundMove();
     crateShow();
     displayDoor();
@@ -163,15 +160,13 @@ function simulation() {
     barShow();
     showLives();
     console.log(bgLeft);
-  }
-  else if(level == 2){
+  } else if (level == 2) {
     backgroundMoveLevel2();
     crateShow();
     stealer.move();
     handleKey();
     showLives();
   }
-
 }
 
 /*
@@ -212,8 +207,6 @@ function moveBgRight2() {
   }
 }
 
-
-
 /*
   Function to see which arrow keys are being held down to move
   the background & character
@@ -224,10 +217,9 @@ function handleKey() {
       stealer.moveLeft();
       display(robberWalkImg, stealer.size2 + padding, stealer.size);
     } else {
-      if(level == 1){
+      if (level == 1) {
         moveBgRight();
-      }
-      else if(level == 2){
+      } else if (level == 2) {
         moveBgRight2();
       }
       display(robberWalkImg, stealer.size2 + padding, stealer.size);
@@ -237,17 +229,15 @@ function handleKey() {
       stealer.moveRight();
       display(robberWalkImg, stealer.size2 + padding, stealer.size);
     } else {
-      if(level == 1){
+      if (level == 1) {
         moveBgLeft();
-      }
-      else if(level == 2){
+      } else if (level == 2) {
         moveBgLeft2();
       }
 
       display(robberWalkImg, stealer.size2 + padding, stealer.size);
     }
-  }
-    else {
+  } else {
     display(robberStandImg, stealer.size2, stealer.size);
   }
 }
@@ -296,10 +286,10 @@ function displayDoor() {
   doorTouch(doorX);
 }
 function doorTouch(doorX) {
-  if(
+  if (
     stealer.pos.x + stealer.r / 6 > doorX - door.sizeW / 2 &&
     stealer.pos.x - stealer.r / 6 < doorX + door.sizeW / 2
-  ){
+  ) {
     level = 2;
     endOfLevel1();
   }
@@ -356,25 +346,20 @@ function barShow() {
   let x = bgLeft + 800;
   let y = 622;
 
-for (let i = 0; i < metalBars.length; i++) {
+  for (let i = 0; i < metalBars.length; i++) {
     let bar = metalBars[i];
-    bar.display(x,y,bar.width, bar.height);
+    bar.display(x, y, bar.width, bar.height);
     bar.barTouch(stealer);
     x += 600;
-    if(bar.height <= bottom && bar.height > cieling){
+    if (bar.height <= bottom && bar.height > cieling) {
       bar.grow();
-    }
-    else if(bar.height <= cieling && bar.height < bottom){
+    } else if (bar.height <= cieling && bar.height < bottom) {
       bar.shrink();
-    }
-    else if(bar.height == 0){
+    } else if (bar.height == 0) {
       cieling = -496;
     }
   }
-
 }
-
-
 
 /*
   This function is to display how many lives the player has left.
@@ -436,8 +421,7 @@ function loseEnding() {
   text(`MISSION : FAILED`, width / 2, height / 2);
 }
 
-
-function reset(){
+function reset() {
   stealer.pos.x = 100;
   livesCounter = 3;
   bgLeft = 0;
