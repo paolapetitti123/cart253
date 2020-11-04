@@ -1,3 +1,3 @@
-# Template p5 project
+# Project 2 Proposal 
 
-This is the README file for the entire project. For more official projects you should write information here about the nature of the project, your name, any special explanations of how the project works, etc.
+Look at the "CART 253 Project Proposal.pdf" file for my proposal document! 
