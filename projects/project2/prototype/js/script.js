@@ -317,7 +317,7 @@ function barShow() {
 for (let i = 0; i < metalBars.length; i++) {
     let bar = metalBars[i];
     bar.display(x,y,bar.width, bar.height);
-    stealer.barTouch(bar);
+    bar.barTouch(stealer);
     x += 600;
     console.log(bar.x);
 
