@@ -24,7 +24,7 @@ Game over sound: https://freesound.org/people/Euphrosyyn/sounds/442127/
 All the art (background, sprites, crates/boxes) was done by me
 **************************************************/
 // Background variables
-let bgImg1;
+let bgImg;
 let bgImg2;
 let bgLeft = 0;
 let bottom = 0;
@@ -147,6 +147,7 @@ function draw() {
   } else if (state === `loseEnding`) {
     loseEnding();
   }
+
 }
 
 /*
@@ -161,10 +162,10 @@ function simulation() {
     handleKey();
     barShow();
     showLives();
+    console.log(bgLeft);
   }
   else if(level == 2){
     backgroundMoveLevel2();
-    bgLeft = 0;
     crateShow();
     stealer.move();
     handleKey();
@@ -442,7 +443,6 @@ function loseEnding() {
 function reset(){
   stealer.pos.x = 100;
   livesCounter = 3;
-  width = 0;
   bgLeft = 0;
-  bgImg = 0;
+
 }
