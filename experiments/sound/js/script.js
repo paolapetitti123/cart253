@@ -3,13 +3,12 @@ Sound experiments
 Paola Petitti
 **************************************************/
 "use strict";
-
-let barkSFX;
-let oscillator;
-let t = 0;
+let synth;
+let notes = [`F3`,`G3`,`Ab3`,`Bb3`,`C3`,`Dd3`, `Eb3`, `F4`];
+let currentNote = 0;
 
 function preload(){
-  barkSFX = loadSound(`assets/sounds/bark.wav`);
+
 }
 
 // setup()
@@ -17,10 +16,10 @@ function preload(){
 // Description of setup() goes here.
 function setup() {
   createCanvas(600,600);
+
+  synth = new p5.PolySynth();
   userStartAudio();
 
-  oscillator = new p5.Oscillator(880,`sine`);
-  oscillator.amp(0.1);
 }
 
 // draw()
@@ -28,18 +27,17 @@ function setup() {
 // Description of draw() goes here.
 function draw() {
   background(0);
-
-  let noiseValue = noise(t);
-  let newFreq = map(noiseValue,-1,1,440,880);
-  oscillator.freq(newFreq);
-
-  t = t + 0.1;
 }
 
-function mousePressed(){
-  oscillator.start();
+function playRandomNote(){
+  let note = notes[currentNote];
+  synth.play(note,1,0,0.1);
+  currentNote += 1;
+  if(currentNote === notes.length){
+    currentNote = 0;
+  }
 }
 
-function mouseReleased(){
-  oscillator.stop();
+function keyPressed(){
+  setInterval(playRandomNote,200);
 }
