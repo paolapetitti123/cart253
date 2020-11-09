@@ -3,12 +3,17 @@ Sound experiments
 Paola Petitti
 **************************************************/
 "use strict";
-let synth;
-let notes = [`F3`,`G3`,`Ab3`,`Bb3`,`C3`,`Dd3`, `Eb3`, `F4`];
-let currentNote = 0;
+let mic;
+let ghost = {
+  x: 0,
+  y: 0,
+  vx: 0,
+  vy: 0,
+  image: undefined
+};
 
 function preload(){
-
+  ghost.image = loadImage(`assets/images/clown.png`);
 }
 
 // setup()
@@ -17,8 +22,11 @@ function preload(){
 function setup() {
   createCanvas(600,600);
 
-  synth = new p5.PolySynth();
-  userStartAudio();
+  ghost.x = width/2;
+  ghost.y = height/2;
+
+  mic = new p5.AudioIn();
+  mic.start();
 
 }
 
@@ -27,17 +35,26 @@ function setup() {
 // Description of draw() goes here.
 function draw() {
   background(0);
-}
 
-function playRandomNote(){
-  let note = notes[currentNote];
-  synth.play(note,1,0,0.1);
-  currentNote += 1;
-  if(currentNote === notes.length){
-    currentNote = 0;
+  // trembling
+  ghost.x += random(-1,1);
+  ghost.y += random(-1,1);
+
+  // volume into mic
+  let level = mic.getLevel();
+
+  // is ghost scared
+  if(level > 0.6){
+    ghost.vx = 20;
   }
-}
 
-function keyPressed(){
-  setInterval(playRandomNote,200);
+  //move ghost
+  ghost.x += ghost.vx;
+  ghost.y += ghost.vy;
+
+  push();
+  imageMode(CENTER);
+  tint(255,50);
+  image(ghost.image, ghost.x, ghost.y);
+  pop();
 }
