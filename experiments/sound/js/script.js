@@ -6,7 +6,7 @@ Paola Petitti
 
 let barkSFX;
 let oscillator;
-let angle = 0;
+let t = 0;
 
 function preload(){
   barkSFX = loadSound(`assets/sounds/bark.wav`);
@@ -29,11 +29,11 @@ function setup() {
 function draw() {
   background(0);
 
-  let r = random(0,1);
-  let newFreq = map(r,-1,1,440,880);
+  let noiseValue = noise(t);
+  let newFreq = map(noiseValue,-1,1,440,880);
   oscillator.freq(newFreq);
 
-  angle = angle + 0.1;
+  t = t + 0.1;
 }
 
 function mousePressed(){
