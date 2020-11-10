@@ -1,5 +1,6 @@
-class Ball {
-  constructor(x, y) {
+class Ball extends PlaySound {
+  constructor(x, y, note) {
+    super(note);
     this.x = x;
     this.y = y;
     this.vx = 0;
@@ -50,30 +51,14 @@ class Ball {
 
       this.vy = -this.vy;
       this.ay = 0;
+      this.playNote();
     }
   }
 
-  // Checks to see if the ball hits one of the bricks and if it does the brick
-  // disappears and 1 gets added to the brick counter so that once the counter
-  // reaches the number of bricks, the game is over.
-  hit(brick) {
-    if (
-      this.x > brick.x - brick.width / 2 &&
-      this.x < brick.x + brick.width / 2 &&
-      this.y + this.size / 2 > brick.y - brick.height / 2 &&
-      this.y - this.size / 2 < brick.y + brick.height / 2
-    ) {
-      brick.active = false;
-      let dx = this.x - brick.x;
-      this.vx += map(dx, -brick.width / 2, brick.width / 2, -2, 2);
 
-      this.vy = -this.vy;
-      this.ay = 0;
-      brickCounter++;
-    }
-  }
 
   display() {
+    super.display();
     push();
     fill(255, 50, 50);
     noStroke();

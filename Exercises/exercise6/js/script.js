@@ -1,5 +1,5 @@
 /**************************************************
-Brick Breaker Game/Exercise 
+Brick Breaker Game/Exercise
 Paola Petitti
 
 turning the juggling simulator into a brick breaker game
@@ -14,6 +14,9 @@ let paddle;
 // declaring the ball information to be stored in an array
 let balls = [];
 let numBalls = 1;
+
+// F-minor scale
+let notes = [`F3`,`G3`,`Ab4`,`Bb4`, `C4`, `Db4`, `Eb4`, `F4`];
 
 // declaring the bricks information that will be stored in an array
 let brick;
@@ -36,17 +39,20 @@ let win = `YOU WIN!`;
 function setup() {
   createCanvas(1280, 720);
   paddle = new Paddle(150, 30);
+  userStartAudio();
 
   for (let i = 0; i < numBalls; i++) {
+    let note = random(notes);
     let x = width / 2;
     let y = height / 2;
-    let ball = new Ball(x, y);
+    let ball = new Ball(x, y, note);
     balls.push(ball);
   }
 
   for (let i = 0; i < numBrick; i++) {
+    let note = random(notes);
     let y = 100;
-    let brick = new Brick(brickSpacing, y);
+    let brick = new Brick(brickSpacing, y, note);
     brickSpacing += 200;
     bricks.push(brick);
   }
@@ -118,7 +124,7 @@ function ballControl() {
       for (let j = 0; j < bricks.length; j++) {
         let brick = bricks[j];
         if (brick.active) {
-          ball.hit(brick);
+          brick.hit(ball);
         }
       }
     } else if (!ball.active) {
