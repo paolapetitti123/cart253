@@ -1,22 +1,21 @@
-class LevelBuilder{
-  constructor(bgImg,crateImg, heartLivesImg, transparentImg){
+class LevelBuilder {
+  constructor(bgImg, crateImg, heartLivesImg, transparentImg) {
     this.bgImg = bgImg;
     this.bgLeft = 0;
     this.moveSpeed = 15;
     this.crateX = undefined;
-    this.crateY = 547,
-    this.crateW = 150;
+    (this.crateY = 547), (this.crateW = 150);
     this.crateH = 150;
     this.crateS = 150;
     this.crateImg = crateImg;
-    this.livesCounter = 3;
+    //this.livesCounter = 3;
     this.heartLivesImg = heartLivesImg;
     this.transparentImg = transparentImg;
   }
 
-  backgroundMove(){
+  backgroundMove() {
     imageMode(CORNER);
-    this.bgImg.resize(7250,720);
+    this.bgImg.resize(7250, 720);
     image(this.bgImg, this.bgLeft, 0);
   }
 
@@ -34,53 +33,56 @@ class LevelBuilder{
     }
   }
 
-  crateShow(){
+  /*
+    The following 2 crate functions show the crates, detect if you touch one & if
+    you are currently on a crate, if you are on a crate the bars can't hurt you.
+  */
+  crateShow() {
     this.crateX = this.bgLeft + 500;
     imageMode(CENTER);
     image(this.crateImg, this.crateX, this.crateY, this.crateW, this.crateH);
-    crateTouch(this.crateX);
-    for (let j = 0; j < 5; j++){
+    this.crateTouch(this.crateX);
+    for (let j = 0; j < 5; j++) {
       this.crateX += 1000;
 
       imageMode(CENTER);
       image(this.crateImg, this.crateX, this.crateY, this.crateW, this.crateH);
-      crateTouch(this.crateX);
+      this.crateTouch(this.crateX);
     }
   }
 
-  crateTouch(crateX){
-    if(stealer.pos.x + stealer.r / 6 > crateX - this.crateW / 2 &&
-    stealer.pos.x - stealer.r / 6 < crateX + this.crateW / 2 &&
-    stealer.pos.y + stealer.r / 2 > this.crateY - this.crateH / 2 &&
-    stealer.pos.y - stealer.r / 2 < this.crateY - this.crateH/ 2){
+  crateTouch(crateX) {
+    if (
+      stealer.pos.x + stealer.r / 6 > crateX - this.crateW / 2 &&
+      stealer.pos.x - stealer.r / 6 < crateX + this.crateW / 2 &&
+      stealer.pos.y + stealer.r / 2 > this.crateY - this.crateH / 2 &&
+      stealer.pos.y - stealer.r / 2 < this.crateY - this.crateH / 2
+    ) {
       stealer.vy = 0;
-      if(stealer.pos.y >= 520){
-        if(stealer.pos.x < crateX){
+      if (stealer.pos.y >= 520) {
+        if (stealer.pos.x < crateX) {
+          stealer.pos.x -= 15;
+        } else {
           stealer.pos.x -= 15;
         }
-        else {
-          stealer.pos.x -= 15;
-        }
-      }
-      else if(stealer.pos.y < 520){
+      } else if (stealer.pos.y < 520) {
         stealer.pos.x -= 0.01;
       }
     }
   }
 
-  showLives(){
-    if(this.livesCounter == 3){
+  showLives() {
+    if (livesCounter == 3) {
       console.log("I MADE IT HERE");
       image(this.heartLivesImg, 50, 65, 25, 25);
       image(this.heartLivesImg, 80, 65, 25, 25);
       image(this.heartLivesImg, 110, 65, 25, 25);
-    } else if(this.livesCounter == 2){
+    } else if (livesCounter == 2) {
       image(this.heartLivesImg, 50, 65, 25, 25);
       image(this.heartLivesImg, 80, 65, 25, 25);
-    } else if(this.livesCounter == 1){
+    } else if (livesCounter == 1) {
       image(this.heartLivesImg, 50, 65, 25, 25);
-    }
-    else if(this.livesCounter == 0){
+    } else if (livesCounter == 0) {
       image(this.transparentImg, 50, 65, 25, 25);
     }
   }

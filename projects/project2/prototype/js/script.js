@@ -296,47 +296,7 @@ function doorTouch(doorX) {
   }
 }
 
-/*
-  The following 4 crate functions show the crates, detect if you touch one & if
-  you are currently on a crate, if you are on a crate the bars can't hurt you.
-*/
-function crateShow() {
-  crate.x = bgLeft + 500;
-  imageMode(CENTER);
-  image(crateImg, crate.x, crate.y, crate.sizeX, crate.sizeY);
-  crateTouch(crate.x);
-  for (let j = 0; j < 5; j++) {
-    crate.x += 1000;
 
-    imageMode(CENTER);
-    image(crateImg, crate.x, crate.y, crate.sizeX, crate.sizeY);
-    crateTouch(crate.x);
-  }
-}
-function crateTouch(crateX) {
-  if (isCrateTouching(crateX)) {
-    stealer.vy = 0;
-    if (stealer.pos.y >= 520) {
-      if (stealer.pos.x < crateX) {
-        stealer.pos.x -= 15;
-      } else {
-        stealer.pos.x += 15;
-      }
-    } else if (stealer.pos.y < 520) {
-      stealer.pos.x -= 0.01;
-    }
-  }
-}
-function isCrateTouching(crateX) {
-  if (
-    stealer.pos.x + stealer.r / 6 > crateX - crate.sizeX / 2 &&
-    stealer.pos.x - stealer.r / 6 < crateX + crate.sizeX / 2 &&
-    stealer.pos.y + stealer.r / 2 > crate.y - crate.sizeY / 2 &&
-    stealer.pos.y - stealer.r / 2 < crate.y - crate.sizeY / 2
-  ) {
-    return true;
-  }
-}
 
 /*
   The 5 following functions show the bars, detect if you hit one and
@@ -362,36 +322,19 @@ function barShow() {
   }
 }
 
-/*
-  This function is to display how many lives the player has left.
-*/
-function showLives() {
-  if (livesCounter == 3) {
-    image(heartLivesImg, 50, 65, 25, 25);
-    image(heartLivesImg, 80, 65, 25, 25);
-    image(heartLivesImg, 110, 65, 25, 25);
-  } else if (livesCounter == 2) {
-    image(heartLivesImg, 50, 65, 25, 25);
-    image(heartLivesImg, 80, 65, 25, 25);
-  } else if (livesCounter == 1) {
-    image(heartLivesImg, 50, 65, 25, 25);
-  } else if (livesCounter == 0) {
-    image(transparentImg, 50, 65, 25, 25);
-  }
-}
 
 /*
   The following 4 functions tell the program what to do for the start state,
   the difficulty select state, the win state and the lose state.
 */
 function intro() {
-  backgroundMove();
-  crateShow();
+  levelBuilder.backgroundMove();
+  levelBuilder.crateShow();
   image(introImg, width / 2, height / 2);
 }
 function diffSelect() {
-  backgroundMove();
-  crateShow();
+  levelBuilder.backgroundMove();
+  levelBuilder.crateShow();
   image(diffImg, width / 2, height / 2);
 }
 function endOfLevel1() {
