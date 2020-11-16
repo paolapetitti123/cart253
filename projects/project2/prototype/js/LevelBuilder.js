@@ -9,10 +9,11 @@ class LevelBuilder{
     this.crateH = 150;
     this.crateS = 150;
     this.crateImg = crateImg;
-    this.livesCounter = 0;
+    this.livesCounter = 3;
     this.heartLivesImg = heartLivesImg;
     this.transparentImg = transparentImg;
   }
+
   backgroundMove(){
     imageMode(CORNER);
     this.bgImg.resize(7250,720);
@@ -69,6 +70,7 @@ class LevelBuilder{
 
   showLives(){
     if(this.livesCounter == 3){
+      console.log("I MADE IT HERE");
       image(this.heartLivesImg, 50, 65, 25, 25);
       image(this.heartLivesImg, 80, 65, 25, 25);
       image(this.heartLivesImg, 110, 65, 25, 25);
