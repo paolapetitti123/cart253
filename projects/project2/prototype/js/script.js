@@ -86,6 +86,7 @@ let difficulty = 0;
 let diffImg;
 
 let level = 1;
+let levelBuilder;
 
 /*
   Loading all the images and music!
@@ -117,6 +118,7 @@ function preload() {
 function setup() {
   createCanvas(1280, 720);
   stealer = new Stealer(100, height + 50);
+  levelBuilder = new LevelBuilder(bgImg,crateImg,heartLivesImg,transparentImg);
 
   for (let i = 0; i < numOfBars; i++) {
     let x = undefined;
@@ -152,14 +154,13 @@ function draw() {
 */
 function simulation() {
   if (level == 1) {
-    backgroundMove();
-    crateShow();
+    levelBuilder.backgroundMove();
+    levelBuilder.crateShow();
     displayDoor();
     stealer.move();
     handleKey();
     barShow();
-    showLives();
-    console.log(bgLeft);
+    levelBuilder.showLives();
   } else if (level == 2) {
     backgroundMoveLevel2();
     crateShow();
@@ -218,7 +219,7 @@ function handleKey() {
       display(robberWalkImg, stealer.size2 + padding, stealer.size);
     } else {
       if (level == 1) {
-        moveBgRight();
+        levelBuilder.moveBgRight();
       } else if (level == 2) {
         moveBgRight2();
       }
@@ -230,7 +231,7 @@ function handleKey() {
       display(robberWalkImg, stealer.size2 + padding, stealer.size);
     } else {
       if (level == 1) {
-        moveBgLeft();
+        levelBuilder.moveBgLeft();
       } else if (level == 2) {
         moveBgLeft2();
       }
