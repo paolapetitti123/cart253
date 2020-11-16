@@ -1,3 +1,7 @@
-class LevelOne {
-  
+class LevelOne extends LevelBuilder {
+  constructor(){
+
+  }
+
+
 }
