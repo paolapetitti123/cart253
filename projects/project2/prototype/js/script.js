@@ -87,7 +87,7 @@ let diffImg;
 
 let level = 1;
 let lvlOne;
-
+let lvlTwo;
 /*
   Loading all the images and music!
 */
@@ -119,6 +119,9 @@ function setup() {
   createCanvas(1280, 720);
   stealer = new Stealer(100, height + 50);
   lvlOne = new LevelOne(bgLeft,bgImg,crateImg,heartLivesImg,transparentImg);
+  lvlTwo = new LevelTwo(bgLeft,bgImg2,crateImg,heartLivesImg,transparentImg);
+
+
   for (let i = 0; i < numOfBars; i++) {
     let x = undefined;
     let y = undefined;
@@ -161,51 +164,51 @@ function simulation() {
     lvlOne.barShow();
     lvlOne.showLives();
   } else if (level == 2) {
-    backgroundMoveLevel2();
-    crateShow();
+    lvlTwo.backgroundMove();
+    lvlTwo.crateShow();
     stealer.move();
     handleKey();
-    showLives();
+    lvlTwo.showLives();
   }
 }
 
 /*
   Functions to move the background
 */
-function backgroundMove() {
-  imageMode(CORNER);
-  bgImg.resize(7250, 720);
-  image(bgImg, bgLeft, 0);
-}
-function backgroundMoveLevel2() {
-  imageMode(CORNER);
-  bgImg2.resize(7250, 720);
-  image(bgImg2, bgLeft, 0);
-}
-function moveBgLeft() {
-  let minBgLeft = -bgImg.width + width;
-
-  if (bgLeft - moveSpeed > minBgLeft) {
-    bgLeft -= moveSpeed;
-  }
-}
-function moveBgLeft2() {
-  let minBgLeft = -bgImg2.width + width;
-
-  if (bgLeft - moveSpeed > minBgLeft) {
-    bgLeft -= moveSpeed;
-  }
-}
-function moveBgRight() {
-  if (bgLeft + moveSpeed < 0) {
-    bgLeft += moveSpeed;
-  }
-}
-function moveBgRight2() {
-  if (bgLeft + moveSpeed < 0) {
-    bgLeft += moveSpeed;
-  }
-}
+// function backgroundMove() {
+//   imageMode(CORNER);
+//   bgImg.resize(7250, 720);
+//   image(bgImg, bgLeft, 0);
+// }
+// function backgroundMoveLevel2() {
+//   imageMode(CORNER);
+//   bgImg2.resize(7250, 720);
+//   image(bgImg2, bgLeft, 0);
+// }
+// function moveBgLeft() {
+//   let minBgLeft = -bgImg.width + width;
+//
+//   if (bgLeft - moveSpeed > minBgLeft) {
+//     bgLeft -= moveSpeed;
+//   }
+// }
+// function moveBgLeft2() {
+//   let minBgLeft = -bgImg2.width + width;
+//
+//   if (bgLeft - moveSpeed > minBgLeft) {
+//     bgLeft -= moveSpeed;
+//   }
+// }
+// function moveBgRight() {
+//   if (bgLeft + moveSpeed < 0) {
+//     bgLeft += moveSpeed;
+//   }
+// }
+// function moveBgRight2() {
+//   if (bgLeft + moveSpeed < 0) {
+//     bgLeft += moveSpeed;
+//   }
+// }
 
 /*
   Function to see which arrow keys are being held down to move
@@ -220,7 +223,7 @@ function handleKey() {
       if (level == 1) {
         lvlOne.moveBgRight();
       } else if (level == 2) {
-        moveBgRight2();
+        lvlTwo.moveBgRight();
       }
       display(robberWalkImg, stealer.size2 + padding, stealer.size);
     }
@@ -232,7 +235,7 @@ function handleKey() {
       if (level == 1) {
         lvlOne.moveBgLeft();
       } else if (level == 2) {
-        moveBgLeft2();
+        lvlTwo.moveBgLeft();
       }
 
       display(robberWalkImg, stealer.size2 + padding, stealer.size);
@@ -294,32 +297,6 @@ function doorTouch(doorX) {
     endOfLevel1();
   }
 }
-
-
-
-/*
-  The 5 following functions show the bars, detect if you hit one and
-  what happens when you do hit one lose a life and get pushed back to try again
-  so long as you haven't lost all your lives.
-*/
-// function barShow() {
-//   let x = bgLeft + 800;
-//   let y = 622;
-//
-//   for (let i = 0; i < metalBars.length; i++) {
-//     let bar = metalBars[i];
-//     bar.display(x, y, bar.width, bar.height);
-//     bar.barTouch(stealer);
-//     x += 600;
-//     if (bar.height <= bottom && bar.height > cieling) {
-//       bar.grow();
-//     } else if (bar.height <= cieling && bar.height < bottom) {
-//       bar.shrink();
-//     } else if (bar.height == 0) {
-//       cieling = -496;
-//     }
-//   }
-// }
 
 
 /*

@@ -14,6 +14,9 @@ class LevelBuilder {
 
   }
 
+  /*
+    Functions to move the background
+  */
   backgroundMove() {
     imageMode(CORNER);
     this.bgImg.resize(7250, 720);
@@ -64,7 +67,7 @@ class LevelBuilder {
         if (stealer.pos.x < crateX) {
           stealer.pos.x -= 15;
         } else {
-          stealer.pos.x -= 15;
+          stealer.pos.x += 15;
         }
       } else if (stealer.pos.y < 520) {
         stealer.pos.x -= 0.01;

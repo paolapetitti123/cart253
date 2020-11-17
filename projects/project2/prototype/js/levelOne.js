@@ -6,6 +6,11 @@ class LevelOne extends LevelBuilder {
     this.bgLeft = bgLeft;
   }
 
+  /*
+    The 5 following functions show the bars, detect if you hit one and
+    what happens when you do hit one lose a life and get pushed back to try again
+    so long as you haven't lost all your lives.
+  */
   barShow(){
     let x = this.bgLeft + 800;
     let y = this.y;
