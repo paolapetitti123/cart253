@@ -242,25 +242,6 @@ function display(picture, width, height) {
   image(picture, stealer.pos.x, stealer.pos.y, width, height);
 }
 
-/*
-  Displaying the diamond at the end of the level that you need to reach in order
-  to win the level.
-*/
-function displayDoor() {
-  let doorX = lvlOne.bgLeft + 6800;
-  imageMode(CENTER);
-  image(doorImg, doorX, door.y, door.sizeH, door.sizeW);
-  doorTouch(doorX);
-}
-function doorTouch(doorX) {
-  if (
-    stealer.pos.x + stealer.r / 6 > doorX - door.sizeW / 2 &&
-    stealer.pos.x - stealer.r / 6 < doorX + door.sizeW / 2
-  ) {
-    level = 2;
-    endOfLevel1();
-  }
-}
 
 
 /*
@@ -277,16 +258,7 @@ function diffSelect() {
   lvlOne.crateShow();
   image(diffImg, width / 2, height / 2);
 }
-function endOfLevel1() {
-  textSize(50);
-  textAlign(CENTER);
-  textFont("monospace");
-  fill(253, 139, 255);
-  let doorX = bgLeft + 6800;
-  imageMode(CENTER);
-  image(doorImg, doorX, door.y, door.sizeH, door.sizeW);
-  reset();
-}
+
 function winEnding() {
   textSize(50);
   textAlign(CENTER);
@@ -303,10 +275,4 @@ function loseEnding() {
   fill(0, 0, 0);
   textFont("monospace");
   text(`MISSION : FAILED`, width / 2, height / 2);
-}
-
-function reset() {
-  stealer.pos.x = 100;
-  livesCounter = 3;
-  bgLeft = 0;
 }

@@ -32,6 +32,10 @@ class LevelOne extends LevelBuilder {
     }
   }
 
+  /*
+    Displaying the door at the end of the level that you need to reach in order
+    to go to the next level.
+  */
   displayDoor(){
     let doorX = this.bgLeft + 6800;
     imageMode(CENTER);
