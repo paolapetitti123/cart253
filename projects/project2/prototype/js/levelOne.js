@@ -31,4 +31,24 @@ class LevelOne extends LevelBuilder {
       }
     }
   }
+
+  displayDoor(){
+    let doorX = this.bgLeft + 6800;
+    imageMode(CENTER);
+    image(doorImg,doorX, door.y, door.height, door.width);
+    this.doorTouch(doorX);
+  }
+
+  doorTouch(doorX){
+    if( stealer.pos.x + stealer.r/6 > doorX - door.width/2 &&
+      stealer.pos.x - stealer.r/6 < doorX + door.width/2 ){
+        level = 2;
+        this.endOfLevel1();
+      }
+  }
+
+  endOfLevel1(){
+    stealer.pos.x = 100;
+    livesCounter = 3;
+  }
 }

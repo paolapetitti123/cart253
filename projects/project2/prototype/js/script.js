@@ -41,8 +41,8 @@ let doorImg;
 let door = {
   x: 7000,
   y: 448,
-  sizeW: 350,
-  sizeH: 172,
+  width: 350,
+  height: 172,
 };
 
 // diamond variable declarations
@@ -158,7 +158,7 @@ function simulation() {
   if (level == 1) {
     lvlOne.backgroundMove();
     lvlOne.crateShow();
-    displayDoor();
+    lvlOne.displayDoor();
     stealer.move();
     handleKey();
     lvlOne.barShow();
@@ -172,43 +172,7 @@ function simulation() {
   }
 }
 
-/*
-  Functions to move the background
-*/
-// function backgroundMove() {
-//   imageMode(CORNER);
-//   bgImg.resize(7250, 720);
-//   image(bgImg, bgLeft, 0);
-// }
-// function backgroundMoveLevel2() {
-//   imageMode(CORNER);
-//   bgImg2.resize(7250, 720);
-//   image(bgImg2, bgLeft, 0);
-// }
-// function moveBgLeft() {
-//   let minBgLeft = -bgImg.width + width;
-//
-//   if (bgLeft - moveSpeed > minBgLeft) {
-//     bgLeft -= moveSpeed;
-//   }
-// }
-// function moveBgLeft2() {
-//   let minBgLeft = -bgImg2.width + width;
-//
-//   if (bgLeft - moveSpeed > minBgLeft) {
-//     bgLeft -= moveSpeed;
-//   }
-// }
-// function moveBgRight() {
-//   if (bgLeft + moveSpeed < 0) {
-//     bgLeft += moveSpeed;
-//   }
-// }
-// function moveBgRight2() {
-//   if (bgLeft + moveSpeed < 0) {
-//     bgLeft += moveSpeed;
-//   }
-// }
+
 
 /*
   Function to see which arrow keys are being held down to move

@@ -90,5 +90,8 @@ class LevelBuilder {
     }
   }
 
+  displayDoor(){
+    // define in levels classes
+  }
 
 }
