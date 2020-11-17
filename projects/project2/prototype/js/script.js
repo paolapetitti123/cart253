@@ -39,7 +39,6 @@ let padding = 10;
 // door variables
 let doorImg;
 let door = {
-  x: 7000,
   y: 448,
   width: 350,
   height: 172,
@@ -56,18 +55,11 @@ let heartD = {
 
 // Crate objects
 let crateImg;
-let crate = {
-  x: undefined,
-  y: 547,
-  sizeX: 150,
-  sizeY: 150,
-  size: 150,
-};
+
 
 // Metal Bar object
 let metalBars = [];
 let numOfBars = 9;
-let minBars = 0;
 
 // Game Lives variables
 let livesCounter = 3;
@@ -201,7 +193,6 @@ function handleKey() {
       } else if (level == 2) {
         lvlTwo.moveBgLeft();
       }
-
       display(robberWalkImg, stealer.size2 + padding, stealer.size);
     }
   } else {
@@ -266,7 +257,7 @@ function winEnding() {
   fill(253, 139, 255);
   let doorX = bgLeft + 6800;
   imageMode(CENTER);
-  image(doorImg, doorX, door.y, door.sizeH, door.sizeW);
+  image(doorImg, doorX, door.y, door.height, door.width);
   text(`MISSON : SUCCESS`, width / 2, height / 2);
 }
 function loseEnding() {
