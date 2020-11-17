@@ -9,7 +9,7 @@ class LevelTwo extends LevelBuilder {
     for(let i = 0; i < lasers.length; i++){
       let laser = lasers[i];
       laser.move();
-      laser.wrap();
+      // laser.wrap();
       laser.display();
     }
   }

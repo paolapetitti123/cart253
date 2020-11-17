@@ -120,13 +120,13 @@ function setup() {
   lvlOne = new LevelOne(bgLeft,bgImg,crateImg,heartLivesImg,transparentImg);
   lvlTwo = new LevelTwo(bgLeft,bgImg2,crateImg,heartLivesImg,transparentImg);
 
-  for(let i = 0; i < numLasers; i++){
-    let x = random(1280, 500000);
-    let y = random(0, 500);
-    // let y = constrain(r, bottom, cieling);
-    let laser = new Laser(x,y);
-    lasers.push(laser);
-  }
+  // for(let i = 0; i < numLasers; i++){
+  //   let x = 1280;
+  //   let y = random(0, 500);
+  //   // let y = constrain(r, bottom, cieling);
+  //   let laser = new Laser(x,y);
+  //   lasers.push(laser);
+  // }
 
 
   for (let i = 0; i < numOfBars; i++) {
@@ -173,6 +173,7 @@ function simulation() {
   } else if (level == 2) {
     lvlTwo.backgroundMove();
     lvlTwo.crateShow();
+    addLasers();
     lvlTwo.displayLasers();
     stealer.move();
     handleKey();
@@ -248,6 +249,21 @@ function keyPressed() {
 function display(picture, width, height) {
   imageMode(CENTER);
   image(picture, stealer.pos.x, stealer.pos.y, width, height);
+}
+
+
+function addLasers(){
+  if(lasers.length < numLasers){
+    if(random()<0.01){
+      let x = 1280;
+      let y = random(0,500);
+      let laser = new Laser(x,y);
+      lasers.push(laser);
+    }
+  }
+  else if(lasers.length == numLasers){
+    numLasers += 10;
+  }
 }
 
 

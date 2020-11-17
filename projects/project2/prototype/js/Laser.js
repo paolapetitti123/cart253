@@ -9,10 +9,12 @@ class Laser {
     this.speed = 15;
   }
 
+
+
   move(){
     this.vx = -this.speed;
 
-    this.x += this.vx;
+    this.x -= this.speed;
     this.y += this.vy;
   }
 
