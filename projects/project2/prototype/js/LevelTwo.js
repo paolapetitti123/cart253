@@ -5,11 +5,36 @@ class LevelTwo extends LevelBuilder {
 
   }
 
+  moveBgLeft() {
+
+
+    let minBgLeft = -this.bgImg.width + width;
+
+    if (this.bgLeft - this.moveSpeed > minBgLeft) {
+      for(let i = 0; i < lasers.length; i++){
+        let laser = lasers[i];
+        laser.x -= this.moveSpeed;
+      }
+    }
+    super.moveBgLeft();
+  }
+
+  moveBgRight() {
+
+    if (this.bgLeft + this.moveSpeed < 0) {
+      for(let i = 0; i < lasers.length; i++){
+        let laser = lasers[i];
+        laser.x += this.moveSpeed;
+      }
+    }
+    super.moveBgRight();
+  }
+
+
   displayLasers(){
     for(let i = 0; i < lasers.length; i++){
       let laser = lasers[i];
       laser.move();
-      // laser.wrap();
       laser.display();
     }
   }

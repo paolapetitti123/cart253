@@ -210,6 +210,7 @@ function handleKey() {
         lvlOne.moveBgLeft();
       } else if (level == 2) {
         lvlTwo.moveBgLeft();
+
       }
       display(robberWalkImg, stealer.size2 + padding, stealer.size);
     }
@@ -256,7 +257,8 @@ function addLasers(){
   if(lasers.length < numLasers){
     if(random()<0.01){
       let x = 1280;
-      let y = random(0,500);
+      console.log("x = " + x);
+      let y = random(300,500);
       let laser = new Laser(x,y);
       lasers.push(laser);
     }
