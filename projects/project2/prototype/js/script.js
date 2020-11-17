@@ -121,7 +121,7 @@ function setup() {
   lvlTwo = new LevelTwo(bgLeft,bgImg2,crateImg,heartLivesImg,transparentImg);
 
   for(let i = 0; i < numLasers; i++){
-    let x = 1280;
+    let x = random(1280, 500000);
     let y = random(0, 500);
     // let y = constrain(r, bottom, cieling);
     let laser = new Laser(x,y);
