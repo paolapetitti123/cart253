@@ -122,8 +122,8 @@ function setup() {
 
   for(let i = 0; i < numLasers; i++){
     let x = 1280;
-    let y = random(0, cieling);
-    console.log(y);
+    let y = random(0, 500);
+    // let y = constrain(r, bottom, cieling);
     let laser = new Laser(x,y);
     lasers.push(laser);
   }
