@@ -19,7 +19,6 @@ class LevelOne extends LevelBuilder {
       bar.display(x,y, bar.width, bar.height);
       bar.barTouch(stealer);
       x += 600;
-      console.log(x);
       if(bar.height <= bottom && bar.height > cieling){
         bar.grow();
       }
@@ -37,7 +36,9 @@ class LevelOne extends LevelBuilder {
     to go to the next level.
   */
   displayDoor(){
-    let doorX = this.bgLeft + 6800;
+    // let doorX = this.bgLeft + 6800;
+    // don't forget to switch back after finishing level 2!!!
+    let doorX = this.bgLeft + 100;
     imageMode(CENTER);
     image(doorImg,doorX, door.y, door.height, door.width);
     this.doorTouch(doorX);

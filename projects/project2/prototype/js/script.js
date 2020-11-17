@@ -80,6 +80,13 @@ let diffImg;
 let level = 1;
 let lvlOne;
 let lvlTwo;
+
+
+// laser stuff for level 2
+let lasers = [];
+let numLasers = 10;
+
+
 /*
   Loading all the images and music!
 */
@@ -112,6 +119,14 @@ function setup() {
   stealer = new Stealer(100, height + 50);
   lvlOne = new LevelOne(bgLeft,bgImg,crateImg,heartLivesImg,transparentImg);
   lvlTwo = new LevelTwo(bgLeft,bgImg2,crateImg,heartLivesImg,transparentImg);
+
+  for(let i = 0; i < numLasers; i++){
+    let x = 1280;
+    let y = random(0, cieling);
+    console.log(y);
+    let laser = new Laser(x,y);
+    lasers.push(laser);
+  }
 
 
   for (let i = 0; i < numOfBars; i++) {
@@ -158,6 +173,7 @@ function simulation() {
   } else if (level == 2) {
     lvlTwo.backgroundMove();
     lvlTwo.crateShow();
+    lvlTwo.displayLasers();
     stealer.move();
     handleKey();
     lvlTwo.displayDoor();

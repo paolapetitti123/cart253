@@ -2,6 +2,16 @@ class LevelTwo extends LevelBuilder {
   constructor(bgLeft,bgImg,crateImg,heartLivesImg,transparentImg){
     super(bgLeft,bgImg,crateImg,heartLivesImg,transparentImg);
     this.bgLeft = bgLeft;
+
+  }
+
+  displayLasers(){
+    for(let i = 0; i < lasers.length; i++){
+      let laser = lasers[i];
+      laser.move();
+      laser.wrap();
+      laser.display();
+    }
   }
 
   /*
