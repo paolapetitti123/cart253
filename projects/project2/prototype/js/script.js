@@ -160,6 +160,7 @@ function simulation() {
     lvlTwo.crateShow();
     stealer.move();
     handleKey();
+    lvlTwo.displayDoor();
     lvlTwo.showLives();
   }
 }
