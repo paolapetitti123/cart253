@@ -1,16 +1,17 @@
 class LevelBuilder {
-  constructor(bgImg, crateImg, heartLivesImg, transparentImg) {
+  constructor(bgLeft, bgImg, crateImg, heartLivesImg, transparentImg) {
     this.bgImg = bgImg;
-    this.bgLeft = 0;
+    this.bgLeft = bgLeft;
     this.moveSpeed = 15;
     this.crateX = undefined;
-    (this.crateY = 547), (this.crateW = 150);
+    this.crateY = 547;
+    this.crateW = 150;
     this.crateH = 150;
     this.crateS = 150;
     this.crateImg = crateImg;
-    //this.livesCounter = 3;
     this.heartLivesImg = heartLivesImg;
     this.transparentImg = transparentImg;
+
   }
 
   backgroundMove() {
@@ -73,7 +74,6 @@ class LevelBuilder {
 
   showLives() {
     if (livesCounter == 3) {
-      console.log("I MADE IT HERE");
       image(this.heartLivesImg, 50, 65, 25, 25);
       image(this.heartLivesImg, 80, 65, 25, 25);
       image(this.heartLivesImg, 110, 65, 25, 25);
@@ -86,4 +86,6 @@ class LevelBuilder {
       image(this.transparentImg, 50, 65, 25, 25);
     }
   }
+
+
 }

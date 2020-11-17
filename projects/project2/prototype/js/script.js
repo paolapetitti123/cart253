@@ -86,7 +86,7 @@ let difficulty = 0;
 let diffImg;
 
 let level = 1;
-let levelBuilder;
+let lvlOne;
 
 /*
   Loading all the images and music!
@@ -118,8 +118,7 @@ function preload() {
 function setup() {
   createCanvas(1280, 720);
   stealer = new Stealer(100, height + 50);
-  levelBuilder = new LevelBuilder(bgImg,crateImg,heartLivesImg,transparentImg);
-
+  lvlOne = new LevelOne(bgLeft,bgImg,crateImg,heartLivesImg,transparentImg);
   for (let i = 0; i < numOfBars; i++) {
     let x = undefined;
     let y = undefined;
@@ -154,13 +153,13 @@ function draw() {
 */
 function simulation() {
   if (level == 1) {
-    levelBuilder.backgroundMove();
-    levelBuilder.crateShow();
+    lvlOne.backgroundMove();
+    lvlOne.crateShow();
     displayDoor();
     stealer.move();
     handleKey();
-    barShow();
-    levelBuilder.showLives();
+    lvlOne.barShow();
+    lvlOne.showLives();
   } else if (level == 2) {
     backgroundMoveLevel2();
     crateShow();
@@ -219,7 +218,7 @@ function handleKey() {
       display(robberWalkImg, stealer.size2 + padding, stealer.size);
     } else {
       if (level == 1) {
-        levelBuilder.moveBgRight();
+        lvlOne.moveBgRight();
       } else if (level == 2) {
         moveBgRight2();
       }
@@ -231,7 +230,7 @@ function handleKey() {
       display(robberWalkImg, stealer.size2 + padding, stealer.size);
     } else {
       if (level == 1) {
-        levelBuilder.moveBgLeft();
+        lvlOne.moveBgLeft();
       } else if (level == 2) {
         moveBgLeft2();
       }
@@ -247,7 +246,7 @@ function handleKey() {
   Function to see if the UP arrow gets pressed once to jump
 */
 function keyPressed() {
-  let x = bgLeft + 800;
+  let x = lvlOne.bgLeft + 800;
   let y = 622;
   if (keyCode === UP_ARROW) {
     stealer.jump();
@@ -281,7 +280,7 @@ function display(picture, width, height) {
   to win the level.
 */
 function displayDoor() {
-  let doorX = bgLeft + 6800;
+  let doorX = lvlOne.bgLeft + 6800;
   imageMode(CENTER);
   image(doorImg, doorX, door.y, door.sizeH, door.sizeW);
   doorTouch(doorX);
@@ -303,24 +302,24 @@ function doorTouch(doorX) {
   what happens when you do hit one lose a life and get pushed back to try again
   so long as you haven't lost all your lives.
 */
-function barShow() {
-  let x = bgLeft + 800;
-  let y = 622;
-
-  for (let i = 0; i < metalBars.length; i++) {
-    let bar = metalBars[i];
-    bar.display(x, y, bar.width, bar.height);
-    bar.barTouch(stealer);
-    x += 600;
-    if (bar.height <= bottom && bar.height > cieling) {
-      bar.grow();
-    } else if (bar.height <= cieling && bar.height < bottom) {
-      bar.shrink();
-    } else if (bar.height == 0) {
-      cieling = -496;
-    }
-  }
-}
+// function barShow() {
+//   let x = bgLeft + 800;
+//   let y = 622;
+//
+//   for (let i = 0; i < metalBars.length; i++) {
+//     let bar = metalBars[i];
+//     bar.display(x, y, bar.width, bar.height);
+//     bar.barTouch(stealer);
+//     x += 600;
+//     if (bar.height <= bottom && bar.height > cieling) {
+//       bar.grow();
+//     } else if (bar.height <= cieling && bar.height < bottom) {
+//       bar.shrink();
+//     } else if (bar.height == 0) {
+//       cieling = -496;
+//     }
+//   }
+// }
 
 
 /*
@@ -328,13 +327,13 @@ function barShow() {
   the difficulty select state, the win state and the lose state.
 */
 function intro() {
-  levelBuilder.backgroundMove();
-  levelBuilder.crateShow();
+  lvlOne.backgroundMove();
+  lvlOne.crateShow();
   image(introImg, width / 2, height / 2);
 }
 function diffSelect() {
-  levelBuilder.backgroundMove();
-  levelBuilder.crateShow();
+  lvlOne.backgroundMove();
+  lvlOne.crateShow();
   image(diffImg, width / 2, height / 2);
 }
 function endOfLevel1() {
