@@ -49,12 +49,18 @@ class Bar {
       stealer.pos.y - stealer.size / 2 < this.y) && livesCounter >= 0
     ){
       if (stealer.pos.x >= this.x) {
+        fill(255,0,0,50);
+        rectMode(CORNER);
+        rect(0,0,width, height);
         stealer.jump();
         stealer.pos.x += 100;
         stealer.jump();
         livesCounter -= 1;
         punchSound.play();
       } else {
+        fill(255,0,0,50);
+        rectMode(CORNER);
+        rect(0,0,width, height);
         stealer.jump();
         stealer.pos.x -= 100;
         stealer.jump();

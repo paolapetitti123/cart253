@@ -36,6 +36,7 @@ class LevelTwo extends LevelBuilder {
       let laser = lasers[i];
       laser.move();
       laser.display();
+      laser.laserTouch();
     }
   }
 

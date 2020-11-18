@@ -19,7 +19,24 @@ class Laser {
   }
 
   laserTouch(){
-
+    if(
+      (stealer.pos.x + stealer.size / 6 > this.x - this.width / 2 &&
+      stealer.pos.x - stealer.size / 6 < this.x + this.width / 2 &&
+      stealer.pos.y + stealer.size / 2 > this.y + this.height &&
+      stealer.pos.y - stealer.size / 2 < this.y) && livesCounter >= 0
+    ){
+      fill(255,0,0,50);
+      rectMode(CORNER);
+      rect(0,0,width, height);
+      livesCounter -= 1;
+      punchSound.play();
+      this.x = 0;
+     }
+     else if (livesCounter < 0) {
+       state = `loseEnding`;
+       gameMusic.stop();
+       gameOver.play();
+     }
   }
 
   display(){
