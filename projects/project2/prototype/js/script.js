@@ -26,6 +26,7 @@ All the art (background, sprites, crates/boxes) was done by me
 // Background variables
 let bgImg;
 let bgImg2;
+let bgImg3;
 let bgLeft = 0;
 let bottom = 0;
 let cieling = -496;
@@ -93,6 +94,7 @@ let numLasers = 10;
 function preload() {
   bgImg = loadImage("assets/images/stealerBackground.png");
   bgImg2 = loadImage("assets/images/stealerBackground2.png");
+  bgImg3 = loadImage("assets/images/stealerBackground3.png");
   heartImg = loadImage("assets/images/diamondHeart.png");
   doorImg = loadImage("assets/images/door.png");
   heartStolenImg = loadImage("assets/images/diamondHeartStolen.png");

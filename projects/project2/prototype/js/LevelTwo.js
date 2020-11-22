@@ -54,15 +54,13 @@ class LevelTwo extends LevelBuilder {
   doorTouch(doorX){
     if( stealer.pos.x + stealer.r/6 > doorX - door.width/2 &&
       stealer.pos.x - stealer.r/6 < doorX + door.width/2 ){
-        level = 2;
+        level = 3;
         this.endOfLevel2();
       }
   }
 
   endOfLevel2(){
-    // stealer.pos.x = 100;
-    // livesCounter = 3;
-    state = `winEnding`;
-    gameMusic.stop();
+    stealer.pos.x = 100;
+    livesCounter = 3;
   }
 }
