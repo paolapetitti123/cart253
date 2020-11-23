@@ -59,6 +59,8 @@ let crateImg;
 
 // Axe object
 let axeImg;
+let numOfAxes = 9;
+let axes = [];
 
 // Metal Bar object
 let metalBars = [];
@@ -127,6 +129,12 @@ function setup() {
   lvlTwo = new LevelTwo(bgLeft,bgImg2,crateImg,heartLivesImg,transparentImg);
   lvlThree = new LevelThree(bgLeft,bgImg3,crateImg,axeImg,heartLivesImg,transparentImg);
 
+  for (let i = 0; i < numOfAxes; i++){
+    let x = undefined;
+    let y = undefined;
+    let axe = new Axe(x,y,axeImg);
+    axes.push(axe);
+  }
 
 
   for (let i = 0; i < numOfBars; i++) {
@@ -186,6 +194,7 @@ function simulation() {
     handleKey();
     lvlThree.displayDoor();
     lvlThree.showLives();
+    lvlThree.displayAxe();
   }
 }
 
