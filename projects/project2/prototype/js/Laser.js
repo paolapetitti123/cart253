@@ -1,5 +1,5 @@
 class Laser {
-  constructor(x,y){
+  constructor(x, y) {
     this.x = x;
     this.y = y;
     this.vx = 0;
@@ -9,43 +9,45 @@ class Laser {
     this.speed = -15;
   }
 
-
-
-  move(){
-    this.vx = this.speed;
-
+  move() {
+    if (difficulty === 1) {
+      this.vx = this.speed;
+    } else if (difficulty === 2) {
+      this.vx = this.speed * 1.5;
+    } else if (difficulty === 3) {
+      this.vx = this.speed * 2;
+    }
     this.x += this.vx;
     this.y += this.vy;
   }
 
-  laserTouch(){
-    if(
-      (stealer.pos.x + stealer.size / 6 > this.x - this.width / 2 &&
+  laserTouch() {
+    if (
+      stealer.pos.x + stealer.size / 6 > this.x - this.width / 2 &&
       stealer.pos.x - stealer.size / 6 < this.x + this.width / 2 &&
       stealer.pos.y + stealer.size / 2 > this.y + this.height &&
-      stealer.pos.y - stealer.size / 2 < this.y) && livesCounter >= 0
-    ){
-      fill(255,0,0,50);
+      stealer.pos.y - stealer.size / 2 < this.y &&
+      livesCounter >= 0
+    ) {
+      fill(255, 0, 0, 50);
       rectMode(CORNER);
-      rect(0,0,width, height);
+      rect(0, 0, width, height);
       livesCounter -= 1;
       punchSound.play();
       this.x = 0;
-     }
-     else if (livesCounter < 0) {
-       state = `loseEnding`;
-       gameMusic.stop();
-       gameOver.play();
-     }
+    } else if (livesCounter < 0) {
+      state = `loseEnding`;
+      gameMusic.stop();
+      gameOver.play();
+    }
   }
 
-  display(){
+  display() {
     push();
-    fill(55,255,0,50);
+    fill(55, 255, 0, 50);
     noStroke();
     rectMode(CENTER);
     rect(this.x, this.y, this.width, this.height);
     pop();
   }
-
 }

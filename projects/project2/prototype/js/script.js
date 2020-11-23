@@ -57,6 +57,8 @@ let heartD = {
 // Crate objects
 let crateImg;
 
+// Axe object
+let axeImg;
 
 // Metal Bar object
 let metalBars = [];
@@ -81,6 +83,7 @@ let diffImg;
 let level = 1;
 let lvlOne;
 let lvlTwo;
+let lvlThree;
 
 
 // laser stuff for level 2
@@ -99,6 +102,7 @@ function preload() {
   doorImg = loadImage("assets/images/door.png");
   heartStolenImg = loadImage("assets/images/diamondHeartStolen.png");
   crateImg = loadImage("assets/images/crate.png");
+  axeImg = loadImage("assets/images/axe.png");
   robberStandImg = loadImage("assets/images/stealer/robber-standing.gif");
   robberWalkImg = loadImage("assets/images/stealer/robber-walking.gif");
   heartLivesImg = loadImage("assets/images/stealer/heart.png");
@@ -121,14 +125,8 @@ function setup() {
   stealer = new Stealer(100, height + 50);
   lvlOne = new LevelOne(bgLeft,bgImg,crateImg,heartLivesImg,transparentImg);
   lvlTwo = new LevelTwo(bgLeft,bgImg2,crateImg,heartLivesImg,transparentImg);
+  lvlThree = new LevelThree(bgLeft,bgImg3,crateImg,axeImg,heartLivesImg,transparentImg);
 
-  // for(let i = 0; i < numLasers; i++){
-  //   let x = 1280;
-  //   let y = random(0, 500);
-  //   // let y = constrain(r, bottom, cieling);
-  //   let laser = new Laser(x,y);
-  //   lasers.push(laser);
-  // }
 
 
   for (let i = 0; i < numOfBars; i++) {
@@ -182,6 +180,13 @@ function simulation() {
     lvlTwo.displayDoor();
     lvlTwo.showLives();
   }
+  else if(level == 3){
+    lvlThree.backgroundMove();
+    stealer.move();
+    handleKey();
+    lvlThree.displayDoor();
+    lvlThree.showLives();
+  }
 }
 
 
@@ -200,6 +205,8 @@ function handleKey() {
         lvlOne.moveBgRight();
       } else if (level == 2) {
         lvlTwo.moveBgRight();
+      } else if(level == 3){
+        lvlThree.moveBgRight();
       }
       display(robberWalkImg, stealer.size2 + padding, stealer.size);
     }
@@ -212,7 +219,8 @@ function handleKey() {
         lvlOne.moveBgLeft();
       } else if (level == 2) {
         lvlTwo.moveBgLeft();
-
+      } else if(level == 3){
+        lvlThree.moveBgLeft();
       }
       display(robberWalkImg, stealer.size2 + padding, stealer.size);
     }
