@@ -104,7 +104,7 @@ function preload() {
   doorImg = loadImage("assets/images/door.png");
   heartStolenImg = loadImage("assets/images/diamondHeartStolen.png");
   crateImg = loadImage("assets/images/crate.png");
-  axeImg = loadImage("assets/images/axe.png");
+  axeImg = loadImage("assets/images/axe.gif");
   robberStandImg = loadImage("assets/images/stealer/robber-standing.gif");
   robberWalkImg = loadImage("assets/images/stealer/robber-walking.gif");
   heartLivesImg = loadImage("assets/images/stealer/heart.png");

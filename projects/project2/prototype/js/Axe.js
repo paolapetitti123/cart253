@@ -6,7 +6,7 @@ class Axe {
     this.h = 200;
     this.axeImg = axeImg;
     this.speed = 5;
-    this.rotation = 1;
+    this.rotation = 0;
   }
 
   move(){
@@ -23,18 +23,19 @@ class Axe {
     this.x = x;
     this.y = y;
     push();
-
-    translate(0,0);
-    rotate(this.rotation);
+    // if(this.rotation <= 2){
+    //   this.rotation -= 0.5;
+    //   if(this.rotation == -2 && this.rotation < 2){
+    //     this.rotation += 0.5;
+    //   }
+    // }
+    // translate(0,0);
+    // rotate(this.rotation);
     imageMode(CENTER);
     image(this.axeImg, x, y, this.w, this.h);
+
+
     // this.rotation += 0.5;
-    if(this.rotation == 1){
-      this.rotation -= 0.5;
-    }
-    else if(this.rotation == -1 ){
-      this.rotation += 0.5;
-    }
     pop();
   }
 
