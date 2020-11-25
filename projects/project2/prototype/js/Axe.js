@@ -6,12 +6,19 @@ class Axe {
     this.h = 200;
     this.axeImg = axeImg;
     this.speed = 5;
+    this.active = true;
   }
 
   move(){
-    push();
-
-    pop();
+    if(this.active){
+      if(random()< 0.001){
+        console.log('HELLOOO');
+        this.y += 100;
+        if(this.h <= bottom){
+          this.active = false;
+        }
+      }
+    }
   }
 
   display(x,y){
