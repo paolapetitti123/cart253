@@ -13,7 +13,7 @@ class Axe {
       if(random()< 0.1){
         console.log(this.y);
         cieling += 100;
-        y += 100;
+        this.y += 100;
         if(this.y == bottom){
           this.active = false;
         }
