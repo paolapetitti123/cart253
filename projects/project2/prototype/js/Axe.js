@@ -10,15 +10,14 @@ class Axe {
   }
 
   move(){
-    if(this.active){
-      if(random()< 0.001){
-        console.log('HELLOOO');
-        this.y += 100;
-        if(this.h <= bottom){
+      if(random()< 0.1){
+        console.log(this.y);
+        cieling += 100;
+        y += 100;
+        if(this.y == bottom){
           this.active = false;
         }
       }
-    }
   }
 
   display(x,y){
