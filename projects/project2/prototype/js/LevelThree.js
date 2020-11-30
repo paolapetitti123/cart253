@@ -2,6 +2,7 @@ class LevelThree extends LevelBuilder {
   constructor(bgLeft,bgImg,crateImg,axeImg,heartLivesImg,transparentImg){
     super(bgLeft,bgImg,crateImg,heartLivesImg,transparentImg);
     this.bgLeft = bgLeft;
+    this.floor = 540;
   }
 
   displayAxe(){
@@ -14,7 +15,7 @@ class LevelThree extends LevelBuilder {
         axe.axeTouch();
 
       }
-      if(axe.y == 540){
+      if(axe.y == this.floor){
         axe.active = false;
       }
 
