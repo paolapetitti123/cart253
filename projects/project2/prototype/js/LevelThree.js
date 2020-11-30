@@ -9,12 +9,13 @@ class LevelThree extends LevelBuilder {
     let y = 200;
     for(let i = 0; i< axes.length; i++){
       let axe = axes[i];
-      if(axe.active == true){
-        axe.move();
+      if(axe.active){
+        // axe.move(y);
+        axe.display(x,y);
+        axe.axeTouch();
       }
       // axe.move();
-      axe.display(x,y);
-      axe.axeTouch();
+
       x += 600;
     }
   }

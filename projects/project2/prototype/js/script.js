@@ -194,6 +194,7 @@ function simulation() {
     handleKey();
     lvlThree.displayDoor();
     lvlThree.showLives();
+    // axeDrop();
     lvlThree.displayAxe();
   }
 }
@@ -287,7 +288,20 @@ function addLasers(){
   }
 }
 
+function axeDrop(){
+  // let axe = new Axe(x,y,axeImg);
+  for(let i =0; i < axes.length; i++){
+    let axe = axes[i];
+    if(axe.active){
+        cieling += 100;
+        axe.y += 100;
+        if(axe.y == bottom){
+          axe.active = false;
+        }
 
+    }
+  }
+}
 
 /*
   The following 4 functions tell the program what to do for the start state,

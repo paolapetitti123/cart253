@@ -4,27 +4,37 @@ class Axe {
     this.y = y;
     this.w = 200;
     this.h = 200;
+    this.vx = 0;
+    this.vy = 0;
     this.axeImg = axeImg;
-    this.speed = 5;
+    this.speed = 50;
     this.active = true;
   }
 
   move(){
+    if(this.active){
       if(random()< 0.1){
-        console.log(this.y);
-        cieling += 100;
-        this.y += 100;
-        if(this.y == bottom){
-          this.active = false;
-        }
+        this.vy += this.speed;
       }
+      cieling += this.vy;
+      this.y += this.vy;
+      console.log(this.y);
+      if(this.y == bottom){
+        this.active = false;
+      }
+    }
   }
 
   display(x,y){
     this.x = x;
     this.y = y;
-    imageMode(CENTER);
-    image(this.axeImg, x, y, this.w, this.h);
+    this.move();
+    if(this.active){
+      imageMode(CENTER);
+      image(this.axeImg, this.x, this.y, this.w, this.h);
+
+    }
+
   }
 
   axeTouch(){
