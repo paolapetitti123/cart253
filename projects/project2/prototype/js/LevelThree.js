@@ -13,7 +13,6 @@ class LevelThree extends LevelBuilder {
       if(axe.active){
         axe.display(x,y);
         axe.axeTouch();
-
       }
       if(axe.y == this.floor){
         axe.active = false;

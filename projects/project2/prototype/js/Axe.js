@@ -19,7 +19,7 @@ class Axe {
       // cieling += this.vy;
       this.y += this.vy;
       console.log(this.y);
-      
+
 
   }
 
