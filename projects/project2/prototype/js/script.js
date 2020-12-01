@@ -87,11 +87,9 @@ let lvlOne;
 let lvlTwo;
 let lvlThree;
 
-
 // laser stuff for level 2
 let lasers = [];
 let numLasers = 10;
-
 
 /*
   Loading all the images and music!
@@ -125,17 +123,30 @@ function preload() {
 function setup() {
   createCanvas(1280, 720);
   stealer = new Stealer(100, height + 50);
-  lvlOne = new LevelOne(bgLeft,bgImg,crateImg,heartLivesImg,transparentImg);
-  lvlTwo = new LevelTwo(bgLeft,bgImg2,crateImg,heartLivesImg,transparentImg);
-  lvlThree = new LevelThree(bgLeft,bgImg3,crateImg,axeImg,heartLivesImg,transparentImg);
+  lvlOne = new LevelOne(bgLeft, bgImg, crateImg, heartLivesImg, transparentImg);
+  lvlTwo = new LevelTwo(
+    bgLeft,
+    bgImg2,
+    crateImg,
+    heartLivesImg,
+    transparentImg
+  );
+  lvlThree = new LevelThree(
+    bgLeft,
+    bgImg3,
+    crateImg,
+    axeImg,
+    heartLivesImg,
+    transparentImg
+  );
+  let x = bgLeft + 800;
+  let y = 200;
 
-  for (let i = 0; i < numOfAxes; i++){
-    let x = undefined;
-    let y = undefined;
-    let axe = new Axe(x,y,axeImg);
+  for (let i = 0; i < numOfAxes; i++) {
+    let axe = new Axe(x, y, axeImg);
+    x += 600;
     axes.push(axe);
   }
-
 
   for (let i = 0; i < numOfBars; i++) {
     let x = undefined;
@@ -187,8 +198,7 @@ function simulation() {
     handleKey();
     lvlTwo.displayDoor();
     lvlTwo.showLives();
-  }
-  else if(level == 3){
+  } else if (level == 3) {
     lvlThree.backgroundMove();
     stealer.move();
     handleKey();
@@ -198,8 +208,6 @@ function simulation() {
     lvlThree.displayAxe();
   }
 }
-
-
 
 /*
   Function to see which arrow keys are being held down to move
@@ -215,7 +223,7 @@ function handleKey() {
         lvlOne.moveBgRight();
       } else if (level == 2) {
         lvlTwo.moveBgRight();
-      } else if(level == 3){
+      } else if (level == 3) {
         lvlThree.moveBgRight();
       }
       display(robberWalkImg, stealer.size2 + padding, stealer.size);
@@ -229,7 +237,7 @@ function handleKey() {
         lvlOne.moveBgLeft();
       } else if (level == 2) {
         lvlTwo.moveBgLeft();
-      } else if(level == 3){
+      } else if (level == 3) {
         lvlThree.moveBgLeft();
       }
       display(robberWalkImg, stealer.size2 + padding, stealer.size);
@@ -272,33 +280,30 @@ function display(picture, width, height) {
   image(picture, stealer.pos.x, stealer.pos.y, width, height);
 }
 
-
-function addLasers(){
-  if(lasers.length < numLasers){
-    if(random()<0.01){
+function addLasers() {
+  if (lasers.length < numLasers) {
+    if (random() < 0.01) {
       let x = 1280;
       console.log("x = " + x);
-      let y = random(300,500);
-      let laser = new Laser(x,y);
+      let y = random(300, 500);
+      let laser = new Laser(x, y);
       lasers.push(laser);
     }
-  }
-  else if(lasers.length == numLasers){
+  } else if (lasers.length == numLasers) {
     numLasers += 10;
   }
 }
 
-function axeDrop(){
+function axeDrop() {
   // let axe = new Axe(x,y,axeImg);
-  for(let i =0; i < axes.length; i++){
+  for (let i = 0; i < axes.length; i++) {
     let axe = axes[i];
-    if(axe.active){
-        cieling += 100;
-        axe.y += 100;
-        if(axe.y == bottom){
-          axe.active = false;
-        }
-
+    if (axe.active) {
+      cieling += 100;
+      axe.y += 100;
+      if (axe.y == bottom) {
+        axe.active = false;
+      }
     }
   }
 }
