@@ -5,12 +5,18 @@ class LevelThree extends LevelBuilder {
     this.floor = 540;
   }
 
+  /*
+    This function loops through the axes array and checks to make sure they
+    are active (meaning they haven't hit the floor of the level), and so long
+    as the axe is active, the loop displays the axes as well as calling for (var i = 0; i <collision detection. ngth; i++) {
+    collision detection.
+    }
+  */
   displayAxe() {
     for (let i = 0; i < axes.length; i++) {
       let axe = axes[i];
       if (axe.active) {
         axe.display();
-        // axe.axeTouch(stealer);
       }
       axe.axeTouch(stealer);
       if (axe.y == this.floor) {
@@ -19,6 +25,10 @@ class LevelThree extends LevelBuilder {
     }
   }
 
+  /*
+    The following two functions allow for the axes to stick to the background
+    as the stealer is moving forwards or backwards
+  */
   moveBgLeft() {
     let minBgLeft = -this.bgImg.width + width;
 

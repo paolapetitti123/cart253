@@ -70,30 +70,4 @@ class Stealer {
     this.pos.x += moveSpeed;
   }
 
-  barTouch(bar){
-    if (
-      (this.pos.x + this.size / 6 > bar.x - bar.width / 2 &&
-      this.pos.x - this.size / 6 < bar.x + bar.width / 2 &&
-      this.pos.y + this.size / 2 > bar.y + bar.height &&
-      this.pos.y - this.size / 2 < bar.y) && livesCounter >= 0
-    ){
-      if (this.pos.x >= bar.x) {
-        this.jump();
-        this.pos.x += 100;
-        this.jump();
-        livesCounter -= 1;
-      } else {
-        this.jump();
-        this.pos.x -= 100;
-        this.jump();
-        livesCounter -= 1;
-      }
-    }
-    else if (livesCounter < 0) {
-      state = `loseEnding`;
-      gameMusic.stop();
-      gameOver.play();
-    }
-  }
-
 }
