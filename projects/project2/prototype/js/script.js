@@ -204,7 +204,6 @@ function simulation() {
     handleKey();
     lvlThree.displayDoor();
     lvlThree.showLives();
-    // axeDrop();
     lvlThree.displayAxe();
   }
 }

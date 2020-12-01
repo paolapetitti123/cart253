@@ -10,8 +10,9 @@ class LevelThree extends LevelBuilder {
       let axe = axes[i];
       if (axe.active) {
         axe.display();
-        axe.axeTouch();
+        // axe.axeTouch(stealer);
       }
+      axe.axeTouch(stealer);
       if (axe.y == this.floor) {
         axe.active = false;
       }
