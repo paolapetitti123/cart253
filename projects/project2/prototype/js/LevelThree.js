@@ -1,5 +1,5 @@
 class LevelThree extends LevelBuilder {
-  constructor(bgLeft, bgImg, crateImg, axeImg, heartLivesImg, transparentImg) {
+  constructor(bgLeft, bgImg, crateImg, heartImg, axeImg, heartLivesImg, transparentImg) {
     super(bgLeft, bgImg, crateImg, heartLivesImg, transparentImg);
     this.bgLeft = bgLeft;
     this.floor = 540;
@@ -50,4 +50,21 @@ class LevelThree extends LevelBuilder {
     }
     super.moveBgRight();
   }
+
+  displayDiamond(){
+    let diamondX = this.bgLeft + 6800;
+
+    imageMode(CENTER);
+    image(heartImg,diamondX, heartD.y, heartD.size, heartD.size);
+    this.diamondTouch(diamondX);
+  }
+
+  diamondTouch(diamondX){
+    if( stealer.pos.x + stealer.r/6 > diamondX - heartD.size/2 &&
+      stealer.pos.x - stealer.r/6 < diamondX + heartD.size/2 ){
+        winEnding();
+      }
+  }
+
+
 }

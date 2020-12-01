@@ -135,6 +135,7 @@ function setup() {
     bgLeft,
     bgImg3,
     crateImg,
+    heartImg,
     axeImg,
     heartLivesImg,
     transparentImg
@@ -202,9 +203,9 @@ function simulation() {
     lvlThree.backgroundMove();
     stealer.move();
     handleKey();
-    lvlThree.displayDoor();
-    lvlThree.showLives();
     lvlThree.displayAxe();
+    lvlThree.displayDiamond();
+    lvlThree.showLives();
   }
 }
 
