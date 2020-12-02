@@ -7,7 +7,7 @@ class Axe {
     this.vx = 0;
     this.vy = 0;
     this.axeImg = axeImg;
-    this.speed = 5;
+    this.speed = 10;
     this.active = true;
   }
 
@@ -16,7 +16,7 @@ class Axe {
   that the player has passed underneath it
 */
   move() {
-    if(random() < 0.01 &&
+    if(random() < 0.1 &&
       stealer.pos.x + stealer.size / 6 > this.x - this.w / 2){
         this.vy = this.speed;
       }

@@ -21,6 +21,7 @@ class LevelThree extends LevelBuilder {
       axe.axeTouch(stealer);
       if (axe.y == this.floor) {
         axe.active = false;
+        axes.splice(i,1);
       }
     }
   }
@@ -63,6 +64,9 @@ class LevelThree extends LevelBuilder {
     if( stealer.pos.x + stealer.r/6 > diamondX - heartD.size/2 &&
       stealer.pos.x - stealer.r/6 < diamondX + heartD.size/2 ){
         winEnding();
+        gameMusic.stop();
+        gameWin.play();
+        noLoop();
       }
   }
 
