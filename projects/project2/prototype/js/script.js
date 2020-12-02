@@ -285,26 +285,12 @@ function addLasers() {
     if (random() < 0.01) {
       let x = 1280;
       console.log("x = " + x);
-      let y = random(300, 500);
+      let y = random(300, 390);
       let laser = new Laser(x, y);
       lasers.push(laser);
     }
   } else if (lasers.length == numLasers) {
     numLasers += 10;
-  }
-}
-
-function axeDrop() {
-  // let axe = new Axe(x,y,axeImg);
-  for (let i = 0; i < axes.length; i++) {
-    let axe = axes[i];
-    if (axe.active) {
-      cieling += 100;
-      axe.y += 100;
-      if (axe.y == bottom) {
-        axe.active = false;
-      }
-    }
   }
 }
 

@@ -36,8 +36,7 @@ class LevelOne extends LevelBuilder {
     to go to the next level.
   */
   displayDoor(){
-     // let doorX = this.bgLeft + 6800;
-     let doorX = this.bgLeft + 100;
+     let doorX = this.bgLeft + 6800;
 
     imageMode(CENTER);
     image(doorImg,doorX, door.y, door.height, door.width);
