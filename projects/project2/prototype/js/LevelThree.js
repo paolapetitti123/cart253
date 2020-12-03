@@ -22,7 +22,7 @@ class LevelThree extends LevelBuilder {
         axe.axeTouch(stealer);
         if (axe.y == this.floor) {
           axe.active = false;
-          axes.splice(i,1);
+          axe.y = 0;
         }
       }
     }
@@ -36,7 +36,7 @@ class LevelThree extends LevelBuilder {
         axe.axeTouch(stealer);
         if (axe.y == this.floor) {
           axe.active = false;
-          axes.splice(i,1);
+          axe.y = 0;
         }
       }
     }
