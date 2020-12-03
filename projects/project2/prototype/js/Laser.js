@@ -14,7 +14,7 @@ class Laser {
       this.vx = this.speed;
     } else if (difficulty === 2) {
       this.vx = this.speed * 1.5;
-    } else if (difficulty === 3) {
+    } else if (difficulty === 3 || difficulty === 4) {
       this.vx = this.speed * 2;
     }
     this.x += this.vx;

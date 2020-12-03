@@ -91,6 +91,9 @@ let lvlThree;
 let lasers = [];
 let numLasers = 10;
 
+// Mic stuff
+let mic;
+
 /*
   Loading all the images and music!
 */
@@ -122,6 +125,9 @@ function preload() {
 */
 function setup() {
   createCanvas(1280, 720);
+  userStartAudio();
+  mic = new p5.AudioIn();
+  mic.start();
   stealer = new Stealer(100, height + 50);
   lvlOne = new LevelOne(bgLeft, bgImg, crateImg, heartLivesImg, transparentImg);
   lvlTwo = new LevelTwo(
@@ -214,36 +220,74 @@ function simulation() {
   the background & character
 */
 function handleKey() {
-  if (keyIsDown(LEFT_ARROW)) {
-    if (stealer.canMoveLeft()) {
-      stealer.moveLeft();
-      display(robberWalkImg, stealer.size2 + padding, stealer.size);
-    } else {
-      if (level == 1) {
-        lvlOne.moveBgRight();
-      } else if (level == 2) {
-        lvlTwo.moveBgRight();
-      } else if (level == 3) {
-        lvlThree.moveBgRight();
+  if(difficulty === 1 ||difficulty === 2 ||difficulty === 3){
+    if (keyIsDown(LEFT_ARROW)) {
+      if (stealer.canMoveLeft()) {
+        stealer.moveLeft();
+        display(robberWalkImg, stealer.size2 + padding, stealer.size);
+      } else {
+        if (level == 1) {
+          lvlOne.moveBgRight();
+        } else if (level == 2) {
+          lvlTwo.moveBgRight();
+        } else if (level == 3) {
+          lvlThree.moveBgRight();
+        }
+        display(robberWalkImg, stealer.size2 + padding, stealer.size);
       }
-      display(robberWalkImg, stealer.size2 + padding, stealer.size);
-    }
-  } else if (keyIsDown(RIGHT_ARROW)) {
-    if (stealer.canMoveRight()) {
-      stealer.moveRight();
-      display(robberWalkImg, stealer.size2 + padding, stealer.size);
-    } else {
-      if (level == 1) {
-        lvlOne.moveBgLeft();
-      } else if (level == 2) {
-        lvlTwo.moveBgLeft();
-      } else if (level == 3) {
-        lvlThree.moveBgLeft();
+    } else if (keyIsDown(RIGHT_ARROW)) {
+      if (stealer.canMoveRight()) {
+        stealer.moveRight();
+        display(robberWalkImg, stealer.size2 + padding, stealer.size);
+      } else {
+        if (level == 1) {
+          lvlOne.moveBgLeft();
+        } else if (level == 2) {
+          lvlTwo.moveBgLeft();
+        } else if (level == 3) {
+          lvlThree.moveBgLeft();
+        }
+        display(robberWalkImg, stealer.size2 + padding, stealer.size);
       }
-      display(robberWalkImg, stealer.size2 + padding, stealer.size);
+    } else {
+      display(robberStandImg, stealer.size2, stealer.size);
     }
-  } else {
-    display(robberStandImg, stealer.size2, stealer.size);
+  }
+  else if (difficulty === 4){
+    let level = mic.getLevel();
+    console.log(level);
+    // if (level >= 0.3 && level < 0.5) {
+    //   if (stealer.canMoveLeft()) {
+    //     stealer.moveLeft();
+    //     display(robberWalkImg, stealer.size2 + padding, stealer.size);
+    //   } else {
+    //     if (level == 1) {
+    //       lvlOne.moveBgRight();
+    //     } else if (level == 2) {
+    //       lvlTwo.moveBgRight();
+    //     } else if (level == 3) {
+    //       lvlThree.moveBgRight();
+    //     }
+    //     display(robberWalkImg, stealer.size2 + padding, stealer.size);
+    //   }
+    // } else
+    if (level >= 0.01 && level < 0.5) {
+      if (stealer.canMoveRight()) {
+        stealer.moveRight();
+        display(robberWalkImg, stealer.size2 + padding, stealer.size);
+      } else {
+        if (level == 1) {
+          lvlOne.moveBgLeft();
+        } else if (level == 2) {
+          lvlTwo.moveBgLeft();
+        } else if (level == 3) {
+          lvlThree.moveBgLeft();
+        }
+        display(robberWalkImg, stealer.size2 + padding, stealer.size);
+      }
+    } else {
+      display(robberStandImg, stealer.size2, stealer.size);
+    }
   }
 }
 
@@ -267,6 +311,11 @@ function keyPressed() {
     gameMusic.play();
   } else if (state == `diffSelect` && key == "3") {
     difficulty = 3;
+    state = `simulation`;
+    gameMusic.play();
+  }
+  else if (state == `diffSelect` && key == "4") {
+    difficulty = 4;
     state = `simulation`;
     gameMusic.play();
   }

@@ -11,7 +11,7 @@ class Bar {
       this.height -= 3;
     } else if (difficulty === 2) {
       this.height -= 7;
-    } else if (difficulty === 3) {
+    } else if (difficulty === 3 || difficulty === 4) {
       this.height -= 10;
     }
   }
@@ -23,7 +23,7 @@ class Bar {
     } else if (difficulty === 2) {
       cieling += 7;
       this.height += 7;
-    } else if (difficulty === 3) {
+    } else if (difficulty === 3 || difficulty === 4) {
       cieling += 10;
       this.height += 10;
     }

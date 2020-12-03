@@ -26,7 +26,7 @@ class LevelThree extends LevelBuilder {
         }
       }
     }
-    else if(difficulty === 3){
+    else if(difficulty === 3 || difficulty === 4){
       this.floor = 500;
       for (let i = 0; i < axes.length; i++) {
         let axe = axes[i];
