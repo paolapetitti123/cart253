@@ -13,15 +13,31 @@ class LevelThree extends LevelBuilder {
     }
   */
   displayAxe() {
-    for (let i = 0; i < axes.length; i++) {
-      let axe = axes[i];
-      if (axe.active) {
-        axe.display();
+    if(difficulty === 1 || difficulty === 2){
+      for (let i = 0; i < axes.length; i++) {
+        let axe = axes[i];
+        if (axe.active) {
+          axe.display();
+        }
+        axe.axeTouch(stealer);
+        if (axe.y == this.floor) {
+          axe.active = false;
+          axes.splice(i,1);
+        }
       }
-      axe.axeTouch(stealer);
-      if (axe.y == this.floor) {
-        axe.active = false;
-        axes.splice(i,1);
+    }
+    else if(difficulty === 3){
+      this.floor = 500;
+      for (let i = 0; i < axes.length; i++) {
+        let axe = axes[i];
+        if (axe.active) {
+          axe.display();
+        }
+        axe.axeTouch(stealer);
+        if (axe.y == this.floor) {
+          axe.active = false;
+          axes.splice(i,1);
+        }
       }
     }
   }
