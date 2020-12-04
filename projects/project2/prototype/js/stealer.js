@@ -44,19 +44,38 @@ class Stealer {
 
   // This function checks if it's possible to continue moving left
   canMoveLeft() {
+    if(difficulty === 1 || difficulty === 2 || difficulty === 3){
     if (this.pos.x > 50 + this.speed) {
       return true;
     } else {
       return false;
     }
   }
+    else if(difficulty === 4){
+      if (this.pos.x > 50 + this.speed || level >= 0.01 && level < 0.5) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  }
 
   // This function checks if it's possible to move to the right
   canMoveRight() {
-    if (this.pos.x < width - (450 + this.speed)) {
-      return true;
-    } else {
-      return false;
+    if(difficulty === 1 || difficulty === 2 || difficulty === 3){
+      if (this.pos.x < width - (450 + this.speed)) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+    else if(difficulty === 4){
+      
+      if (this.pos.x < width - (450 + this.speed) || level >= 0.01 && level < 0.5) {
+        return true;
+      } else {
+        return false;
+      }
     }
   }
 

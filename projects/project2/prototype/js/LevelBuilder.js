@@ -24,16 +24,32 @@ class LevelBuilder {
   }
 
   moveBgLeft() {
-    let minBgLeft = -this.bgImg.width + width;
+    if(difficulty === 1 || difficulty === 2 || difficulty === 3){
+      let minBgLeft = -this.bgImg.width + width;
 
-    if (this.bgLeft - this.moveSpeed > minBgLeft) {
-      this.bgLeft -= this.moveSpeed;
+      if (this.bgLeft - this.moveSpeed > minBgLeft) {
+        this.bgLeft -= this.moveSpeed;
+      }
+    }
+    else if(difficulty === 4){
+      let minBgLeft = -this.bgImg.width + width;
+
+      if ((this.bgLeft - this.moveSpeed > minBgLeft) || level >= 0.01 && level < 0.5) {
+        this.bgLeft -= this.moveSpeed;
+      }
     }
   }
 
   moveBgRight() {
-    if (this.bgLeft + this.moveSpeed < 0) {
-      this.bgLeft += this.moveSpeed;
+    if(difficulty === 1 || difficulty === 2 || difficulty === 3){
+      if (this.bgLeft + this.moveSpeed < 0) {
+        this.bgLeft += this.moveSpeed;
+      }
+    }
+    else if(difficulty === 4){
+      if (this.bgLeft + this.moveSpeed < 0) {
+        this.bgLeft += this.moveSpeed;
+      }
     }
   }
 

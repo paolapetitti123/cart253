@@ -220,7 +220,7 @@ function simulation() {
   the background & character
 */
 function handleKey() {
-  if(difficulty === 1 ||difficulty === 2 ||difficulty === 3){
+  if(difficulty === 1 || difficulty === 2 || difficulty === 3){
     if (keyIsDown(LEFT_ARROW)) {
       if (stealer.canMoveLeft()) {
         stealer.moveLeft();
@@ -255,23 +255,22 @@ function handleKey() {
   }
   else if (difficulty === 4){
     let level = mic.getLevel();
-    console.log(level);
-    // if (level >= 0.3 && level < 0.5) {
-    //   if (stealer.canMoveLeft()) {
-    //     stealer.moveLeft();
-    //     display(robberWalkImg, stealer.size2 + padding, stealer.size);
-    //   } else {
-    //     if (level == 1) {
-    //       lvlOne.moveBgRight();
-    //     } else if (level == 2) {
-    //       lvlTwo.moveBgRight();
-    //     } else if (level == 3) {
-    //       lvlThree.moveBgRight();
-    //     }
-    //     display(robberWalkImg, stealer.size2 + padding, stealer.size);
-    //   }
-    // } else
-    if (level >= 0.01 && level < 0.5) {
+
+    if (keyIsDown(LEFT_ARROW)) {
+      if (stealer.canMoveLeft()) {
+        stealer.moveLeft();
+        display(robberWalkImg, stealer.size2 + padding, stealer.size);
+      } else {
+        if (level == 1) {
+          lvlOne.moveBgRight();
+        } else if (level == 2) {
+          lvlTwo.moveBgRight();
+        } else if (level == 3) {
+          lvlThree.moveBgRight();
+        }
+        display(robberWalkImg, stealer.size2 + padding, stealer.size);
+      }
+    } else if (level >= 0.01 && level < 0.5) {
       if (stealer.canMoveRight()) {
         stealer.moveRight();
         display(robberWalkImg, stealer.size2 + padding, stealer.size);
