@@ -34,7 +34,7 @@ class LevelBuilder {
     else if(difficulty === 4){
       let minBgLeft = -this.bgImg.width + width;
 
-      if ((this.bgLeft - this.moveSpeed > minBgLeft) || level >= 0.01 && level < 0.5) {
+      if ((this.bgLeft - this.moveSpeed > minBgLeft)) {
         this.bgLeft -= this.moveSpeed;
       }
     }

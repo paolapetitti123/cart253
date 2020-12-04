@@ -270,7 +270,7 @@ function handleKey() {
         }
         display(robberWalkImg, stealer.size2 + padding, stealer.size);
       }
-    } else if (level >= 0.01 && level < 0.5) {
+    } else if (keyIsDown(RIGHT_ARROW) || level >= 0.01 && level < 0.5) {
       if (stealer.canMoveRight()) {
         stealer.moveRight();
         display(robberWalkImg, stealer.size2 + padding, stealer.size);
