@@ -220,6 +220,7 @@ function simulation() {
   the background & character
 */
 function handleKey() {
+  let levelMic = mic.getLevel();
   if(difficulty === 1 || difficulty === 2 || difficulty === 3){
     if (keyIsDown(LEFT_ARROW)) {
       if (stealer.canMoveLeft()) {
@@ -240,7 +241,9 @@ function handleKey() {
         stealer.moveRight();
         display(robberWalkImg, stealer.size2 + padding, stealer.size);
       } else {
+        console.log(level);
         if (level == 1) {
+          console.log("here");
           lvlOne.moveBgLeft();
         } else if (level == 2) {
           lvlTwo.moveBgLeft();
@@ -254,13 +257,12 @@ function handleKey() {
     }
   }
   else if (difficulty === 4){
-    let level = mic.getLevel();
-
-    if (keyIsDown(LEFT_ARROW)) {
+    if (levelMic >= 0.5 && levelMic < 0.7) {
       if (stealer.canMoveLeft()) {
         stealer.moveLeft();
         display(robberWalkImg, stealer.size2 + padding, stealer.size);
-      } else {
+      }
+      else {
         if (level == 1) {
           lvlOne.moveBgRight();
         } else if (level == 2) {
@@ -270,7 +272,7 @@ function handleKey() {
         }
         display(robberWalkImg, stealer.size2 + padding, stealer.size);
       }
-    } else if (keyIsDown(RIGHT_ARROW) || level >= 0.01 && level < 0.5) {
+    } else if (levelMic >= 0.05 && levelMic < 0.5) {
       if (stealer.canMoveRight()) {
         stealer.moveRight();
         display(robberWalkImg, stealer.size2 + padding, stealer.size);

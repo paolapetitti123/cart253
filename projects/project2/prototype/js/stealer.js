@@ -64,14 +64,17 @@ class Stealer {
   canMoveRight() {
     if(difficulty === 1 || difficulty === 2 || difficulty === 3){
       if (this.pos.x < width - (450 + this.speed)) {
+        console.log("true");
         return true;
+
       } else {
+        console.log("false");
         return false;
       }
     }
     else if(difficulty === 4){
-      
-      if (this.pos.x < width - (450 + this.speed) || level >= 0.01 && level < 0.5) {
+
+      if (this.pos.x < width - (450 + this.speed)) {
         return true;
       } else {
         return false;
