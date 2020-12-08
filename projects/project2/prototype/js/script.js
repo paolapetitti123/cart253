@@ -6,8 +6,9 @@ You must must avoid all the obstacles in each of the three levels and make
 it to the end of the third level in order to steal the diamond heart. The player
 can jump onto the boxes however you can't jump when your on a box.
 
-Also note that in my code Difficulty =/= The level, the difficulty determines
-how fast/frequent the obstacles you see in each of the 3 stages are.
+Also note that in my code the varibale name difficulty =/= The level, the
+difficulty determines how fast/frequent the obstacles you see in each of the
+3 stages of the game are.
 
 The idea/concept for this is heavily inspired by
 The Boyz - The Stealer music video
