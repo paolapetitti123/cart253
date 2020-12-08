@@ -84,7 +84,11 @@ class LevelBuilder {
         stealer.pos.y - stealer.r / 2 < this.crateY - this.crateH / 2
       ) {
         stealer.vy = 0;
-        console.log(stealer.pos.y);
+        /*
+          I add/subtract 15 px from the x position since that's the perfect
+          wiggle room between the player and the box to ultimately stop the
+          player from walking infront of the box.
+        */
         if (stealer.pos.y > this.crateTop) {
           if (stealer.pos.x < crateX) {
             stealer.pos.x -= 15;
@@ -92,6 +96,12 @@ class LevelBuilder {
             stealer.pos.x += 15;
           }
         }
+        /*
+          Setting the players x position to a really small number so visually
+          it looks like the player isn't sliding off the box, because setting
+          it to 0 makes the player not move at all but bigger numbers makes the
+          player slide off the box
+        */
         else if (stealer.pos.y <= this.crateTop) {
           stealer.pos.x -= 0.01;
         }
