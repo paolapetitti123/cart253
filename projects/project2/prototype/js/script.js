@@ -328,6 +328,12 @@ function display(picture, width, height) {
   image(picture, stealer.pos.x, stealer.pos.y, width, height);
 }
 
+/*
+  This function creates the lasers for level 2 at random times between the
+  y-position 300 - 390 and once 10 have been made, the variable numLasers gets
+  10 added to it that way the lasers never stop being made while you're playing
+  the second level.
+*/
 function addLasers() {
   if (lasers.length < numLasers) {
     if (random() < 0.01) {
@@ -343,8 +349,9 @@ function addLasers() {
 }
 
 /*
-  The following 4 functions tell the program what to do for the start state,
-  the difficulty select state, the win state and the lose state.
+  The following 5 functions tell the program what to do for the start state,
+  the difficulty select state (and warning state for difficulty 4), the win
+  state and the lose state.
 */
 function intro() {
   lvlOne.backgroundMove();
