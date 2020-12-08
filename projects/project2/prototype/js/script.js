@@ -2,14 +2,12 @@
 Project 2: The Stealer Continued~
 Paola Petitti
 
-Things to fix/Add:
-- Change the diamond to the door
-- put all this code into levelOne.js (and make it work)
-- create a level 2 that connects to the door of levelOne
-
-You must jump over the metal bars that are coming out of the floor
-to make it to the end of the level and steal the diamond heart. The player
+You must must avoid all the obstacles in each of the three levels and make
+it to the end of the third level in order to steal the diamond heart. The player
 can jump onto the boxes however you can't jump when your on a box.
+
+Also note that in my code Difficulty =/= The level, the difficulty determines
+how fast/frequent the obstacles you see in each of the 3 stages are.
 
 The idea/concept for this is heavily inspired by
 The Boyz - The Stealer music video
@@ -257,22 +255,7 @@ function handleKey() {
     }
   }
   else if (difficulty === 4){
-    if (levelMic >= 0.5 && levelMic < 0.7) {
-      if (stealer.canMoveLeft()) {
-        stealer.moveLeft();
-        display(robberWalkImg, stealer.size2 + padding, stealer.size);
-      }
-      else {
-        if (level == 1) {
-          lvlOne.moveBgRight();
-        } else if (level == 2) {
-          lvlTwo.moveBgRight();
-        } else if (level == 3) {
-          lvlThree.moveBgRight();
-        }
-        display(robberWalkImg, stealer.size2 + padding, stealer.size);
-      }
-    } else if (levelMic >= 0.05 && levelMic < 0.5) {
+    if (levelMic >= 0.05 && levelMic < 0.5) {
       if (stealer.canMoveRight()) {
         stealer.moveRight();
         display(robberWalkImg, stealer.size2 + padding, stealer.size);
@@ -298,9 +281,8 @@ function handleKey() {
 function keyPressed() {
   let x = lvlOne.bgLeft + 800;
   let y = 622;
-  if (keyCode === UP_ARROW) {
-    stealer.jump();
-  } else if (keyCode === ENTER && state == `start`) {
+
+  if (keyCode === ENTER && state == `start`) {
     state = `diffSelect`;
   } else if (state == `diffSelect` && key == "1") {
     difficulty = 1;
@@ -319,6 +301,13 @@ function keyPressed() {
     difficulty = 4;
     state = `simulation`;
     gameMusic.play();
+  }
+
+// Making the jump key only available for the first 3 difficulties.
+  if(difficulty == 1 || difficulty == 2 || difficulty == 3){
+    if (keyCode === UP_ARROW) {
+      stealer.jump();
+    }
   }
 }
 
