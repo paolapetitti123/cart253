@@ -11,7 +11,7 @@ class LevelBuilder {
     this.crateImg = crateImg;
     this.heartLivesImg = heartLivesImg;
     this.transparentImg = transparentImg;
-
+    this.crateTop = 390;
   }
 
   /*
@@ -28,17 +28,16 @@ class LevelBuilder {
     This function allows for the background to scroll to the left
   */
   moveBgLeft() {
-    if(difficulty === 1 || difficulty === 2 || difficulty === 3){
+    if (difficulty === 1 || difficulty === 2 || difficulty === 3) {
       let minBgLeft = -this.bgImg.width + width;
 
       if (this.bgLeft - this.moveSpeed > minBgLeft) {
         this.bgLeft -= this.moveSpeed;
       }
-    }
-    else if(difficulty === 4){
+    } else if (difficulty === 4) {
       let minBgLeft = -this.bgImg.width + width;
 
-      if ((this.bgLeft - this.moveSpeed > minBgLeft)) {
+      if (this.bgLeft - this.moveSpeed > minBgLeft) {
         this.bgLeft -= this.moveSpeed;
       }
     }
@@ -48,12 +47,11 @@ class LevelBuilder {
     This function allows for the background to scroll to the right
   */
   moveBgRight() {
-    if(difficulty === 1 || difficulty === 2 || difficulty === 3){
+    if (difficulty === 1 || difficulty === 2 || difficulty === 3) {
       if (this.bgLeft + this.moveSpeed < 0) {
         this.bgLeft += this.moveSpeed;
       }
-    }
-    else if(difficulty === 4){
+    } else if (difficulty === 4) {
       if (this.bgLeft + this.moveSpeed < 0) {
         this.bgLeft += this.moveSpeed;
       }
@@ -80,28 +78,30 @@ class LevelBuilder {
 
   crateTouch(crateX) {
     if (
-      stealer.pos.x + stealer.r / 6 > crateX - this.crateW / 2 &&
-      stealer.pos.x - stealer.r / 6 < crateX + this.crateW / 2 &&
-      stealer.pos.y + stealer.r / 2 > this.crateY - this.crateH / 2 &&
-      stealer.pos.y - stealer.r / 2 < this.crateY - this.crateH / 2
-    ) {
-      stealer.vy = 0;
-      if (stealer.pos.y >= 520) {
-        if (stealer.pos.x < crateX) {
-          stealer.pos.x -= 15;
-        } else {
-          stealer.pos.x += 15;
+        stealer.pos.x + stealer.r / 6 > crateX - this.crateW / 2 &&
+        stealer.pos.x - stealer.r / 6 < crateX + this.crateW / 2 &&
+        stealer.pos.y + stealer.r / 2 > this.crateY - this.crateH / 2 &&
+        stealer.pos.y - stealer.r / 2 < this.crateY - this.crateH / 2
+      ) {
+        stealer.vy = 0;
+        console.log(stealer.pos.y);
+        if (stealer.pos.y > this.crateTop) {
+          if (stealer.pos.x < crateX) {
+            stealer.pos.x -= 15;
+          } else {
+            stealer.pos.x += 15;
+          }
         }
-      } else if (stealer.pos.y < 520) {
-        stealer.pos.x -= 0.01;
+        else if (stealer.pos.y <= this.crateTop) {
+          stealer.pos.x -= 0.01;
+        }
       }
-    }
   }
 
   /*
     This function allows for the players lives/hearts to be seen in the
     top left corner of the screen, and it updates to whatever the live counter
-    is at, if it reaches 0 it displays a blank png file   
+    is at, if it reaches 0 it displays a blank png file
   */
   showLives() {
     if (livesCounter == 3) {
@@ -118,8 +118,7 @@ class LevelBuilder {
     }
   }
 
-  displayDoor(){
+  displayDoor() {
     // define in levels classes
   }
-
 }

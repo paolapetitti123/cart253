@@ -71,13 +71,12 @@ class Stealer {
   /*
     This function checks if it's possible to move to the right
   */
+  canMoveRight(){
     if(difficulty === 1 || difficulty === 2 || difficulty === 3){
       if (this.pos.x < width - (450 + this.speed)) {
-        console.log("true");
         return true;
 
       } else {
-        console.log("false");
         return false;
       }
     }
