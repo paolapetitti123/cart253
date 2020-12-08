@@ -9,6 +9,10 @@ class Laser {
     this.speed = -15;
   }
 
+  /*
+    This function allows for the lasers in level 2 to move at different
+    speeds depends on which difficulty level was selected at the beginning
+  */
   move() {
     if (difficulty === 1) {
       this.vx = this.speed;
@@ -20,7 +24,10 @@ class Laser {
     this.x += this.vx;
     this.y += this.vy;
   }
-
+  /*
+    This function checks to see if the player comes in contact with one of
+    the lasers and makes them lose a life if they do.
+  */
   laserTouch() {
     if (
       stealer.pos.x + stealer.size / 6 > this.x - this.width / 2 &&
@@ -41,7 +48,10 @@ class Laser {
       gameOver.play();
     }
   }
-
+  /*
+    This function make a green rectangle that is 50% transparent and displays
+    it.
+  */
   display() {
     push();
     fill(55, 255, 0, 50);

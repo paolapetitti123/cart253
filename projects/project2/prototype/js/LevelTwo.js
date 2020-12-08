@@ -46,11 +46,12 @@ class LevelTwo extends LevelBuilder {
 
   /*
     Displaying the door at the end of the level that you need to reach in order
-    to go to the next level.
+    to go to the next level, it also checks to see if the player has touched the
+    door.
   */
   displayDoor(){
     let doorX = this.bgLeft + 6800;
-    
+
     imageMode(CENTER);
     image(doorImg,doorX, door.y, door.height, door.width);
     this.doorTouch(doorX);
@@ -58,8 +59,7 @@ class LevelTwo extends LevelBuilder {
 
 /*
   Checks to see if the player has reached the door at the end of the levels
-  and proceeds to call the end of level 2 function which resets the player's
-  x position and live counter.
+  and proceeds to call the end of level 2 function.
 */
   doorTouch(doorX){
     if( stealer.pos.x + stealer.r/6 > doorX - door.width/2 &&
@@ -69,6 +69,10 @@ class LevelTwo extends LevelBuilder {
       }
   }
 
+  /*
+    This function resets the players position to the start of the level and
+    resets the lives counter so it's ready for the next level.
+  */
   endOfLevel2(){
     stealer.pos.x = 100;
     livesCounter = 3;

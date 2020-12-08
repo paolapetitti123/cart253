@@ -15,27 +15,35 @@ class Stealer {
     this.alive = true;
   }
 
-  // This function adds a force to simulate gravity
+  /*
+    This function adds a force to simulate gravity
+  */
   applyForce(force) {
     this.acc.add(force);
   }
 
-  // This function is constantly updating the vel, acc & pos of the character
+  /*
+    This function is constantly updating the vel, acc & pos of the character
+  */
   update() {
     this.vel.add(this.acc);
     this.pos.add(this.vel);
     this.acc.set(0, 0);
   }
 
-  // This function allows for the character to move while being confined to the
-  // screen
+  /*
+    This function allows for the character to move while being confined to the
+    screen
+  */
   move() {
     this.pos.y += this.vy;
     this.vy += this.gravity;
     this.pos.y = constrain(this.pos.y, 0, height - this.r);
   }
 
-  // This function allows for the character to jump
+  /*
+    This function allows for the character to jump
+  */
   jump() {
     if (this.pos.y === height - this.r) {
       this.vy = this.jumpHeight;
@@ -60,8 +68,9 @@ class Stealer {
     }
   }
 
-  // This function checks if it's possible to move to the right
-  canMoveRight() {
+  /*
+    This function checks if it's possible to move to the right
+  */
     if(difficulty === 1 || difficulty === 2 || difficulty === 3){
       if (this.pos.x < width - (450 + this.speed)) {
         console.log("true");
@@ -82,12 +91,16 @@ class Stealer {
     }
   }
 
-  // This function allows the character to move left
+  /*
+    This function allows the character to move left
+  */
   moveLeft() {
     this.pos.x -= moveSpeed;
   }
 
-  // This function allows the character to move right
+  /*
+    This function allows the character to move right
+  */
   moveRight() {
     this.pos.x += moveSpeed;
   }

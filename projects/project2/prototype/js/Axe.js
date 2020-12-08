@@ -13,7 +13,8 @@ class Axe {
 
 /*
   This function allows for the axes to drop down at a random time given
-  that the player has passed underneath it
+  that the player has passed underneath it and the axes will drop at different
+  speeds depending on the difficulty selection you made at the beginning.
 */
   move() {
     if(difficulty === 1){
@@ -23,7 +24,7 @@ class Axe {
           this.vy = this.speed;
         }
     }
-    else if(difficulty === 2){
+    else if(difficulty === 2 || difficulty === 4){
       this.speed = 10;
       if(random() < 0.1 &&
         stealer.pos.x + stealer.size / 6 > this.x - this.w / 2){

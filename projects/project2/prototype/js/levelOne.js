@@ -7,9 +7,9 @@ class LevelOne extends LevelBuilder {
   }
 
   /*
-    The 5 following functions show the bars, detect if you hit one and
-    what happens when you do hit one lose a life and get pushed back to try again
-    so long as you haven't lost all your lives.
+    This function allows for the metal bars to be seen, it also makes them
+    grow and shrink while checking to see if the player comes in contact
+    with one of the bars. 
   */
   barShow(){
     let x = this.bgLeft + 800;
@@ -42,7 +42,10 @@ class LevelOne extends LevelBuilder {
     image(doorImg,doorX, door.y, door.height, door.width);
     this.doorTouch(doorX);
   }
-
+  /*
+    This function checks to see if the player touches the door at the end
+    of the level and calls the end of level function.
+  */
   doorTouch(doorX){
     if( stealer.pos.x + stealer.r/6 > doorX - door.width/2 &&
       stealer.pos.x - stealer.r/6 < doorX + door.width/2 ){
@@ -51,6 +54,10 @@ class LevelOne extends LevelBuilder {
       }
   }
 
+  /*
+    This function resets the players position to the start of the level
+    and resets the lives counter for the next level.
+  */
   endOfLevel1(){
     stealer.pos.x = 100;
     livesCounter = 3;

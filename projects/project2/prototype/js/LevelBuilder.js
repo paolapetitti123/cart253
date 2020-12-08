@@ -15,7 +15,8 @@ class LevelBuilder {
   }
 
   /*
-    Functions to move the background
+    This function just shows the background image while also resizing it
+    to make sure it fits the screen.
   */
   backgroundMove() {
     imageMode(CORNER);
@@ -23,6 +24,9 @@ class LevelBuilder {
     image(this.bgImg, this.bgLeft, 0);
   }
 
+  /*
+    This function allows for the background to scroll to the left
+  */
   moveBgLeft() {
     if(difficulty === 1 || difficulty === 2 || difficulty === 3){
       let minBgLeft = -this.bgImg.width + width;
@@ -40,6 +44,9 @@ class LevelBuilder {
     }
   }
 
+  /*
+    This function allows for the background to scroll to the right
+  */
   moveBgRight() {
     if(difficulty === 1 || difficulty === 2 || difficulty === 3){
       if (this.bgLeft + this.moveSpeed < 0) {
@@ -91,6 +98,11 @@ class LevelBuilder {
     }
   }
 
+  /*
+    This function allows for the players lives/hearts to be seen in the
+    top left corner of the screen, and it updates to whatever the live counter
+    is at, if it reaches 0 it displays a blank png file   
+  */
   showLives() {
     if (livesCounter == 3) {
       image(this.heartLivesImg, 50, 65, 25, 25);

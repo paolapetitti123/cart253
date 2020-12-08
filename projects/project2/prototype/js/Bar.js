@@ -6,6 +6,10 @@ class Bar {
     this.height = 0;
   }
 
+  /*
+    This function makes the metal bars grow at different speeds depending on
+    which difficulty level was selected at the beginning.
+  */
   grow(){
     if (difficulty === 1) {
       this.height -= 3;
@@ -15,7 +19,11 @@ class Bar {
       this.height -= 10;
     }
   }
-
+  /*
+    This function makes the metal bars shrink at different speeds depending on
+    which difficulty level was selected at the beginning (matching with the grow
+    function).
+  */
   shrink(){
     if (difficulty === 1) {
       cieling += 3;
@@ -29,7 +37,10 @@ class Bar {
     }
   }
 
-
+  /*
+    This function displays a gray rectangle that is the metal bar you must
+    avoid.
+  */
   display(x,y,w,h){
     this.x = x;
     this.y = y;
@@ -41,6 +52,12 @@ class Bar {
     pop();
   }
 
+  /*
+    This function checks to see if the player comes in contact with one of the
+    bars and if they do, they lose a life, get pushed back or forwards depending
+    on which side of the bar they were hit on. It also changes the game state
+    to lose if the lives counter < 0. 
+  */
   barTouch(stealer){
     if (
       (stealer.pos.x + stealer.size / 6 > this.x - this.width / 2 &&

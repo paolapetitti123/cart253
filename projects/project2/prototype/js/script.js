@@ -223,7 +223,7 @@ function simulation() {
 */
 function handleKey() {
   let levelMic = mic.getLevel();
-  if(difficulty === 1 || difficulty === 2 || difficulty === 3){
+  if (difficulty === 1 || difficulty === 2 || difficulty === 3) {
     if (keyIsDown(LEFT_ARROW)) {
       if (stealer.canMoveLeft()) {
         stealer.moveLeft();
@@ -257,8 +257,7 @@ function handleKey() {
     } else {
       display(robberStandImg, stealer.size2, stealer.size);
     }
-  }
-  else if (difficulty === 4){
+  } else if (difficulty === 4) {
     if (levelMic >= 0.05 && levelMic < 0.5) {
       if (stealer.canMoveRight()) {
         stealer.moveRight();
@@ -275,11 +274,10 @@ function handleKey() {
       }
     }
     // Get player to jump when you shout
-    else if(levelMic >= 0.5 && levelMic < 1){
+    else if (levelMic >= 0.5 && levelMic < 1) {
       stealer.jump();
       display(robberStandImg, stealer.size2, stealer.size);
-    }
-     else {
+    } else {
       display(robberStandImg, stealer.size2, stealer.size);
     }
   }
@@ -306,18 +304,16 @@ function keyPressed() {
     difficulty = 3;
     state = `simulation`;
     gameMusic.play();
-  }
-  else if (state == `diffSelect` && key == "4") {
+  } else if (state == `diffSelect` && key == "4") {
     difficulty = 4;
     state = `warning`;
-  }
-  else if(state == `warning` && keyCode === ENTER){
+  } else if (state == `warning` && keyCode === ENTER) {
     state = `simulation`;
     gameMusic.play();
   }
 
-// Making the jump key only available for the first 3 difficulties.
-  if(difficulty == 1 || difficulty == 2 || difficulty == 3){
+  // Making the jump key only available for the first 3 difficulties.
+  if (difficulty == 1 || difficulty == 2 || difficulty == 3) {
     if (keyCode === UP_ARROW) {
       stealer.jump();
     }
@@ -360,7 +356,7 @@ function diffSelect() {
   lvlOne.crateShow();
   image(diffImg, width / 2, height / 2);
 }
-function warningScreen(){
+function warningScreen() {
   lvlOne.backgroundMove();
   lvlOne.crateShow();
   image(warningImg, width / 2, height / 2);

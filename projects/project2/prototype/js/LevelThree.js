@@ -68,6 +68,10 @@ class LevelThree extends LevelBuilder {
     super.moveBgRight();
   }
 
+  /*
+    This function allows for the giant diamond to be seen at the end of
+    the level
+  */
   displayDiamond(){
     let diamondX = this.bgLeft + 6800;
 
@@ -76,6 +80,11 @@ class LevelThree extends LevelBuilder {
     this.diamondTouch(diamondX);
   }
 
+  /*
+    This function checks to see if the player comes in contact with the diamond
+    and if they do, the win Ending function gets called, and they player has
+    won the game!   
+  */
   diamondTouch(diamondX){
     if( stealer.pos.x + stealer.r/6 > diamondX - heartD.size/2 &&
       stealer.pos.x - stealer.r/6 < diamondX + heartD.size/2 ){
