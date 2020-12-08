@@ -269,7 +269,12 @@ function handleKey() {
         }
         display(robberWalkImg, stealer.size2 + padding, stealer.size);
       }
-    } else {
+    }
+    else if(levelMic >= 0.5 && levelMic < 1){
+      stealer.jump();
+      display(robberStandImg, stealer.size2, stealer.size);
+    }
+     else {
       display(robberStandImg, stealer.size2, stealer.size);
     }
   }
