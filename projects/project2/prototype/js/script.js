@@ -334,15 +334,41 @@ function display(picture, width, height) {
   the second level.
 */
 function addLasers() {
-  if (lasers.length < numLasers) {
-    if (random() < 0.01) {
-      let x = 1280;
-      let y = random(300, 390);
-      let laser = new Laser(x, y);
-      lasers.push(laser);
+  if(difficulty === 1){
+    if (lasers.length < numLasers) {
+      if (random() < 0.01) {
+        let x = 1280;
+        let y = random(300, 390);
+        let laser = new Laser(x, y);
+        lasers.push(laser);
+      }
+    } else if (lasers.length == numLasers) {
+      numLasers += 10;
     }
-  } else if (lasers.length == numLasers) {
-    numLasers += 10;
+  }
+  else if(difficulty === 2 || difficulty === 4){
+    if (lasers.length < numLasers) {
+      if (random() < 0.03) {
+        let x = 1280;
+        let y = random(300, 390);
+        let laser = new Laser(x, y);
+        lasers.push(laser);
+      }
+    } else if (lasers.length == numLasers) {
+      numLasers += 10;
+    }
+  }
+  else if(difficulty === 3){
+    if (lasers.length < numLasers) {
+      if (random() < 0.05) {
+        let x = 1280;
+        let y = random(300, 390);
+        let laser = new Laser(x, y);
+        lasers.push(laser);
+      }
+    } else if (lasers.length == numLasers) {
+      numLasers += 10;
+    }
   }
 }
 
