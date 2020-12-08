@@ -79,6 +79,7 @@ let introImg;
 let state = "start";
 let difficulty = 0;
 let diffImg;
+let warningImg;
 
 let level = 1;
 let lvlOne;
@@ -110,6 +111,7 @@ function preload() {
   transparentImg = loadImage("assets/images/stealer/transparent.png");
   introImg = loadImage("assets/images/introScreen.png");
   diffImg = loadImage("assets/images/selectDifficulty.png");
+  warningImg = loadImage("assets/images/warning.png");
 
   gameMusic = loadSound("assets/sounds/Monplaisir_-_02_-_Garage.mp3");
   gameWin = loadSound("assets/sounds/Monplaisir_-_08_-_Victory.mp3");
@@ -173,6 +175,8 @@ function draw() {
     intro();
   } else if (state === `diffSelect`) {
     diffSelect();
+  } else if (state === `warning`) {
+    warningScreen();
   } else if (state === `simulation`) {
     simulation();
   } else if (state === `winEnding`) {
@@ -270,6 +274,7 @@ function handleKey() {
         display(robberWalkImg, stealer.size2 + padding, stealer.size);
       }
     }
+    // Get player to jump when you shout
     else if(levelMic >= 0.5 && levelMic < 1){
       stealer.jump();
       display(robberStandImg, stealer.size2, stealer.size);
@@ -304,6 +309,9 @@ function keyPressed() {
   }
   else if (state == `diffSelect` && key == "4") {
     difficulty = 4;
+    state = `warning`;
+  }
+  else if(state == `warning` && keyCode === ENTER){
     state = `simulation`;
     gameMusic.play();
   }
@@ -351,6 +359,11 @@ function diffSelect() {
   lvlOne.backgroundMove();
   lvlOne.crateShow();
   image(diffImg, width / 2, height / 2);
+}
+function warningScreen(){
+  lvlOne.backgroundMove();
+  lvlOne.crateShow();
+  image(warningImg, width / 2, height / 2);
 }
 
 function winEnding() {
