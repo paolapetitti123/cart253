@@ -94,6 +94,10 @@ let numLasers = 10;
 // Mic stuff
 let mic;
 
+// Text fade
+let fade = 255;
+let fadeAmonut = 1;
+
 /*
   Loading all the images and music!
 */
@@ -194,6 +198,7 @@ function simulation() {
   if (level == 1) {
     lvlOne.backgroundMove();
     lvlOne.crateShow();
+    musicCredit();
     lvlOne.displayDoor();
     stealer.move();
     handleKey();
@@ -202,6 +207,7 @@ function simulation() {
   } else if (level == 2) {
     lvlTwo.backgroundMove();
     lvlTwo.crateShow();
+    musicCredit();
     addLasers();
     lvlTwo.displayLasers();
     stealer.move();
@@ -210,6 +216,7 @@ function simulation() {
     lvlTwo.showLives();
   } else if (level == 3) {
     lvlThree.backgroundMove();
+    musicCredit();
     stealer.move();
     handleKey();
     lvlThree.displayAxe();
@@ -409,4 +416,16 @@ function loseEnding() {
   fill(0, 0, 0);
   textFont("monospace");
   text(`MISSION : FAILED`, width / 2, height / 2);
+}
+
+function musicCredit(){
+  textSize(25);
+  textAlign(CENTER);
+  fill(200,200,200,fade);
+  textFont("monospace");
+  text(`Music: The Stealer Orchestra Version - MeiMei Zhu`, 400,  690);
+  if(fade > 255){
+    fadeAmonut = -0.5;
+  }
+  fade += fadeAmonut;
 }
