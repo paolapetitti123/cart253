@@ -16,7 +16,7 @@ This is the link if you are interested in watching it
 https://www.youtube.com/watch?v=c_e-IC0VwZM&ab_channel=THEBOYZ
 
 Hit sound effect: https://freesound.org/people/CastIronCarousel/sounds/216783/
-Gameplay music: https://freemusicarchive.org/search?adv=1&quicksearch=Monplaisir%20Garage&&
+Gameplay music: https://www.youtube.com/watch?v=bPtYl2hdrVo&ab_channel=MeimeiZhu
 Game win music: https://freemusicarchive.org/search?adv=1&quicksearch=Monplaisir%20Victory&&
 Game over sound: https://freesound.org/people/Euphrosyyn/sounds/442127/
 
@@ -114,7 +114,7 @@ function preload() {
   diffImg = loadImage("assets/images/selectDifficulty.png");
   warningImg = loadImage("assets/images/warning.png");
 
-  gameMusic = loadSound("assets/sounds/Monplaisir_-_02_-_Garage.mp3");
+  gameMusic = loadSound("assets/sounds/gameMusic.mp3");
   gameWin = loadSound("assets/sounds/Monplaisir_-_08_-_Victory.mp3");
   gameOver = loadSound("assets/sounds/gameOver.wav");
   punchSound = loadSound("assets/sounds/punch.mp3");
@@ -163,7 +163,7 @@ function setup() {
     metalBars.push(bar);
   }
 
-  gameMusic.setVolume(0.5);
+  gameMusic.setVolume(0.2);
   gameOver.setVolume(0.2);
   gameWin.setVolume(0.3);
 }
@@ -294,21 +294,21 @@ function keyPressed() {
   } else if (state == `diffSelect` && key == "1") {
     difficulty = 1;
     state = `simulation`;
-    gameMusic.play();
+    gameMusic.loop();
   } else if (state == `diffSelect` && key == "2") {
     difficulty = 2;
     state = `simulation`;
-    gameMusic.play();
+    gameMusic.loop();
   } else if (state == `diffSelect` && key == "3") {
     difficulty = 3;
     state = `simulation`;
-    gameMusic.play();
+    gameMusic.loop();
   } else if (state == `diffSelect` && key == "4") {
     difficulty = 4;
     state = `warning`;
   } else if (state == `warning` && keyCode === ENTER) {
     state = `simulation`;
-    gameMusic.play();
+    gameMusic.loop();
   }
 
   // Making the jump key only available for the first 3 difficulties.
@@ -348,7 +348,7 @@ function addLasers() {
   }
   else if(difficulty === 2 || difficulty === 4){
     if (lasers.length < numLasers) {
-      if (random() < 0.03) {
+      if (random() < 0.02) {
         let x = 1280;
         let y = random(300, 390);
         let laser = new Laser(x, y);
@@ -360,7 +360,7 @@ function addLasers() {
   }
   else if(difficulty === 3){
     if (lasers.length < numLasers) {
-      if (random() < 0.05) {
+      if (random() < 0.03) {
         let x = 1280;
         let y = random(300, 390);
         let laser = new Laser(x, y);
