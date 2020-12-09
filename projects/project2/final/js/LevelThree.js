@@ -83,7 +83,7 @@ class LevelThree extends LevelBuilder {
   /*
     This function checks to see if the player comes in contact with the diamond
     and if they do, the win Ending function gets called, and they player has
-    won the game!   
+    won the game!
   */
   diamondTouch(diamondX){
     if( stealer.pos.x + stealer.r/6 > diamondX - heartD.size/2 &&
