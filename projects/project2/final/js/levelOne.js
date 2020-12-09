@@ -9,7 +9,7 @@ class LevelOne extends LevelBuilder {
   /*
     This function allows for the metal bars to be seen, it also makes them
     grow and shrink while checking to see if the player comes in contact
-    with one of the bars. 
+    with one of the bars.
   */
   barShow(){
     let x = this.bgLeft + 800;
