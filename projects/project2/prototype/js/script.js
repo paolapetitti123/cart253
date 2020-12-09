@@ -339,6 +339,9 @@ function display(picture, width, height) {
   y-position 300 - 390 and once 10 have been made, the variable numLasers gets
   10 added to it that way the lasers never stop being made while you're playing
   the second level.
+
+  Samuel (TA) helped me with getting the lasers to enter the scene at
+  random times
 */
 function addLasers() {
   if(difficulty === 1){
@@ -418,6 +421,10 @@ function loseEnding() {
   text(`MISSION : FAILED`, width / 2, height / 2);
 }
 
+/*
+  This function is strictly for attributing the artist I got the background
+  music from (link to the song is in the comment at the top of this doc.)
+*/
 function musicCredit(){
   textSize(25);
   textAlign(CENTER);
